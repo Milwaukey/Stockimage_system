@@ -1,0 +1,27 @@
+$("#BtnSignup").click(function(){
+
+    $.ajax({
+
+        url : "APIs/api-signup-photographer.php",
+        method : "POST",
+        data : $('form').serialize(),
+        dataType : "JSON"
+
+    })
+    .done(function( jData ){
+
+        
+        // jData = JSON.parse(sData);
+        console.log(jData.message);
+
+        $(location).attr('href', 'index.php');
+
+
+    })
+
+
+
+    return false;
+
+})
+
