@@ -3,9 +3,16 @@
 
 
 <h1>FRONTPAGE</h1>
+<div>
 <a href="signup-photographer.php">Photographer</a>
-<a href="signup-user.php">User</a>
+<a href="create-gallery.php">Create Gallery</a>
+</div></br>
 
+
+<div>
+<a href="signup-user.php">User</a>
+<a href="add-card.php">Add Card</a>
+</div>
 
 
 

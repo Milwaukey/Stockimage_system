@@ -22,7 +22,7 @@ require_once(__DIR__ . '/includes/connection.php');
 
                 while($row = mysqli_fetch_array($results)) {
 
-                    echo '<option value="'. $row['cityID'] . '">' . $row['cityName'] . '</option>';
+                    echo '<option value="'. $row['cityID'] . '">' . $row['cityName'] . '</option>';//sloppy use jquery 
 
                 }
 
