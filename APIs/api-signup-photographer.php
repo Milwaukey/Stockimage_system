@@ -8,7 +8,9 @@ require_once(__DIR__ . '/functions.php');
 $tName = $_POST['tName'];
 $tSurname = $_POST['tSurname'];
 $tEmail = $_POST['tEmail'];
-$tPassword = hash('md5', $_POST['tPassword']);
+
+$writtenPassword = $_POST['tPassword'];
+$tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
 
 $query = "
 

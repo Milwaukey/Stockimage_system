@@ -3,27 +3,27 @@ CREATE DATABASE proofing_system_db;
 USE proofing_system_db;
 
 CREATE TABLE tphotographers (
-  photographerID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  photographerID int AUTO_INCREMENT PRIMARY KEY,
   name varchar(50) NOT NULL,
   surname varchar(60) NOT NULL,
   email varchar(50) NOT NULL,
-  password varchar(50) NOT NULL
+  password varchar(100) NOT NULL
   );
 
 CREATE TABLE tcities (
-  cityID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  cityID int AUTO_INCREMENT PRIMARY KEY,
   cityName varchar(50) NOT NULL
 );
 
 CREATE TABLE tusers (
-  userID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  userID int AUTO_INCREMENT PRIMARY KEY,
   name varchar(50) NOT NULL,
   surname varchar(50) NOT NULL,
   email varchar(50) NOT NULL,
   username varchar(50) NOT NULL,
-  password varchar(50) NOT NULL,
+  password varchar(100) NOT NULL,
   signupDate date,
-  deleteDate NULL,
+  deleteDate date DEFAULT NULL,
   totalMonetaryPaid decimal(5, 2) DEFAULT 0,
   streetName varchar(50) NOT NULL,
   streetNumber varchar(5) NOT NULL,
@@ -34,7 +34,7 @@ CREATE TABLE tusers (
 
 
 CREATE TABLE tgalleries (
-  galleryID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  galleryID int AUTO_INCREMENT PRIMARY KEY,
   photographerID int NOT NULL,
   name varchar(50) NOT NULL,
   numberOfPhotos smallint NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE tgalleries (
 );
 
 CREATE TABLE tcards (
-  cardID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  cardID int AUTO_INCREMENT PRIMARY KEY,
   userID int NOT NULL,
   ibanCode char(18) NOT NULL,
   expirationDate char(4) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE tcards (
 );
 
 CREATE TABLE tphotos (
-  photoID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  photoID int AUTO_INCREMENT PRIMARY KEY,
   galleryID int NOT NULL,
   format varchar(5) NOT NULL,
   hDimension MEDIUMINT NOT NULL,
@@ -65,7 +65,7 @@ CREATE TABLE tphotos (
 );
 
 CREATE TABLE tpayments (
-  paymentID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  paymentID int AUTO_INCREMENT PRIMARY KEY,
   cardID int NOT NULL,
   photoID int NOT NULL,
   payDate date NOT NULL,

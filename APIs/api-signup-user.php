@@ -9,7 +9,10 @@ $tName = $_POST['tName'];
 $tSurname = $_POST['tSurname'];
 $tEmail = $_POST['tEmail'];
 $tUsername = $_POST['tUsername'];
-$tPassword = hash('md5', $_POST['tPassword']);
+
+$writtenPassword = $_POST['tPassword'];
+$tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
+
 $tStreetName = $_POST['tStreetName'];
 $tStreetNumber = $_POST['tStreetNumber'];
 $tZipcode = $_POST['tZipcode'];

@@ -14,6 +14,8 @@
 <a href="add-card.php">Add Card</a>
 </div>
 
+<div><a href="login.php">Login</a></div>
+
 
 
 <?php require_once(__DIR__ . '/footer.php'); ?>
