@@ -9,12 +9,19 @@ if(!$_SESSION){
 
 echo $_SESSION['type'];
 
-
 ?>
 
 
 
-<h1>PROFILE</h1>
+<h1>Gallery</h1>
+
+
+
+
+
+
+
+
 
 
 <?php require_once(__DIR__ . '/footer.php'); ?>

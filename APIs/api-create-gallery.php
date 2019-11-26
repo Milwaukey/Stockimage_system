@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 require_once(__DIR__ . '/../includes/connection.php'); 
 require_once(__DIR__ . '/functions.php'); 
 
@@ -8,10 +8,10 @@ require_once(__DIR__ . '/functions.php');
 
 $tGalleryName = $_POST['tGalleryName'];
 
-$photographerID = $_POST['photographerID'];
+$photographerID = $_SESSION['photographerID'];
 
-// HARDED NUMBER OF PHOTOTS 
-$numberOfPhotosInGallery = 2;
+// HARDED NUMBER OF PHOTOTS  /// REMOOOOOOOVE THIIIIIIIIIIS 
+$numberOfPhotosInGallery = 0;
 
 $query = "
 

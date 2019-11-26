@@ -6,7 +6,7 @@ $("#BtnCreateGallery").click(function(){
 
         url : "APIs/api-create-gallery.php",
         method : "POST",
-        data : $('form').serialize() + "&photographerID=" + photographerID,
+        data : $('form').serialize(),
         dataType : "JSON"
 
     })

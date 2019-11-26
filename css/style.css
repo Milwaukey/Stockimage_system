@@ -10,3 +10,9 @@ body {
     color: #282828;
     padding: 120px;
 }
+
+
+
+.hide {
+    display: none;
+}

@@ -45,6 +45,11 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
         $loginID = $row['photographerID'] ;    
 
 
+        session_start();
+        $_SESSION['photographerID'] = $row['photographerID'];
+        $_SESSION['type'] = $loginType;
+
+
         echo sendResponse(1, 'Correct Login!', __LINE__);
 
     }
@@ -84,27 +89,14 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
         $loginID = $row['userID'] ;    
 
 
+        
+        session_start();
+        $_SESSION['userID'] = $row['userID'];
+        $_SESSION['type'] = $loginType;
+
+
         echo sendResponse(1, 'Correct Login!', __LINE__);
 
     }
-
-
-    // // Checks if the username exists in the database 
-    // $query = 'SELECT username FROM tusers WHERE username =' . $tLogin ;
-
-    // // Get the result from the database
-    // $reulsts = mysqli_query($db, $query);
-
-    // // If it doesn't exists the send response to the browser about wrong credentials 
-    // if( $results == 'false' ){
-
-    //     echo sendResponse('O', 'Wrong Credentials!', __LINE__);
-
-    // }
-
-    // // Check if it matches the password in the database
-    // $query = 'SELECT password FROM tusers WHERE username = ' . $tLogin ;
-
-    // $loginType = 'user';
 
 }

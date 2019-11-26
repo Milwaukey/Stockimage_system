@@ -37,7 +37,7 @@ CREATE TABLE tgalleries (
   galleryID int AUTO_INCREMENT PRIMARY KEY,
   photographerID int NOT NULL,
   name varchar(50) NOT NULL,
-  numberOfPhotos smallint NOT NULL,
+  numberOfPhotos smallint NOT NULL DEFAULT 0,
   FOREIGN KEY (photographerID) REFERENCES tphotographers(photographerID)
 );
 
