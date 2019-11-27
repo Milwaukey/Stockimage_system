@@ -16,5 +16,6 @@ echo $_SESSION['type'];
 
 <h1>PROFILE</h1>
 
+<a href="APIs/deleteuser.php?userID=<?=$_SESSION['ID']?>"
 
 <?php require_once(__DIR__ . '/footer.php'); ?>

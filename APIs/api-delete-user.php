@@ -4,6 +4,15 @@
     require_once(__DIR__ . '/functions.php'); 
 
     $userToBeDeleted = $_GET['userID'];
-    $query = 'DELETE FROM tusers WHERE id = $userToBeDeleted';
+    $sTable = $_SESSION['type']
+
+    if{$sTable=='photographer'}(
+        $sTable='tPhotographers';
+    )elseif{
+        $sTable=='user'
+    }(
+        $sTable='tUser';
+    )
+    $query = "DELETE FROM $sTable WHERE id = $userToBeDeleted";
     $result = mysqli_query($db, $query);
-    echo sendResponse('1','DONE',__LINE__);
+    //echo sendResponse('1','DONE',__LINE__);
