@@ -3,7 +3,7 @@
     require_once(__DIR__ . '/../includes/connection.php'); 
     require_once(__DIR__ . '/functions.php'); 
 
-    $userToBeDeleted = $_GET['userID'];
+    $sUserToBeDeleted = $_GET['ID'];
     $sTable = $_SESSION['type']
 
     if{$sTable=='photographer'}(
@@ -13,6 +13,6 @@
     }(
         $sTable='tUser';
     )
-    $query = "DELETE FROM $sTable WHERE id = $userToBeDeleted";
+    $query = "DELETE FROM $sTable WHERE id = $sUserToBeDeleted";
     $result = mysqli_query($db, $query);
     //echo sendResponse('1','DONE',__LINE__);
