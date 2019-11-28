@@ -1,3 +1,5 @@
+//NOT USED
+
 $("#BtnCreateGallery").click(function(){
 
     let photographerID = $(this).parent().attr('id');
