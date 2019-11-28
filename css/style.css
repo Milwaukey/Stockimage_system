@@ -21,3 +21,8 @@ body {
 .BtnBuyImage, .BtnDeleteImage {
     cursor: pointer;
 }
+
+.img_size {
+    width: 100px;
+    height: 100px;
+}

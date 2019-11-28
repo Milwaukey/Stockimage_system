@@ -23,7 +23,7 @@ echo $_SESSION['type'];
 
 <?php 
 
-$query = 'SELECT photoID, price FROM tphotos WHERE galleryID = '. $_GET['id'] .'';
+$query = 'SELECT photoID, price, photoFile, format FROM tphotos WHERE galleryID = '. $_GET['id'] .'';
 
 $results = mysqli_query($db, $query);
 
@@ -32,6 +32,7 @@ while($row = mysqli_fetch_array($results)){
     echo '<div id="photo_' . $row['photoID'] . '">';
 
             echo '<div class="photo_price"> ' .$row['price'] . '</div>';
+            echo '<img class="img_size" src="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'">';
             if($_SESSION['type'] == 'user'){ echo '<div class="BtnBuyImage" id="'. $row['photoID'] .'">Buy Image</div>'; };
             if($_SESSION['type'] == 'photographer'){ echo '<div class="BtnDeleteImage" id="'. $row['photoID'] .'">Delete Image</div>'; };
 
