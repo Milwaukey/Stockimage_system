@@ -29,13 +29,48 @@ $photographerID = 5;
     </form>
 
 
-    <h1>Overview ALL galleries (photographer)</h1>
+    <h1>Overview of MY galleries</h1>
+
+    <?php 
+
+        $query = 'SELECT galleryID, name FROM tgalleries WHERE photographerID =' . $_SESSION['ID'];
+
+        $results = mysqli_query($db, $query);
+
+        while($row = mysqli_fetch_array($results)){
+
+            echo '<a href="gallery.php?id='. $row['galleryID'] .'"' . $row['name'] . '</a> ';
+            echo $row['name'];
+
+        }
+
+
+    ?>
    
     
 </div>
     
     <div <?php if($_SESSION['type'] == 'photographer'){echo 'class="hide"';} ?>>
-    <h1>Overview ALL galleries (user)</h1>
+    
+        <h1>Overview ALL galleries (user)</h1>
+
+
+    <?php 
+
+        $query = 'SELECT galleryID, name FROM tgalleries';
+
+        $results = mysqli_query($db, $query);
+
+        while($row = mysqli_fetch_array($results)){
+
+            echo '<a href="gallery.php?id='. $row['galleryID'] .'"' . $row['name'] . '</a> ';
+            echo $row['name'];
+
+        }
+
+
+    ?>
+
     </div>
 
     <?php $sLinkToScript = '<script src="js/create-gallery.js"></script>'; require_once(__DIR__ . '/footer.php'); ?>

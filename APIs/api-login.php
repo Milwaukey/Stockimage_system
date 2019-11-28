@@ -42,11 +42,11 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
 
 
         $loginType = 'photographer';
-        $loginID = $row['ID'] ;    
+        $loginID = $row['photographerID'] ;    
 
 
         session_start();
-        $_SESSION['ID'] = $row['ID'];
+        $_SESSION['ID'] = $row['photographerID'];
         $_SESSION['type'] = $loginType;
 
 
@@ -86,12 +86,11 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
 
 
         $loginType = 'user';
-        $loginID = $row['ID'] ;    
-
+        $loginID = $row['userID'] ;    
 
         
         session_start();
-        $_SESSION['ID'] = $row['ID'];
+        $_SESSION['ID'] = $row['userID'];
         $_SESSION['type'] = $loginType;
 
 

@@ -3,16 +3,53 @@
     require_once(__DIR__ . '/../includes/connection.php'); 
     require_once(__DIR__ . '/functions.php'); 
 
-    $sUserToBeDeleted = $_GET['ID'];
-    $sTable = $_SESSION['type']
+    session_start();
 
-    if{$sTable=='photographer'}(
-        $sTable='tPhotographers';
-    )elseif{
-        $sTable=='user'
-    }(
-        $sTable='tUser';
-    )
-    $query = "DELETE FROM $sTable WHERE id = $sUserToBeDeleted";
+    if(!$_SESSION){
+
+        header('Location: ../login.php ');
+        exit; // Make sure that code doesn't keeep running and deletes people!! 
+
+    }
+
+    if($SESSION['ID'] != $_GET['ID']){
+
+        header('Location: ../login.php ');
+        exit; // Make sure that code doesn't keeep running and deletes people!! 
+
+    }
+
+    $sUserToBeDeleted = $_GET['ID'];
+    $sTable = $_SESSION['type'];
+
+
+
+
+ echo $sTable;
+ echo $sUserToBeDeleted;
+
+
+
+    if( $sTable == 'photographer' ){
+
+
+        $sTable='tphotographers';
+        $sIdType = 'photographerID';
+
+
+    }elseif( $sTable=='user'){
+
+
+        $sTable='tusers';
+        $sIdType = 'userID';
+
+        
+    }
+
+
+    $query = "DELETE FROM $sTable WHERE $sIdType = $sUserToBeDeleted";
     $result = mysqli_query($db, $query);
-    //echo sendResponse('1','DONE',__LINE__);
+
+    session_destroy();
+
+    header('Location: ../index.php');

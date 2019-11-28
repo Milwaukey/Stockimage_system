@@ -20,6 +20,7 @@
     <a href="login.php">Login</a>
     <a href="profile.php">Profile</a>
     <a href="galleries-overview.php">Gallery Overview</a>
-    <a href="gallery.php">Gallery</a>
     <a href="add-card.php">Add Card</a>
+    <a href="signup-user.php">Signup User</a>
+    <a href="signup-photographer.php">Signup Photographer</a>
 </nav>

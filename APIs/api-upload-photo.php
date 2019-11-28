@@ -7,11 +7,13 @@ require_once(__DIR__ . '/functions.php');
 $galleryID = 2;
 
 //Pickup files that have been uploaded // PHOTO ID // GALLERY ID // FORMAT // H + V // RESOLUTION // SIZE // PRICE // FILE  
-$sPropertyImages = $_FILES['photos']['name'];
 $tPrice = $_POST['tPrice'];
 
 // COUNTS the number op oploadeds images in the array
 $iNumberOfImages = count($_FILES['photos']['name']);
+
+echo $iNumberOfImages;
+
 
 // Loops though the number of oploades images, gives the possible to get path, size and so one for validation
 for($i = 0; $i < $iNumberOfImages ; $i++){
@@ -45,13 +47,7 @@ for($i = 0; $i < $iNumberOfImages ; $i++){
     // Removing images from the uploaded folder, to the one i want to store them in
     $tmpFile = move_uploaded_file($_FILES['photos']['tmp_name'][$i], "/Applications/XAMPP/xamppfiles/htdocs/WebDevelopmentDatabase/images/" . $sImageName);
     
-    echo $tmpFile;
-
-    // echo $iImageSize . '----';
-    // echo $imageWidth . '----';
-    // echo $imageHeight . '----';
-    // echo $imageResolution . '----';
-    // echo $sExtension . '----';
+    // echo $tmpFile;
 
 
     // Put it into the database // ONLY WORKS AS LOCAL HOST
@@ -68,5 +64,8 @@ for($i = 0; $i < $iNumberOfImages ; $i++){
     // var_dump($results);
 
     // echo 'Image uploaded';
+   
+   
+    // echo $i . 'hej';
 
 }

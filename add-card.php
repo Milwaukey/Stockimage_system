@@ -15,12 +15,11 @@ if($_SESSION['type'] == 'photographer'){
 }
 
 // HARD CODED SESSIONS ID FOR USER
-$userID = 3;
 
 ?>
 
     <h1>Add card</h1>
-    <form id="<?php echo $userID ?>">    
+    <form>    
         <input name="tIbanCode" type="text" placeholder="ibanCode">
         <input name="tExpirationDate" type="text" placeholder="tExpiration Date">
         <input name="tccv" type="text" placeholder="CCV">

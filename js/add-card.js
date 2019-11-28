@@ -1,23 +1,26 @@
 $("#BtnAddCard").click(function(){
 
-    let userID = $(this).parent().attr('id');
+    // let userID = $(this).parent().attr('id');
 
     $.ajax({
 
         url : "APIs/api-add-card.php",
         method : "POST",
-        data : $('form').serialize() + "&userID=" + userID,
+        data : $('form').serialize(),
         dataType : "JSON"
 
     })
     .done(function( jData ){
 
-        
-        // jData = JSON.parse(sData);
-        console.log(jData.message);
+        if( jData.status == 0 ){
 
-        // $(location).attr('href', 'index.php');
+            $(location).attr('href', 'index.php');
 
+        }else if( jData.status = 1 ){
+
+            $(location).attr('href', 'profile.php');
+
+        }
 
     })
 

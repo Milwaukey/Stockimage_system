@@ -16,3 +16,8 @@ body {
 .hide {
     display: none;
 }
+
+
+.BtnBuyImage, .BtnDeleteImage {
+    cursor: pointer;
+}
