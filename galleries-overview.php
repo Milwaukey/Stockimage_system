@@ -37,7 +37,7 @@ $photographerID = 5;
 
         while($row = mysqli_fetch_array($results)){
 
-            echo '<a href="gallery.php?id='. $row['galleryID'] .'"' . $row['name'] . '</a> ';
+            echo '<a href="gallery.php?id='. $row['galleryID'] .'"> '. $row['name'] .' </a>';
             echo $row['name'];
 
         }
@@ -48,9 +48,10 @@ $photographerID = 5;
     
 </div>
     
-    <div <?php if($_SESSION['type'] == 'photographer'){echo 'class="hide"';} ?>>
+    <div <?php if($_SESSION['type'] == 'photographer'){echo 'class="hide"';} ?> >
     
-        <h1>Overview ALL galleries (user)</h1>
+
+    <h1>Overview ALL galleries (user)</h1>
 
 
     <?php 
@@ -61,8 +62,7 @@ $photographerID = 5;
 
         while($row = mysqli_fetch_array($results)){
 
-            echo '<a href="gallery.php?id='. $row['galleryID'] .'"' . $row['name'] . '</a> ';
-            echo $row['name'];
+            echo '<a href="gallery.php?id='. $row['galleryID'] .'"> '. $row['name'] .' </a>';
 
         }
 
