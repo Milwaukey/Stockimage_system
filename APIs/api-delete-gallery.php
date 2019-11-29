@@ -21,11 +21,17 @@
 
     }
 
+    $galleryid = 1; //HARDED CODED XXX
+    $query = "SELECT photoid FROM tphotos WHERE galleryID = $galleryid";
+    $results = mysqli_query($db,$query);
 
+    foreach($results as $photoid){
+        $query = "UPDATE tpayments SET photoID = NULL WHERE photoID = $photoID";
+        mysqli_query($db,$query);
+    }
+    
 
-
-
-    $sGalleryToBeDeleted = $_GET['ID'];
+    $sGalleryToBeDeleted = $galleryid;
     
     $query = "DELETE FROM tgalleries WHERE galleryID = $sGalleryToBeDeleted";
 
