@@ -16,10 +16,6 @@
     $sPhotoToBeDeleted = $_POST['tPhotoID'];
 
 
-    // CHANGE PAYMENT PHOTOID = NULL, so it doesn't ruin the database structure 
-
-
-
     // DELETES THE PHOTO FROM THE DATABASE 
     $query = "DELETE FROM tphotos WHERE photoID = $sPhotoToBeDeleted";
 

@@ -35,20 +35,22 @@ if( $_SESSION['type'] == 'user' ){
     $tSurname = $_POST['tSurname']; 
     $tEmail = $_POST['tEmail']; 
     
-    $writtenPassword = $_POST['tPassword'];
-    $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
+    // $writtenPassword = $_POST['tPassword'];
+    // $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
 
     $tUsername = $_POST['tUsername'];
     $tStreetName = $_POST['tStreetName'];
     $tStreetNumber = $_POST['tStreetNumber'];
     $tZipcode= $_POST['tZipcode'];
 
-
     // ADD CITY CHANGE 
+    $city = $_POST['tCity'];
 
-    $query = "UPDATE tusers SET name = '$tName', surname = '$tSurname', email = '$tEmail', password = '$tPassword', username = '$tUsername', streetName = '$tStreetName', streetNumber = '$tStreetNumber', zipcode = $tZipcode WHERE userID = 4";
+    $query = "UPDATE tusers SET name = '$tName', surname = '$tSurname', email = '$tEmail', username = '$tUsername', streetName = '$tStreetName', streetNumber = '$tStreetNumber', zipcode = $tZipcode, cityID = $city WHERE userID = " . $_SESSION['ID'] ;
 
     $results = mysqli_query($db, $query);
+
+    echo sendResponse(1, "Done", __LINE__);
 
  }
 

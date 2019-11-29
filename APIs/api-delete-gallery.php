@@ -14,23 +14,33 @@
 
     }
 
-    if($SESSION['ID'] != $_GET['ID']){ // CHANGE TO AJAX 
-
-        header('Location: ../login.php ');
-        exit; // Make sure that code doesn't keeep running and deletes people!! 
-
-    }
-
     $galleryid = 1; //HARDED CODED XXX
-    $query = "SELECT photoid FROM tphotos WHERE galleryID = $galleryid";
+
+
+
+
+// SETS PAYMENT PHOTO ID TO NULL
+    $query = "SELECT photoID FROM tphotos WHERE galleryID = $galleryid";
     $results = mysqli_query($db,$query);
 
     foreach($results as $photoid){
-        $query = "UPDATE tpayments SET photoID = NULL WHERE photoID = $photoID";
-        mysqli_query($db,$query);
-    }
-    
 
+        $i = $photoid['photoID'];
+
+        $query = "UPDATE tpayments SET photoID = NULL WHERE photoID = $i";
+        mysqli_query($db,$query);
+    
+    
+        // DELETE PHOTOS 
+        $query = "DELETE FROM tphotos WHERE photoID = $i";
+
+        mysqli_query($db, $query);
+
+
+    }
+
+
+// DELETE GALLERY
     $sGalleryToBeDeleted = $galleryid;
     
     $query = "DELETE FROM tgalleries WHERE galleryID = $sGalleryToBeDeleted";
@@ -38,6 +48,4 @@
     $result = mysqli_query($db, $query);
 
 
-
-    // echo sendResponse('1','DONE',__LINE__);
-    header('Location:index.php');
+    echo sendResponse('1','DONE',__LINE__);

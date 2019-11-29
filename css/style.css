@@ -18,7 +18,7 @@ body {
 }
 
 
-.BtnBuyImage, .BtnDeleteImage {
+.BtnBuyImage, .BtnDeleteImage, .BtnUpdateImage {
     cursor: pointer;
 }
 
