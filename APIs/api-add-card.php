@@ -14,6 +14,10 @@ $tccv = $_POST['tccv'];
 $userID = $_SESSION['ID'];
 
 
+
+// VARIFY IF THE IBAN ALREADY EXCIST IN THE DATABASE !
+
+
 $query = "
 
 INSERT INTO tcards (userID, ibanCode, expirationDate, ccv)

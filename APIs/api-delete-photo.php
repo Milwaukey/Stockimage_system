@@ -13,17 +13,14 @@
 
     }
 
-    // if($SESSION['ID'] != $_GET['ID']){ // CHANGE TO AJAX 
-
-    //     header('Location: ../login.php ');
-    //     exit; // Make sure that code doesn't keeep running and deletes people!! 
-
-    // }
-
-
     $sPhotoToBeDeleted = $_POST['tPhotoID'];
 
 
+    // CHANGE PAYMENT PHOTOID = NULL, so it doesn't ruin the database structure 
+
+
+
+    // DELETES THE PHOTO FROM THE DATABASE 
     $query = "DELETE FROM tphotos WHERE photoID = $sPhotoToBeDeleted";
 
 

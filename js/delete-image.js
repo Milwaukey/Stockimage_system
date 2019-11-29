@@ -15,7 +15,16 @@ $(".BtnDeleteImage").click(function(){
     
             console.log(jData.message);
 
-            // CHANGE SO IT UPDATES ON THE PAGE WITHOUT RELOAD 
+            
+            if( jData.status == 1 ){
+
+                console.log( tDeleteImage );
+
+            }
+
+
+            // $('#photo_' + tDeleteImage).remove();
+
 
         })
             
