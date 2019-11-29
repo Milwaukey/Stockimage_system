@@ -2,8 +2,6 @@ $(".BtnDeleteImage").click(function(){
 
     let tDeleteImage = $(this).attr('id');
 
-
-
     $.ajax({
 
         url : "APIs/api-set-payment-null.php",
@@ -13,10 +11,7 @@ $(".BtnDeleteImage").click(function(){
 
     })
     .done(function( jData ){    
-        console.log(jData.message);
-        if( jData.status == 1 ){
-            $('#photo_' + tDeleteImage).hide();
-        }
+
         $.ajax({
 
             url : "APIs/api-delete-photo.php",
@@ -27,11 +22,13 @@ $(".BtnDeleteImage").click(function(){
         })
         .done(function( jData ){   
 
-            console.log(jData.message);
             if( jData.status == 1 ){
                 $('#photo_' + tDeleteImage).hide();
             }
+
         })
+
+
     })
         
 })

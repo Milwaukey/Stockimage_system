@@ -16,7 +16,7 @@ $("#BtnCreateGallery").click(function(){
         // jData = JSON.parse(sData);
         console.log(jData.message);
 
-        $(location).attr('href', 'index.php');
+        $(location).attr('href', 'profile.php');
 
 
     })

@@ -28,7 +28,7 @@ CREATE TABLE tusers (
   streetName varchar(50) NOT NULL,
   streetNumber varchar(5) NOT NULL,
   zipcode char(4) NOT NULL,
-  cityID int NOT NULL,
+  cityID int,
   FOREIGN KEY (cityID) REFERENCES tcities(cityID)
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE tgalleries (
 
 CREATE TABLE tcards (
   cardID int AUTO_INCREMENT PRIMARY KEY,
-  userID int NOT NULL,
+  userID int,
   ibanCode char(18) NOT NULL,
   expirationDate char(4) NOT NULL,
   ccv char(3) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE tcards (
 
 CREATE TABLE tphotos (
   photoID int AUTO_INCREMENT PRIMARY KEY,
-  galleryID int NOT NULL,
+  galleryID int,
   format varchar(5) NOT NULL,
   hDimension MEDIUMINT NOT NULL,
   vDimension MEDIUMINT NOT NULL,
@@ -66,8 +66,8 @@ CREATE TABLE tphotos (
 
 CREATE TABLE tpayments (
   paymentID int AUTO_INCREMENT PRIMARY KEY,
-  cardID int NOT NULL,
-  photoID int NOT NULL,
+  cardID int,
+  photoID int,
   payDate date NOT NULL,
   payTime time NOT NULL,
   amountPaid decimal(5, 2) NOT NULL,

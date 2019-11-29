@@ -4,7 +4,7 @@ require_once(__DIR__ . '/../includes/connection.php');
 require_once(__DIR__ . '/functions.php'); 
 
 // CHANGE THIS BY GET
-$galleryID = 2;
+$galleryID = 1;
 
 //Pickup files that have been uploaded // PHOTO ID // GALLERY ID // FORMAT // H + V // RESOLUTION // SIZE // PRICE // FILE  
 $tPrice = $_POST['tPrice'];

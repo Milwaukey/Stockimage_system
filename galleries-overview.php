@@ -22,9 +22,7 @@ $photographerID = 5;
         <input name="tGalleryName" type="text" placeholder="Gallery Name">
 
 
-        
-
-
+    
         <button id="BtnCreateGallery">Create Gallery</button>
     </form>
 

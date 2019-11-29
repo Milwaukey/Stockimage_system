@@ -8,7 +8,7 @@ require_once(__DIR__ . '/functions.php');
 
 $tGalleryName = $_POST['tGalleryName'];
 
-$photographerID = $_SESSION['photographerID'];
+$photographerID = $_SESSION['ID'];
 
 // HARDED NUMBER OF PHOTOTS  /// REMOOOOOOOVE THIIIIIIIIIIS 
 $numberOfPhotosInGallery = 0;
