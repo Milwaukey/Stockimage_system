@@ -1,4 +1,13 @@
-<?php require_once(__DIR__ . '/header.php'); ?>
+<?php require_once(__DIR__ . '/header.php');
+
+session_start();
+if($_SESSION){
+
+    header('Location: profile.php ');
+
+}
+
+?>
 
     <h1>Signup Photographer</h1>
     <form>

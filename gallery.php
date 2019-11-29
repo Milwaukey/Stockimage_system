@@ -65,6 +65,12 @@ while($row = mysqli_fetch_array($results)){
 
 
 
-<?php $sLinkToScript3 = '<script src="js/delete-image.js"></script>'; $sLinkToScript2 = '<script src="js/select-card.js"></script>'; $sLinkToScript = '<script src="js/create-payment.js"></script>'; require_once(__DIR__ . '/footer.php'); ?>
+<?php
 
+$sLinkToScript3 = '<script src="js/delete-image.js"></script>';
+$sLinkToScript2 = '<script src="js/select-card.js"></script>';
+$sLinkToScript = '<script src="js/create-payment.js"></script>';
+
+
+require_once(__DIR__ . '/footer.php'); ?>
 
