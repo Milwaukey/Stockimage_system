@@ -5,13 +5,8 @@ require_once(__DIR__ . '/../includes/connection.php');
 require_once(__DIR__ . '/functions.php'); 
 
 
-// CHECK IF ITS A PHOTOGRAPHER OR A USER THAT UPDATES THE INFORMATION 
 
-$type = 'user';
-
-
-
-if( $type == 'photographer' ){  // CHANGHE TO SESSION
+if( $_SESSION['type'] == 'photographer' ){ 
     
     
     $tName = $_POST['tName']; 
@@ -33,7 +28,7 @@ if( $type == 'photographer' ){  // CHANGHE TO SESSION
 
 
 
-if( $type == 'user' ){ 
+if( $_SESSION['type'] == 'user' ){ 
 
 
     $tName = $_POST['tName']; 
@@ -48,11 +43,12 @@ if( $type == 'user' ){
     $tStreetNumber = $_POST['tStreetNumber'];
     $tZipcode= $_POST['tZipcode'];
 
+
+    // ADD CITY CHANGE 
+
     $query = "UPDATE tusers SET name = '$tName', surname = '$tSurname', email = '$tEmail', password = '$tPassword', username = '$tUsername', streetName = '$tStreetName', streetNumber = '$tStreetNumber', zipcode = $tZipcode WHERE userID = 4";
 
     $results = mysqli_query($db, $query);
-
-    echo 'Done';
 
  }
 
