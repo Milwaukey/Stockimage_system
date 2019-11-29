@@ -18,12 +18,13 @@ $(".BtnDeleteImage").click(function(){
             
             if( jData.status == 1 ){
 
-                console.log( tDeleteImage );
+                
+                $('#photo_' + tDeleteImage).hide();
+
 
             }
 
 
-            // $('#photo_' + tDeleteImage).remove();
 
 
         })
