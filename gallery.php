@@ -20,7 +20,15 @@ echo $_SESSION['type'];
 
 <h1>Gallery</h1>
 
-<button id="upload_images" type="submit">Upload images</button>
+<button id="BtnUpload_images" type="submit">Add images to gallery</button>
+
+<form id="<?php echo $_GET['id'] ?>" class="frmUploadImages hide">
+    <input id="imageUpload" name="photos[]" type="file" multiple="multipart/form-data" required>
+    <input name="tPrice" type="number" min="0" step="any" placeholder="Image price" required>
+    <button>Upload</button>
+</form>
+
+
 
 
 <?php 

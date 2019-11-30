@@ -12,7 +12,7 @@ $("#BtnSignup").click(function(){
 
         
         // jData = JSON.parse(sData);
-        console.log(jData.message);
+        console.log(jData);
 
         $(location).attr('href', 'login.php');
 

@@ -4,15 +4,13 @@ require_once(__DIR__ . '/../includes/connection.php');
 require_once(__DIR__ . '/functions.php'); 
 
 // CHANGE THIS BY GET
-$galleryID = 1;
+$galleryID = $_GET['galleryID'];
 
 //Pickup files that have been uploaded // PHOTO ID // GALLERY ID // FORMAT // H + V // RESOLUTION // SIZE // PRICE // FILE  
 $tPrice = $_POST['tPrice'];
 
 // COUNTS the number op oploadeds images in the array
 $iNumberOfImages = count($_FILES['photos']['name']);
-
-echo $iNumberOfImages;
 
 
 // Loops though the number of oploades images, gives the possible to get path, size and so one for validation
@@ -47,8 +45,6 @@ for($i = 0; $i < $iNumberOfImages ; $i++){
     // Removing images from the uploaded folder, to the one i want to store them in
     $tmpFile = move_uploaded_file($_FILES['photos']['tmp_name'][$i], "/Applications/XAMPP/xamppfiles/htdocs/WebDevelopmentDatabase/images/" . $sImageName);
     
-    // echo $tmpFile;
-
 
     // Put it into the database // ONLY WORKS AS LOCAL HOST
     $query = "
@@ -59,13 +55,27 @@ for($i = 0; $i < $iNumberOfImages ; $i++){
     ";
 
 
-    $results = mysqli_query($db, $query);
+    mysqli_query($db, $query);
+    
+    
+}
 
-    // var_dump($results);
+// UPDATE THE GALLERY  with the number of  images added
+$query2 = " SELECT numberOfPhotos FROM tgalleries WHERE galleryID = " . $galleryID ;
+$results = mysqli_query($db, $query2);
 
-    // echo 'Image uploaded';
-   
-   
-    // echo $i . 'hej';
+
+while($row = mysqli_fetch_array($results)){
+
+    $numberOfPhotos = $row['numberOfPhotos'];
+
+    $newNumberOfPhotos = $numberOfPhotos+$iNumberOfImages;
+
+    $query3 = " UPDATE tgalleries SET numberOfPhotos = $newNumberOfPhotos WHERE galleryID = " . $galleryID ;
+    mysqli_query($db, $query3);
+
 
 }
+
+
+echo sendResponse(1, 'Uploaded', __LINE__);
