@@ -1,13 +1,13 @@
 $('.BtnUpdateImage').click(function(){
 
-    $('#Update_personal_info').show();
+    $('.Update_personal_info').show();
     
 
 })
 
 
 
-$('#Update_personal_info form button').click(function(){
+$('.Update_personal_info form button').click(function(){
 
     $.ajax({
 
@@ -18,14 +18,19 @@ $('#Update_personal_info form button').click(function(){
 
     })
     .done(function( jData ){
-
         
         if(jData.status == 1){
 
-        
-                $('#Update_personal_info').hide();
-                
+            setInterval(function(){
 
+                $(location).attr('href', 'profile.php');
+
+            }, 100)
+
+
+
+                $('.Update_personal_info').hide();
+                            
         }
 
 

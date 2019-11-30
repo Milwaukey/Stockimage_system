@@ -29,6 +29,17 @@ echo $_SESSION['type'];
                     echo '<div>' . $row['name'] .'</div>';
                     echo '<div>' . $row['surname'] .'</div>';
                     echo '<div>' . $row['email'] .'</div>';
+
+                    echo "
+                        <div class='Update_personal_info hide'>
+                            <form>
+                                <input name='tName' value='".$row['name']."'>
+                                <input name='tSurname' value='".$row['surname']."'>
+                                <input name='tEmail' value='".$row['email']."'>                                
+                                <button>Update</button>
+                            </form>
+                        </div>
+                        ";
                     
                 }
             
@@ -70,7 +81,7 @@ echo $_SESSION['type'];
 
                 echo "
                 
-                <div id='Update_personal_info' class='hide'>
+                <div class='Update_personal_info hide'>
                     <form method='POST'>
                         <input name='tName' value='".$row['name']."'>
                         <input name='tSurname' value='".$row['surname']."'>

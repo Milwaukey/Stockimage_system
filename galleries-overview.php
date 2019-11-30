@@ -38,7 +38,6 @@ $photographerID = 5;
         while($row = mysqli_fetch_array($results)){
 
             echo '<a href="gallery.php?id='. $row['galleryID'] .'"> '. $row['name'] .' </a>';
-            echo $row['name'];
 
         }
 

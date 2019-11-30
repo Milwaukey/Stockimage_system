@@ -8,19 +8,18 @@ require_once(__DIR__ . '/functions.php');
 
 if( $_SESSION['type'] == 'photographer' ){ 
     
-    
     $tName = $_POST['tName']; 
     $tSurname = $_POST['tSurname']; 
     $tEmail = $_POST['tEmail']; 
 
-    $writtenPassword = $_POST['tPassword'];
-    $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
+    // $writtenPassword = $_POST['tPassword'];
+    // $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
 
-    $query = "UPDATE tphotographers SET name = '$tName', surname = '$tSurname', email = '$tEmail', password = '$tPassword' WHERE photographerID = " . $_SESSION['ID'] ;
+    $query = "UPDATE tphotographers SET name = '$tName', surname = '$tSurname', email = '$tEmail' WHERE photographerID = " . $_SESSION['ID'] ;
 
     $results = mysqli_query($db, $query);
 
-    echo sendResponse(1, "Message", __LINE__);
+    echo sendResponse(1, "Done", __LINE__);
 
 }
 
@@ -29,7 +28,6 @@ if( $_SESSION['type'] == 'photographer' ){
 
 
 if( $_SESSION['type'] == 'user' ){ 
-
 
     $tName = $_POST['tName']; 
     $tSurname = $_POST['tSurname']; 
