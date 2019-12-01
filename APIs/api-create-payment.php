@@ -42,3 +42,31 @@ echo sendResponse(1, 'SUCCES!', __LINE__);
 
 
 // PAYMENT ID // CARD ID // PHOTOID // PAYDATE // PAYTIME // AMOUNT PAID 
+
+
+
+// Price to tphotos
+// amount paid tpayments
+//  total amount paid tcards
+//   total monetary paid tusers
+
+$query = "
+
+SELECT tcards.totalAmountPaid, tusers.totalMonetaryPaid
+FROM tcards
+INNER JOIN tusers ON tcards.userID = tuser.userID
+
+"
+$results = mysqli_query($db,$query);
+$row = mysqli_fetch_array($result, MYSQLI_NUM)
+
+$iCardTotalSpend = $row[0] + $iAmountPaid;
+$iUserTotalSpend = $row[1] + $iAmountPaid;
+
+$query = " BEGIN TRANSACTION 
+
+UPDATE tcards
+SET totalAmountPaid = $iCardTotalSpend
+WHERE userID = $_SESSION['ID'];
+
+"
