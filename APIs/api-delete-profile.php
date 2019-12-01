@@ -47,9 +47,14 @@
     }
 
 
-    $query = "DELETE FROM $sTable WHERE $sIdType = $sUserToBeDeleted";
+    // $query = "DELETE FROM $sTable WHERE $sIdType = $sUserToBeDeleted";
+    // $result = mysqli_query($db, $query);
+
+    $query = "UPDATE $sTable SET deleteDate = date('Y-m-d', time()), active = 0  WHERE $sIdType = $sUserToBeDeleted";
     $result = mysqli_query($db, $query);
 
     session_destroy();
 
     header('Location: ../index.php');
+
+ 
