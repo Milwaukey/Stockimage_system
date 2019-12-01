@@ -23,12 +23,12 @@ $iAmountPaid = $_POST['tPrice'];
 
 
 
-$query = "
+// $query = "
 
-    INSERT INTO tpayments (cardID, photoID, payDate, payTime, amountPaid) 
-    VALUES ( $tCardID, $tPhotoID, '$dPayDate', '$dPayTime', $iAmountPaid );
+//     INSERT INTO tpayments (cardID, photoID, payDate, payTime, amountPaid) 
+//     VALUES ( $tCardID, $tPhotoID, '$dPayDate', '$dPayTime', $iAmountPaid );
 
-";
+// ";
 
 
 mysqli_query($db, $query);
@@ -49,24 +49,37 @@ echo sendResponse(1, 'SUCCES!', __LINE__);
 // amount paid tpayments
 //  total amount paid tcards
 //   total monetary paid tusers
+$id= $_SESSION['ID'];
+// $query = "
 
-$query = "
+// SELECT tcards.totalAmountPaid, tusers.totalMonetaryPaid
+// FROM tcards
+// INNER JOIN tusers ON tcards.userID = tuser.userID
 
-SELECT tcards.totalAmountPaid, tusers.totalMonetaryPaid
-FROM tcards
-INNER JOIN tusers ON tcards.userID = tuser.userID
+// ";
+// $results = mysqli_query($db,$query);
+// $row = mysqli_fetch_array($result, MYSQLI_NUM);
 
-"
+// $iCardTotalSpend = $row[0] + $iAmountPaid;
+// $iUserTotalSpend = $row[1] + $iAmountPaid;
+
+$query = " 
+START TRANSACTION 
+
+SET @AmountPaid = $iAmountPaid;
+SET @UserID = $id;
+SET @CardTotalSpending = (SELECT totalAmountPaid FROM tcards WHERE userID = @UserID) + @AmountPaid; 
+SET @UserTotalSpending = (SELECT totalMonetaryPaid FROM tusers WHERE userID = @UserID) + @AmountPaid; 
+
+
+INSERT INTO tpayments (cardID, photoID, payDate, payTime, amountPaid) 
+VALUES ( $tCardID, $tPhotoID, '$dPayDate', '$dPayTime', $iAmountPaid );
+
+
+UPDATE tcards SET totalAmountpaid = @CardTotalSpending WHERE userID = @UserID;
+UPDATE tusers SET totalMonetarypaid = @UserTotalSpending WHERE userID = @UserID;
+
+
+";
+
 $results = mysqli_query($db,$query);
-$row = mysqli_fetch_array($result, MYSQLI_NUM)
-
-$iCardTotalSpend = $row[0] + $iAmountPaid;
-$iUserTotalSpend = $row[1] + $iAmountPaid;
-
-$query = " BEGIN TRANSACTION 
-
-UPDATE tcards
-SET totalAmountPaid = $iCardTotalSpend
-WHERE userID = $_SESSION['ID'];
-
-"
