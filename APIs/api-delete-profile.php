@@ -52,7 +52,18 @@
 
     $query = "UPDATE $sTable SET deleteDate = date('Y-m-d', time()), active = 0  WHERE $sIdType = $sUserToBeDeleted";
     $result = mysqli_query($db, $query);
+    if( $sTable == 'photographer' ){
 
+
+     $query = "SELECT COUNT(name)
+     FROM tgalleries
+     WHERE photographerID = $sUserToBeDeleted;";
+    $count = mysqli_affected_rows($query);
+    for ($i = 1; $i <= $count; $i++) {
+            //NEEDS TO WORK WITH THE INCLUDED FILE!!!!!!
+        include "api-delete-gallery.php";
+    };
+    };
     session_destroy();
 
     header('Location: ../index.php');
