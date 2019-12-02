@@ -5,9 +5,11 @@ require_once(__DIR__ . '/functions.php');
 
 
 // GETS THE INFORMATION
-$tLogin = $_POST['tLogin'];
-$tPassword = $_POST['tPassword'];
+// $tLogin = $_POST['tLogin'];
+// $tPassword = $_POST['tPassword'];
 
+$tLogin = mysqli_real_escape_string($db,$_POST['tLogin']);
+$tPassword = mysqli_real_escape_string($db,$_POST['tPassword']);
 
 
 // CHECK IF tLogin is an email or an username
