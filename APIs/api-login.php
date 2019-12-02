@@ -59,7 +59,7 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
 }else {
 
     // Checks if the email exists in the database 
-    $query = "SELECT userID, email, username, password FROM tusers WHERE username = '$tLogin' ";
+    $query = "SELECT userID, email, username, active, password FROM tusers WHERE username = '$tLogin' ";
 
     // Get the result from the database
     $results = mysqli_query($db, $query);
@@ -75,6 +75,12 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
 
     // IF TRUE  - loop trough the objecdt
     while($row = mysqli_fetch_array($results)){
+
+        if( $row['active'] == 0){
+
+            echo sendResponse(0, 'You are not active!', __LINE__);
+
+        }
 
         // CHECK THE PASSWORD 
         if( !password_verify( $tPassword, $row['password'] ) ){

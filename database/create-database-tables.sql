@@ -25,7 +25,7 @@ CREATE TABLE tusers (
   signupDate date,
   deleteDate date DEFAULT NULL,
   active boolean DEFAULT true,
-  totalMonetaryPaid decimal(5, 2) DEFAULT 0,
+  totalMonetaryPaid decimal(10, 2) DEFAULT 0,
   streetName varchar(50) NOT NULL,
   streetNumber varchar(5) NOT NULL,
   zipcode char(4) NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE tcards (
   ibanCode char(18) NOT NULL,
   expirationDate char(4) NOT NULL,
   ccv char(3) NOT NULL,
-  totalAmountPaid decimal(7, 2) DEFAULT 0,
+  totalAmountPaid decimal(10, 2) DEFAULT 0,
   FOREIGN KEY (userID) REFERENCES tusers(userID)
 );
 
@@ -60,7 +60,7 @@ CREATE TABLE tphotos (
   vDimension MEDIUMINT NOT NULL,
   resolution int NOT NULL,
   filesize MEDIUMINT NOT NULL,
-  price decimal(5, 2) DEFAULT 0,
+  price decimal(6, 2) DEFAULT 0,
   photoFile longblob NOT NULL,
   FOREIGN KEY (galleryID) REFERENCES tgalleries(galleryID)
 );
@@ -71,7 +71,7 @@ CREATE TABLE tpayments (
   photoID int,
   payDate date NOT NULL,
   payTime time NOT NULL,
-  amountPaid decimal(5, 2) NOT NULL,
+  amountPaid decimal(6, 2) NOT NULL,
   FOREIGN KEY (cardID) REFERENCES tcards(cardID),
   FOREIGN KEY (photoID) REFERENCES tphotos(photoID)
 );

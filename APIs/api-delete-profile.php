@@ -5,67 +5,89 @@
 
     session_start();
 
-    if(!$_SESSION){
+    // if(!$_SESSION){
 
-        header('Location: ../login.php ');
-        exit; // Make sure that code doesn't keeep running and deletes people!! 
+    //     header('Location: ../login.php ');
+    //     exit; // Make sure that code doesn't keeep running and deletes people!! 
 
-    }
+    // }
 
-    if($SESSION['ID'] != $_GET['ID']){
+    // if($SESSION['ID'] != $_GET['ID']){
 
-        header('Location: ../login.php ');
-        exit; // Make sure that code doesn't keeep running and deletes people!! 
+    //     header('Location: ../login.php ');
+    //     exit; // Make sure that code doesn't keeep running and deletes people!! 
 
-    }
+    // }
 
     $sUserToBeDeleted = $_GET['ID'];
-    $sTable = $_SESSION['type'];
+    $type = $_SESSION['type'];
+
+
+    if( $type == 'photographer' ){
+
+
+        // $sTable='tphotographers';
+        // $sIdType = 'photographerID';
+
+        $query = "SELECT galleryID FROM tgalleries WHERE photographerID = $sUserToBeDeleted";
+
+        $results = mysqli_query($db, $query);
+
+
+        while($row = mysqli_fetch_array($results)){
+
+            $galleryid = $row['galleryID'];
+            
+            // SETS PAYMENT PHOTO ID TO NULL
+            $query_2 = "SELECT photoID FROM tphotos WHERE galleryID = $galleryid";
+            $results_2 = mysqli_query($db,$query_2);
+
+            foreach($results_2 as $photoid){
+
+                $i = $photoid['photoID'];
+
+                $query = "UPDATE tpayments SET photoID = NULL WHERE photoID = $i";
+                mysqli_query($db,$query);
+            
+            
+                // DELETE PHOTOS 
+                $query = "DELETE FROM tphotos WHERE photoID = $i";
+
+                mysqli_query($db, $query);
+
+
+            }
+
+
+                // DELETE GALLERY
+                $sGalleryToBeDeleted = $galleryid;
+                
+                $query_2 = "DELETE FROM tgalleries WHERE galleryID = $sGalleryToBeDeleted";
+                mysqli_query($db, $query_2);
+
+                    
+        }
+
+
+        // DELETE PROFILE PHOTOGRAPHER
+
+        $query = "DELETE FROM tphotographers WHERE photographerID = $sUserToBeDeleted";
+        mysqli_query($db, $query);
 
 
 
+    }elseif( $type == 'user'){
 
- echo $sTable;
- echo $sUserToBeDeleted;
-
-
-
-    if( $sTable == 'photographer' ){
+        $deleteDate = date('Y-m-d', time() );
 
 
-        $sTable='tphotographers';
-        $sIdType = 'photographerID';
+        $query = "UPDATE tusers SET deleteDate = '$deleteDate', active = 0 WHERE userID = $sUserToBeDeleted";
+        $result = mysqli_query($db, $query);
 
 
-    }elseif( $sTable=='user'){
-
-
-        $sTable='tusers';
-        $sIdType = 'userID';
-
-        
     }
 
 
-    // $query = "DELETE FROM $sTable WHERE $sIdType = $sUserToBeDeleted";
-    // $result = mysqli_query($db, $query);
-
-    $query = "UPDATE $sTable SET deleteDate = date('Y-m-d', time()), active = 0  WHERE $sIdType = $sUserToBeDeleted";
-    $result = mysqli_query($db, $query);
-    if( $sTable == 'photographer' ){
-
-
-     $query = "SELECT COUNT(name)
-     FROM tgalleries
-     WHERE photographerID = $sUserToBeDeleted;";
-    $count = mysqli_affected_rows($query);
-    for ($i = 1; $i <= $count; $i++) {
-            //NEEDS TO WORK WITH THE INCLUDED FILE!!!!!!
-        include "api-delete-gallery.php";
-    };
-    };
     session_destroy();
 
     header('Location: ../index.php');
-
- 

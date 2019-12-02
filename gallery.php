@@ -29,6 +29,7 @@ echo $_SESSION['type'];
 </form>
 
 
+<?php if($_SESSION['type'] == 'photographer'){ echo '<a href="APIs/api-delete-gallery.php?id='. $_GET['id'] .'" class="BtnDeleteGallery" >Delete Gallery</button></a>'; }; ?>
 
 
 <?php 

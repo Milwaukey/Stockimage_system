@@ -10,13 +10,10 @@ $tGalleryName = $_POST['tGalleryName'];
 
 $photographerID = $_SESSION['ID'];
 
-// HARDED NUMBER OF PHOTOTS  /// REMOOOOOOOVE THIIIIIIIIIIS 
-$numberOfPhotosInGallery = 0;
-
 $query = "
 
-INSERT INTO tgalleries (photographerID, name, numberOfPhotos)
-VALUES ('$photographerID', '$tGalleryName', '$numberOfPhotosInGallery');
+INSERT INTO tgalleries (photographerID, name)
+VALUES ('$photographerID', '$tGalleryName');
 
 ";
 

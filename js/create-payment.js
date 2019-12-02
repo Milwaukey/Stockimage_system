@@ -10,15 +10,16 @@ $(".BtnBuyImage").click(function(){
     
     
     $('#select_card').change(function(){
-        
+
         
         let cardID = $("#select_card option:selected").val();
+        let price = $('.photo_price').text();
     
         $.ajax({
     
             url : "APIs/api-create-payment.php",
             method : "POST",
-            data : { "tPhotoID" : tBuyImage, "tCardID": cardID, "tPrice": 100 },
+            data : { "tPhotoID" : tBuyImage, "tCardID": cardID, "tPrice": price },
             dataType : "JSON"
     
         })
@@ -51,3 +52,9 @@ $(".BtnBuyImage").click(function(){
     return false;
     
 })
+
+
+
+
+"SELECT name, tusers.userID, count(tusers.userID) FROM tusers INNER JOIN tcards ON tcards.userID = tusers.userID INNER JOIN tpayments ON tcards.cardID = tpayments.cardID GROUP BY tusers.name DESC
+"SELECT tcards.cardID, count(tcards.cardID) FROM tcards INNER JOIN tpayments ON tcards.cardID = tpayments.cardID GROUP BY tcards.cardID DESC

@@ -8,6 +8,10 @@ $galleryID = $_GET['galleryID'];
 
 //Pickup files that have been uploaded // PHOTO ID // GALLERY ID // FORMAT // H + V // RESOLUTION // SIZE // PRICE // FILE  
 $tPrice = $_POST['tPrice'];
+if( empty($tPrice) ){ sendResponse(0, 'txtPrice is empty', __LINE__); }
+if( !ctype_digit( $tPrice ) ){ sendResponse(0, 'Not a number', __LINE__); }
+if( $tPrice < 1 ){ sendResponse(0,'...', __LINE__); }
+if( $tPrice > 9999 ){ sendResponse(0, '...', __LINE__); }
 
 // COUNTS the number op oploadeds images in the array
 $iNumberOfImages = count($_FILES['photos']['name']);

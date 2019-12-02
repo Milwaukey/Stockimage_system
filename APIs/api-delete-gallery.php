@@ -14,10 +14,9 @@
 
     }
 
-    $galleryid = 1; //HARDED CODED XXX
+        $galleryid = $_GET['id'];
 
-
-
+    
 
 // SETS PAYMENT PHOTO ID TO NULL
     $query = "SELECT photoID FROM tphotos WHERE galleryID = $galleryid";
@@ -48,4 +47,4 @@
     $result = mysqli_query($db, $query);
 
 
-    echo sendResponse('1','DONE',__LINE__);
+    header('Location: ../galleries-overview.php');
