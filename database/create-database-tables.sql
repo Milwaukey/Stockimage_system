@@ -24,6 +24,7 @@ CREATE TABLE tusers (
   password varchar(100) NOT NULL,
   signupDate date,
   deleteDate date DEFAULT NULL,
+  active boolean DEFAULT true,
   totalMonetaryPaid decimal(5, 2) DEFAULT 0,
   streetName varchar(50) NOT NULL,
   streetNumber varchar(5) NOT NULL,
