@@ -26,9 +26,6 @@
     if( $type == 'photographer' ){
 
 
-        // $sTable='tphotographers';
-        // $sIdType = 'photographerID';
-
         $query = "SELECT galleryID FROM tgalleries WHERE photographerID = $sUserToBeDeleted";
 
         $results = mysqli_query($db, $query);

@@ -121,12 +121,12 @@ CREATE TABLE tauditcards (
   statementType varchar(6),
   statementExecution datetime,
   dbmsUser varchar(12)
-  )
+  );
 
 CREATE TABLE tauditpayments (
   paymentID int NOT NULL,
   cardID int NOT NULL,
-  photoID int NOT  NULL,
+  photoID int,
   payDate date,
   payTime time,
   amountPaid decimal(10, 2) DEFAULT NULL,

@@ -20,16 +20,28 @@ echo $_SESSION['type'];
 
 <h1>Gallery</h1>
 
-<button id="BtnUpload_images" type="submit">Add images to gallery</button>
-
-<form id="<?php echo $_GET['id'] ?>" class="frmUploadImages hide">
-    <input id="imageUpload" name="photos[]" type="file" multiple="multipart/form-data" required>
-    <input name="tPrice" type="number" min="0" step="any" placeholder="Image price" required>
-    <button>Upload</button>
-</form>
 
 
-<?php if($_SESSION['type'] == 'photographer'){ echo '<a href="APIs/api-delete-gallery.php?id='. $_GET['id'] .'" class="BtnDeleteGallery" >Delete Gallery</button></a>'; }; ?>
+<?php if($_SESSION['type'] == 'photographer'){ ?>
+    
+    
+    
+    
+    
+    <button id="BtnUpload_images" type="submit">Add images to gallery</button>
+    
+    <a href="APIs/api-delete-gallery.php?id='<?= $_GET['id'] ?>" class="BtnDeleteGallery">Delete Gallery</button></a>
+    
+
+    <form id="<?php echo $_GET['id'] ?>" class="frmUploadImages hide">
+        <input id="imageUpload" name="photos[]" type="file" multiple="multipart/form-data" required>
+        <input name="tPrice" type="number" min="0" step="any" placeholder="Image price" required>
+        <button>Upload</button>
+    </form>
+    
+    
+    
+    <?php }; ?>
 
 
 <?php 

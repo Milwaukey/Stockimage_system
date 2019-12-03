@@ -27,6 +27,7 @@ echo $_SESSION['type'];
                 while($row = mysqli_fetch_array($results)){
 
                     echo '<div>' . $row['name'] .'</div>';
+                    echo '<div>' . $_SESSION['ID'] .'</div>';
                     echo '<div>' . $row['surname'] .'</div>';
                     echo '<div>' . $row['email'] .'</div>';
 
@@ -78,6 +79,7 @@ echo $_SESSION['type'];
             while($row = mysqli_fetch_array($results)){
 
                 echo  '<div>' .$row['name'] . '</div>';
+                echo '<div>' . $_SESSION['ID'] .'</div>';
 
                 echo "
                 

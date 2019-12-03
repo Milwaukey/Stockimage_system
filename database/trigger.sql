@@ -193,10 +193,13 @@ CREATE TRIGGER auditPaymentUpdate AFTER UPDATE ON tpayments
 FOR EACH ROW BEGIN
 
 INSERT INTO tauditPayments (paymentID, cardID, photoID, payDate, payTime, amountPaid, statementType, statementExecution, dbmsUser)
-VALUES (new.paymentID, new.cardID, NULL, new.payDate, new.payTime, new.amountPaid, 'UPDATE', CURRENT_TIMESTAMP, 'TBA');
+VALUES (new.paymentID, new.cardID, new.photoID, new.payDate, new.payTime, new.amountPaid, 'UPDATE', CURRENT_TIMESTAMP, 'TBA');
 
 END // 
 
 
 DELIMITER ; 
+
+
+
 

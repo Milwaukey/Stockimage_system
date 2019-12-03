@@ -13,10 +13,10 @@ if(!$_SESSION){
 
 }
 
-    $sPhotoId =  $_POST['tPhotoID'];
-    $query = "UPDATE tpayments SET photoID = NULL WHERE photoID = $sPhotoId";
+    // $sPhotoId =  $_POST['tPhotoID'];
+    // $query = "UPDATE tpayments SET photoID = NULL WHERE photoID = $sPhotoId";
 
-    $results = mysqli_query($db, $query);
+    // $results = mysqli_query($db, $query);
 
     
     echo sendResponse(1,'Set value to Null',__LINE__);
