@@ -5,12 +5,12 @@ require_once(__DIR__ . '/functions.php');
 
 session_start();
 
-// if(!$_SESSION){
+if(!$_SESSION){
     
-//     header('Location: ../login.php ');
-//     exit; // Make sure that code doesn't keeep running and deletes people!! 
+    header('Location: ../login.php ');
+    exit; // Make sure that code doesn't keeep running and deletes people!! 
      
-// }
+}
 
 
 $tCardID = $_POST['tCardID'];
@@ -18,8 +18,7 @@ $tPhotoID = $_POST['tPhotoID'];
 $dPayDate = date('Y-m-d', time() );
 $dPayTime = date('H:i:s');
 $iAmountPaid = floatVal($_POST['tPrice']);
-// $userID= $_SESSION['ID'];
-$userID= 4;
+$userID= $_SESSION['ID'];
 
 $query = "
 START TRANSACTION;

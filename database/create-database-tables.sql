@@ -60,7 +60,7 @@ CREATE TABLE tphotos (
   vDimension MEDIUMINT NOT NULL,
   resolution int NOT NULL,
   filesize MEDIUMINT NOT NULL,
-  price decimal(6, 2) DEFAULT 0,
+  price decimal(10, 2) DEFAULT 0,
   photoFile longblob NOT NULL,
   FOREIGN KEY (galleryID) REFERENCES tgalleries(galleryID)
 );
@@ -71,9 +71,67 @@ CREATE TABLE tpayments (
   photoID int,
   payDate date NOT NULL,
   payTime time NOT NULL,
-  amountPaid decimal(6, 2) NOT NULL,
+  amountPaid decimal(10, 2) NOT NULL,
   FOREIGN KEY (cardID) REFERENCES tcards(cardID),
   FOREIGN KEY (photoID) REFERENCES tphotos(photoID)
 );
 
+
+CREATE TABLE taudit (
+  auditID int AUTO_INCREMENT PRIMARY KEY,
+  photoAuditID int,
+  dateOfDeletePhoto date NOT NULL,
+  photographerID int,
+  userID int,
+  paymentID int,
+  FOREIGN KEY (photographerID) REFERENCES tphotographers(photographerID),
+  FOREIGN KEY (userID) REFERENCES tusers(userID),
+  FOREIGN KEY (paymentID) REFERENCES tpayments(paymentID)
+);
+
+
+
+CREATE TABLE tauditusers (
+  userID int NOT NULL,
+  name varchar(50) DEFAULT NULL,
+  surname varchar(50) DEFAULT NULL,
+  email varchar(50) DEFAULT NULL,
+  username varchar(50) DEFAULT NULL,
+  password varchar(100) DEFAULT NULL,
+  signupDate date DEFAULT NULL,
+  deleteDate date DEFAULT NULL,
+  active boolean DEFAULT NULL,
+  totalMonetaryPaid decimal(10, 2) DEFAULT NULL,
+  streetName varchar(50) DEFAULT NULL,
+  streetNumber varchar(5) DEFAULT NULL,
+  zipcode char(4) DEFAULT NULL,
+  cityID int DEFAULT NULL,
+  statementType varchar(6),
+  statementExecution datetime,
+  dbmsUser varchar(12)
+);
+
+CREATE TABLE tauditcards (
+  cardID int NOT NULL,
+  userID int NOT NULL,
+  ibanCode char(18) DEFAULT NULL,
+  expirationDate char(4) DEFAULT NULL,
+  ccv char(3) DEFAULT NULL,
+  totalAmountPaid decimal(10, 2) DEFAULT NULL,
+  statementType varchar(6),
+  statementExecution datetime,
+  dbmsUser varchar(12)
+  )
+
+CREATE TABLE tauditpayments (
+  paymentID int NOT NULL,
+  cardID int NOT NULL,
+  photoID int NOT  NULL,
+  payDate date,
+  payTime time,
+  amountPaid decimal(10, 2) DEFAULT NULL,
+  statementType varchar(6),
+  statementExecution datetime,
+  dbmsUser varchar(12)
+)
 

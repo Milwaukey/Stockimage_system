@@ -1,0 +1,17 @@
+
+
+
+DELIMITER // 
+
+CREATE PROCEDURE InsertAudit();
+
+BEGIN
+
+
+
+END //
+
+DELIMITER ;
+
+
+
