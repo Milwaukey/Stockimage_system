@@ -2,18 +2,17 @@ $(".BtnBuyImage").click(function(){
 
     
     let tBuyImage = $(this).attr('id');
-
+    
     // HIDE / SHOW POP UP 
     
     $('#select_card').show();
-    
-    
+
     
     $('#select_card').change(function(){
-
         
+        
+        let price = $('.photo_price_' + tBuyImage).text();
         let cardID = $("#select_card option:selected").val();
-        let price = $('.photo_price').text();
     
         $.ajax({
     
@@ -36,7 +35,14 @@ $(".BtnBuyImage").click(function(){
                     'success'
                   )
     
-                  $('#select_card').hide();
+
+                $('.swal2-confirm').click(function(){
+
+                    $(location).attr('href', 'profile.php');
+
+                })
+                
+                
 
             }
         

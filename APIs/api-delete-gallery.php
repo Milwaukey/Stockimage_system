@@ -14,13 +14,17 @@
 
     }
 
-        $galleryid = $_GET['id'];
+    
+    $galleryid = $_GET['id'];
 
     
 
 // SETS PAYMENT PHOTO ID TO NULL
     $query = "SELECT photoID FROM tphotos WHERE galleryID = $galleryid";
     $results = mysqli_query($db,$query);
+
+
+if($results == true){
 
     foreach($results as $photoid){
 
@@ -37,6 +41,8 @@
 
 
     }
+
+}
 
 
 // DELETE GALLERY

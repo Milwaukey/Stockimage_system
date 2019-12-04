@@ -14,6 +14,8 @@ if(empty($_GET['id'])){
 
 echo $_SESSION['type'];
 
+$galleryID = $_GET['id'];
+
 ?>
 
 
@@ -26,11 +28,9 @@ echo $_SESSION['type'];
     
     
     
-    
-    
     <button id="BtnUpload_images" type="submit">Add images to gallery</button>
     
-    <a href="APIs/api-delete-gallery.php?id='<?= $_GET['id'] ?>" class="BtnDeleteGallery">Delete Gallery</button></a>
+    <a href="APIs/api-delete-gallery.php?id=<?php echo $galleryID ?>" class="BtnDeleteGallery">Delete Gallery</a>
     
 
     <form id="<?php echo $_GET['id'] ?>" class="frmUploadImages hide">
@@ -54,7 +54,7 @@ while($row = mysqli_fetch_array($results)){
 
     echo '<div id="photo_' . $row['photoID'] . '">';
 
-            echo '<div class="photo_price"> ' .$row['price'] . '</div>';
+            echo '<div class="photo_price_'.$row['photoID'].'"> ' .$row['price'] . '</div>';
             echo '<img class="img_size" src="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'">';
             if($_SESSION['type'] == 'user'){ echo '<div class="BtnBuyImage" id="'. $row['photoID'] .'">Buy Image</div>'; };
             if($_SESSION['type'] == 'photographer'){ echo '<div class="BtnDeleteImage" id="'. $row['photoID'] .'">Delete Image</div>'; };
