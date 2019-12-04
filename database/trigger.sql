@@ -5,17 +5,17 @@ CREATE TRIGGER auditPhotoOnDelete BEFORE DELETE ON tphotos
 FOR EACH ROW BEGIN
 
 
-SET @photographerID = (SELECT photographerID FROM tgalleries LEFT JOIN tphotos ON tphotos.galleryID = tgalleries.galleryID WHERE tphotos.photoID = old.photoID);
+SET @photographerID = (SELECT photographerID FROM tgalleries LEFT JOIN tphotos ON tphotos.galleryID = tgalleries.galleryID WHERE tphotos.photoID = old.photoID LIMIT 1);
 
-SET @userID = (SELECT userID FROM tcards LEFT JOIN tpayments ON tcards.cardID = tpayments.cardID WHERE photoID = old.photoID);
+SET @userID = (SELECT userID FROM tcards LEFT JOIN tpayments ON tcards.cardID = tpayments.cardID WHERE photoID = old.photoID LIMIT 1);
 
-SET @paymentID = (SELECT paymentID FROM tpayments WHERE photoID = old.photoID);
+SET @paymentID = (SELECT paymentID FROM tpayments WHERE photoID = old.photoID) LIMIT 1;
 
 INSERT INTO taudit (dateOfDeletePhoto, photoAuditID, photographerID, userID, paymentID)
 
 VALUES (CURRENT_TIMESTAMP, old.photoID, @photographerID, @userID, @paymentID);
 
-UPDATE tpayments SET photoID = NULL;
+UPDATE tpayments SET photoID = NULL WHERE paymentID = @paymentID;
 
 
 END // 
@@ -159,7 +159,7 @@ CREATE TRIGGER auditPaymentInsert AFTER INSERT ON tpayments
 FOR EACH ROW BEGIN
 
 INSERT INTO tauditPayments (paymentID, cardID, photoID, payDate, payTime, amountPaid, statementType, statementExecution, dbmsUser)
-VALUES (new.paymentID, new.cardID, new.photoID, new.payDate, new.payTime, new.amountPaid, 'UPDATE', CURRENT_TIMESTAMP, 'TBA');
+VALUES (new.paymentID, new.cardID, new.photoID, new.payDate, new.payTime, new.amountPaid, 'INSERT', CURRENT_TIMESTAMP, 'TBA');
 
 END // 
 
@@ -176,7 +176,7 @@ CREATE TRIGGER auditPaymentDelete BEFORE DELETE ON tpayments
 FOR EACH ROW BEGIN
 
 INSERT INTO tauditPayments (paymentID, cardID, photoID, payDate, payTime, amountPaid, statementType, statementExecution, dbmsUser)
-VALUES (old.paymentID, old.cardID, old.photoID, old.payDate, old.payTime, old.amountPaid, 'UPDATE', CURRENT_TIMESTAMP, 'TBA');
+VALUES (old.paymentID, old.cardID, old.photoID, old.payDate, old.payTime, old.amountPaid, 'DELETE', CURRENT_TIMESTAMP, 'TBA');
 
 END // 
 
