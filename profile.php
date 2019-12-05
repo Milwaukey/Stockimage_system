@@ -112,38 +112,41 @@ echo $_SESSION['type'];
         
     echo '</div>';
 
-} ?>
+    echo '<div>';
 
 
 
-<div>
+    // SHOWING AN OVERVIEW OF THE IMAGES BOUGHT AND MAKE IT AVIABLE TO DOWNLOAD
+    $query_orders = 'SELECT paymentID, tphotos.photoID, tphotos.format, tcards.cardID, tcards.userID, tphotos.photoFile FROM tpayments
+    LEFT JOIN tphotos ON tpayments.photoID = tphotos.photoID
+    LEFT JOIN tcards ON tpayments.cardID = tcards.cardID 
+    WHERE tcards.userID = '. $_SESSION['ID'] .'
 
-<?php
+    ;';
+                $result_orders = mysqli_query($db, $query_orders);
 
-$query_orders = 'SELECT paymentID, tphotos.photoID, tphotos.format, tcards.cardID, tcards.userID, tphotos.photoFile FROM tpayments
-LEFT JOIN tphotos ON tpayments.photoID = tphotos.photoID
-LEFT JOIN tcards ON tpayments.cardID = tcards.cardID 
-WHERE tcards.userID = '. $_SESSION['ID'] .'
-
-;';
-            $result_orders = mysqli_query($db, $query_orders);
-
-            
-            while($row = mysqli_fetch_array($result_orders)){
-
-                echo '
                 
-                <a href="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'" download>
-                    <img class="img_size" src="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'">
-                </a>
-                
-                ';
+                while($row = mysqli_fetch_array($result_orders)){
 
-            }
+                    echo '
+                    
+                    <a href="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'" download>
+                        <img class="img_size" src="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'">
+                    </a>
+                    
+                    ';
 
-?>
+                }
 
-</div>
+
+
+    echo '</div>';
+
+    } ?>
+
+
+
+
 
 
 <div class="BtnUpdateImage">Update Profile</div>

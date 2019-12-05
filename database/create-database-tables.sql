@@ -108,7 +108,7 @@ CREATE TABLE tauditusers (
   cityID int DEFAULT NULL,
   statementType varchar(6),
   statementExecution datetime,
-  dbmsUser varchar(12)
+  dbmsUser varchar(30)
 );
 
 CREATE TABLE tauditcards (
@@ -120,7 +120,7 @@ CREATE TABLE tauditcards (
   totalAmountPaid decimal(10, 2) DEFAULT NULL,
   statementType varchar(6),
   statementExecution datetime,
-  dbmsUser varchar(12)
+  dbmsUser varchar(30)
   );
 
 CREATE TABLE tauditpayments (
@@ -132,6 +132,6 @@ CREATE TABLE tauditpayments (
   amountPaid decimal(10, 2) DEFAULT NULL,
   statementType varchar(6),
   statementExecution datetime,
-  dbmsUser varchar(12)
+  dbmsUser varchar(30)
 )
 
