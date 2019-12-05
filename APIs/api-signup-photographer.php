@@ -5,9 +5,9 @@ require_once(__DIR__ . '/functions.php');
 
 // INFORMATION FROM THE SIGNUP 
 
-$tName = $_POST['tName'];
-$tSurname = $_POST['tSurname'];
-$tEmail = $_POST['tEmail'];
+$tName = mysqli_real_escape_string($_POST['tName']);
+$tSurname = mysqli_real_escape_string($_POST['tSurname']);
+$tEmail = mysqli_real_escape_string($_POST['tEmail']);
 
 $writtenPassword = $_POST['tPassword'];
 $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);

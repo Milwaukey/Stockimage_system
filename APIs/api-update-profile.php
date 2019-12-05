@@ -8,9 +8,9 @@ require_once(__DIR__ . '/functions.php');
 
 if( $_SESSION['type'] == 'photographer' ){ 
     
-    $tName = $_POST['tName']; 
-    $tSurname = $_POST['tSurname']; 
-    $tEmail = $_POST['tEmail']; 
+    $tName = mysqli_real_escape_string($_POST['tName']); 
+    $tSurname = mysqli_real_escape_string($_POST['tSurname']); 
+    $tEmail = mysqli_real_escape_string($_POST['tEmail']); 
 
     // $writtenPassword = $_POST['tPassword'];
     // $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
@@ -29,17 +29,17 @@ if( $_SESSION['type'] == 'photographer' ){
 
 if( $_SESSION['type'] == 'user' ){ 
 
-    $tName = $_POST['tName']; 
-    $tSurname = $_POST['tSurname']; 
-    $tEmail = $_POST['tEmail']; 
+    $tName = mysqli_real_escape_string($_POST['tName']; 
+    $tSurname = mysqli_real_escape_string($_POST['tSurname']; 
+    $tEmail = mysqli_real_escape_string($_POST['tEmail']; 
     
     // $writtenPassword = $_POST['tPassword'];
     // $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
 
-    $tUsername = $_POST['tUsername'];
-    $tStreetName = $_POST['tStreetName'];
-    $tStreetNumber = $_POST['tStreetNumber'];
-    $tZipcode= $_POST['tZipcode'];
+    $tUsername = mysqli_real_escape_string($_POST['tUsername']);
+    $tStreetName = mysqli_real_escape_string($_POST['tStreetName']);
+    $tStreetNumber = mysqli_real_escape_string($_POST['tStreetNumber']);
+    $tZipcode= mysqli_real_escape_string($_POST['tZipcode']);
 
     // ADD CITY CHANGE 
     $city = $_POST['tCity'];

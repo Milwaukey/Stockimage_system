@@ -5,18 +5,18 @@ require_once(__DIR__ . '/functions.php');
 
 // INFORMATION FROM THE SIGNUP 
 
-$tName = $_POST['tName'];
-$tSurname = $_POST['tSurname'];
-$tEmail = $_POST['tEmail'];
-$tUsername = $_POST['tUsername'];
+$tName = mysqli_real_escape_string($_POST['tName']);
+$tSurname = mysqli_real_escape_string($_POST['tSurname']);
+$tEmail = mysqli_real_escape_string($_POST['tEmail']);
+$tUsername = mysqli_real_escape_string($_POST['tUsername']);
 
-$writtenPassword = $_POST['tPassword'];
+$writtenPassword = mysqli_real_escape_string($_POST['tPassword']);
 $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
 
-$tStreetName = $_POST['tStreetName'];
-$tStreetNumber = $_POST['tStreetNumber'];
-$tZipcode = $_POST['tZipcode'];
-$tCity = $_POST['tCity'];
+$tStreetName = mysqli_real_escape_string($_POST['tStreetName']);
+$tStreetNumber = mysqli_real_escape_string($_POST['tStreetNumber']);
+$tZipcode = mysqli_real_escape_string($_POST['tZipcode']);
+$tCity = mysqli_real_escape_string($_POST['tCity']);
 
 
 // $signupDate = date('Y-m-d', time() );

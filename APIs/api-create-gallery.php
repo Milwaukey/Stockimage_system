@@ -6,7 +6,7 @@ require_once(__DIR__ . '/functions.php');
 // INFORMATION FROM THE SIGNUP 
 
 
-$tGalleryName = $_POST['tGalleryName'];
+$tGalleryName = mysqli_real_escape_string($_POST['tGalleryName']);
 
 $photographerID = $_SESSION['ID'];
 
