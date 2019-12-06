@@ -44,9 +44,33 @@ if( $_SESSION['type'] == 'user' ){
     // ADD CITY CHANGE 
     $city = $_POST['tCity'];
 
-    $query = "UPDATE tusers SET name = '$tName', surname = '$tSurname', email = '$tEmail', username = '$tUsername', streetName = '$tStreetName', streetNumber = '$tStreetNumber', zipcode = $tZipcode, cityID = $city WHERE userID = " . $_SESSION['ID'] ;
+    // $query = "UPDATE tusers SET name = '$tName', surname = '$tSurname', email = '$tEmail', username = '$tUsername', streetName = '$tStreetName', streetNumber = '$tStreetNumber', zipcode = $tZipcode, cityID = $city WHERE userID = " . $_SESSION['ID'] ;
 
-    mysqli_query($db, $query);
+    // mysqli_query($db, $query);
+
+    // NEW PREPARED VERSION
+    
+    $stmt = $db->prepare(
+        "UPDATE tusers SET name = ?, surname = ?, email = ?, username = ?, streetName = ?,
+         streetNumber = ?, zipcode = ?, cityID = ? 
+         WHERE userID =  ?" ;
+   );
+   
+       
+    $stmt->bind_param("ssssssss", $tName,$tSurname,$tEmail,$tUsername,$tStreetName,$tStreetNumber,$tZipcode,$city ,$_SESSION['ID'] );
+   
+    $ok = $stmt->execute();
+   
+   
+    // If it doesn't exists the send response to the browser about wrong credentials 
+    if( $ok == 0){
+        
+        echo sendResponse(0, 'Wrong Credentials!', __LINE__);
+        
+    }
+    
+    // BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
+    $results = mysqli_stmt_get_result($stmt);
 
     echo sendResponse(1, "Done", __LINE__);
 

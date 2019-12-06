@@ -18,15 +18,45 @@ $userID = $_SESSION['ID'];
 // VARIFY IF THE IBAN ALREADY EXCIST IN THE DATABASE !
 
 
-$query = "
+// $query = "
 
-INSERT INTO tcards (userID, ibanCode, expirationDate, ccv)
-VALUES ('$userID', '$tIbanCode', '$tExpirationDate', '$tccv');
+// INSERT INTO tcards (userID, ibanCode, expirationDate, ccv)
+// VALUES ('$userID', '$tIbanCode', '$tExpirationDate', '$tccv');
 
-";
+// ";
 
 
-$result = mysqli_query($db, $query);
+// $result = mysqli_query($db, $query);
 
-echo sendResponse(1, 'DONE', __LINE__);;
+
+$stmt = $db->prepare(
+"INSERT INTO tcards (userID, ibanCode, expirationDate, ccv)
+VALUES (?, ?, ?, ?);" ;
+);
+
+   
+$stmt->bind_param("ssss", $userID,$tIbanCode,$tExpirationDate,$tccv);
+
+$ok = $stmt->execute();
+
+
+// If it doesn't exists the send response to the browser about wrong credentials 
+if( $ok == 0){
+    
+    echo sendResponse(0, 'Wrong Credentials!', __LINE__);
+    
+}
+
+// BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
+$results = mysqli_stmt_get_result($stmt);
+
+
+
+
+
+
+
+
+
+echo sendResponse(1, 'DONE', __LINE__);
 

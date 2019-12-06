@@ -18,13 +18,38 @@ $searchTerm2 = mysqli_real_escape_string($db,$_POST['photographer_name']);
 
 
 
-$query = "SELECT tgalleries.name, tgalleries.galleryID FROM tgalleries LEFT JOIN tphotographers ON tgalleries.photographerID = tphotographers.photographerID
-WHERE tgalleries.name LIKE '%$searchTerm1%'
-AND tphotographers.name LIKE '%$searchTerm2%';";
+// $query = "SELECT tgalleries.name, tgalleries.galleryID FROM tgalleries LEFT JOIN tphotographers ON tgalleries.photographerID = tphotographers.photographerID
+// WHERE tgalleries.name LIKE '%$searchTerm1%'
+// AND tphotographers.name LIKE '%$searchTerm2%';";
 
 
 
-$result = mysqli_query($db,$query);
+// $result = mysqli_query($db,$query);
+
+
+
+$stmt = $db->prepare(
+   "SELECT tgalleries.name, tgalleries.galleryID FROM tgalleries LEFT JOIN tphotographers ON tgalleries.photographerID = tphotographers.photographerID
+WHERE tgalleries.name LIKE '%?%'
+AND tphotographers.name LIKE '%?%';"
+);
+
+   
+$stmt->bind_param("ss",$searchTerm1,$searchTerm2 );
+
+$ok = $stmt->execute();
+
+
+// If it doesn't exists the send response to the browser about wrong credentials 
+if( $ok == 0){
+    
+    echo sendResponse(0, 'Wrong Credentials!', __LINE__);
+    
+}
+
+// BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
+$result = mysqli_stmt_get_result($stmt);
+
 
 
 $contruct = '[';
