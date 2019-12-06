@@ -7,7 +7,8 @@ $user='root'; //Refers to the localhost, it matches depends on the server you us
 $password=''; //Refers to the localhost, it matches depends on the server you use (like a domain server)
 $databaseName = 'proofing_system_db';
 
-$db = mysqli_connect($host, $user, $password, $databaseName); // Establish the connection to the server by using the information from the variables 
+// $db = mysqli_connect($host, $user, $password, $databaseName); // Establish the connection to the server by using the information from the variables 
+$db = new mysqli($host, $user, $password, $databaseName); // Establish the connection to the server by using the information from the variables 
 
 mysqli_set_charset($db, 'utf8'); // Uses the UTF8 charset that's also used in the database
 

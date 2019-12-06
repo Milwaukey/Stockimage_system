@@ -24,7 +24,6 @@ AND tphotographers.name LIKE '%$searchTerm2%';";
 
 
 
-
 $result = mysqli_query($db,$query);
 
 
@@ -41,8 +40,6 @@ while($row = mysqli_fetch_array($result)){
 
 
 }
-
-
 
 $contruct = substr($contruct, 0, -1);
 $contruct .= ']';

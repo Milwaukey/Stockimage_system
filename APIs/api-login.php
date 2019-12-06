@@ -16,20 +16,26 @@ $tPassword = mysqli_real_escape_string($db,$_POST['tPassword']);
 if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
 
 
-    // Checks if the email exists in the database 
-    $query = "SELECT email, password, photographerID FROM tphotographers WHERE email = '$tLogin' ";
+    // Checks if the email exists in the database WITH A PREPARED STATEMENT 
 
-    // Get the result from the database
-    $results = mysqli_query($db, $query);
+    $stmt = $db->prepare('SELECT email, password, photographerID
+    FROM tphotographers WHERE email = ?');
 
-    // var_dump($results);
+    $stmt->bind_param("s", $tLogin);
+
+    $ok = $stmt->execute();
+
 
     // If it doesn't exists the send response to the browser about wrong credentials 
-    if( mysqli_num_rows($results) == 0){
-
+    if( $ok == 0){
+        
         echo sendResponse(0, 'Wrong Credentials!', __LINE__);
-
+        
     }
+    
+    // BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
+    $results = mysqli_stmt_get_result($stmt);
+
 
     // IF TRUE  - loop trough the objecdt
     while($row = mysqli_fetch_array($results)){
