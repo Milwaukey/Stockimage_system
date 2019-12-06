@@ -1,6 +1,4 @@
-$("#BtnCreateGallery").click(function(){
-
-    let photographerID = $(this).parent().attr('id');
+$("#frmSearch #BtnSearch").click(function(){
 
     $.ajax({
 
@@ -10,18 +8,34 @@ $("#BtnCreateGallery").click(function(){
         dataType : "JSON"
 
     })
-    .done(function( jData ){
+    .done(function( searchResults ){
 
-        console.log(jData.message);
         //APPEND SEARCH RESULTS TO ELEMENT
 
+        $('#search_result').empty();
+
+        ajSearchResults = JSON.parse(searchResults); // Convert the text into a object
+
+        // console.log(ajSearchResults);
 
 
+        for( let jResults of ajSearchResults ) { // JSON OBJECT WITH JSON OBJECTS IN IT 
 
-    })
+
+            console.log(jResults)
+
+            let searchResults = `<a href="gallery.php?id=${jResults.id}">${jResults.name}</a>`;
+
+            $('#search_result').append(searchResults);
+
+
+        } // END LOOP
 
 
     
+    })
+ 
+
     return false;
 
 })

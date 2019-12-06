@@ -52,6 +52,17 @@ $photographerID = $_SESSION['ID'];
     <h1>Overview ALL galleries (user)</h1>
 
 
+<!-- SEARCH -->
+
+    <form id="frmSearch">
+        <input name="gallery_name" placeholder="Gallery Name">
+        <input name="photographer_name" placeholder="Photographer Name">
+        <button id="BtnSearch">SEARCH</button>
+    </form>
+
+
+    <div id="search_result"></div>
+
     <?php 
 
         $query = 'SELECT galleryID, name FROM tgalleries';
@@ -61,15 +72,15 @@ $photographerID = $_SESSION['ID'];
         while($row = mysqli_fetch_array($results)){
 
             echo '<a href="gallery.php?id='. $row['galleryID'] .'"> '. $row['name'] .' </a>';
-
+            
         }
 
-
     ?>
+    
 
     </div>
 
-    <?php $sLinkToScript = '<script src="js/create-gallery.js"></script>'; require_once(__DIR__ . '/footer.php'); ?>
+    <?php $sLinkToScript2 ='<script src="js/search-galleries.js"></script>'; $sLinkToScript = '<script src="js/create-gallery.js"></script>'; require_once(__DIR__ . '/footer.php'); ?>
 
 </body>
 </html>

@@ -92,7 +92,6 @@ while($row = mysqli_fetch_array($results)){
 
 $sLinkToScript4 = '<script src="js/upload-images.js"></script>';
 $sLinkToScript3 = '<script src="js/delete-image.js"></script>';
-$sLinkToScript2 = '<script src="js/select-card.js"></script>';
 $sLinkToScript = '<script src="js/create-payment.js"></script>';
 
 
