@@ -12,9 +12,9 @@ if(!$_SESSION){
     exit; // Make sure that code doesn't keeep running and deletes people!! 
 
 }
-
-$searchTerm1 = mysqli_real_escape_string($db,$_POST['gallery_name']);
-$searchTerm2 = mysqli_real_escape_string($db,$_POST['photographer_name']);
+ 
+$searchTerm1 = mysqli_real_escape_string($db,'%'.$_POST['gallery_name'].'%');
+$searchTerm2 = mysqli_real_escape_string($db,'%'.$_POST['photographer_name'].'%');
 
 
 
@@ -30,8 +30,8 @@ $searchTerm2 = mysqli_real_escape_string($db,$_POST['photographer_name']);
 
 $stmt = $db->prepare(
    "SELECT tgalleries.name, tgalleries.galleryID FROM tgalleries LEFT JOIN tphotographers ON tgalleries.photographerID = tphotographers.photographerID
-WHERE tgalleries.name LIKE '%?%'
-AND tphotographers.name LIKE '%?%';"
+WHERE tgalleries.name LIKE ?
+AND tphotographers.name LIKE ?;"
 );
 
    

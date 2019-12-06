@@ -57,7 +57,7 @@ if( $_SESSION['type'] == 'user' ){
    );
    
        
-    $stmt->bind_param("ssssssss", $tName,$tSurname,$tEmail,$tUsername,$tStreetName,$tStreetNumber,$tZipcode,$city ,$_SESSION['ID'] );
+    $stmt->bind_param("ssssssssi", $tName,$tSurname,$tEmail,$tUsername,$tStreetName,$tStreetNumber,$tZipcode,$city ,$_SESSION['ID'] );
    
     $ok = $stmt->execute();
    
