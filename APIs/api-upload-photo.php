@@ -7,7 +7,7 @@ require_once(__DIR__ . '/functions.php');
 $galleryID = $_GET['galleryID'];
 
 //Pickup files that have been uploaded // PHOTO ID // GALLERY ID // FORMAT // H + V // RESOLUTION // SIZE // PRICE // FILE  
-$tPrice = $_POST['tPrice'];
+$tPrice = mysqli_real_escape_string($db,$_POST['tPrice']); 
 if( empty($tPrice) ){ sendResponse(0, 'txtPrice is empty', __LINE__); }
 if( !ctype_digit( $tPrice ) ){ sendResponse(0, 'Not a number', __LINE__); }
 if( $tPrice < 1 ){ sendResponse(0,'...', __LINE__); }
@@ -80,6 +80,5 @@ while($row = mysqli_fetch_array($results)){
 
 
 }
-
 
 echo sendResponse(1, 'Uploaded', __LINE__);

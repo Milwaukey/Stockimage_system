@@ -16,7 +16,7 @@ if(!$_SESSION){
 
     $sGalleryId =  $_POST['galleryID'];
     $query = "DELETE FROM tphotos WHERE galleryID = $sGalleryId";
-    $results = mysqli_results($db, $query);
+    mysqli_query($db, $query);
 
     
     echo sendResponse(1,'photos deleted',__LINE__);

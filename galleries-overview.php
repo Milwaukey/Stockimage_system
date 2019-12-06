@@ -11,18 +11,17 @@ if(!$_SESSION){
 
 echo $_SESSION['type'];
 
-// HARD CODED SESSIONS ID FOR USER
-$photographerID = 5;
+
+$photographerID = $_SESSION['ID'];
 
 ?>
 
 <div <?php if($_SESSION['type'] == 'user'){echo 'class="hide"';} ?>>
     <h1>Create gallery</h1>
+
+
     <form id="<?php echo $photographerID ?>">    
         <input name="tGalleryName" type="text" placeholder="Gallery Name">
-
-
-    
         <button id="BtnCreateGallery">Create Gallery</button>
     </form>
 

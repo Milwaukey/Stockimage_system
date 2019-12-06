@@ -8,9 +8,9 @@ session_start();
 
 
 // INFORMATION FROM THE SIGNUP 
-$tIbanCode = $_POST['tIbanCode']; // FOR FUNCTIONALITY - One day it will be credit card/bank number
-$tExpirationDate = $_POST['tExpirationDate'];
-$tccv = $_POST['tccv'];
+$tIbanCode = mysqli_real_escape_string($db,$_POST['tIbanCode']); // FOR FUNCTIONALITY - One day it will be credit card/bank number
+$tExpirationDate = mysqli_real_escape_string($db,$_POST['tExpirationDate']);
+$tccv = mysqli_real_escape_string($db,$_POST['tccv']);
 $userID = $_SESSION['ID'];
 
 

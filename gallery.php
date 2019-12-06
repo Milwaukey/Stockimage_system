@@ -70,7 +70,7 @@ while($row = mysqli_fetch_array($results)){
 
 <div id="select_card" class="hide">
 
-<!-- SOLUTION THAT MAKES IT EASIER TO SELECT CARD WHILE TESTING PAYMENTS -->
+<!-- SOLUTION THAT MAKES IT EASIER TO SELECT CARD WHILE TESTING PAYMENTS, WE ARE USING THE INSTEAD OF AN API -->
         <select>
         <option disabled selected >CHOOSE CARD</option>
                 <?php 

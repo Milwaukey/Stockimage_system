@@ -5,18 +5,18 @@ require_once(__DIR__ . '/functions.php');
 
 // INFORMATION FROM THE SIGNUP 
 
-$tName = mysqli_real_escape_string($_POST['tName']);
-$tSurname = mysqli_real_escape_string($_POST['tSurname']);
-$tEmail = mysqli_real_escape_string($_POST['tEmail']);
-$tUsername = mysqli_real_escape_string($_POST['tUsername']);
+$tName = mysqli_real_escape_string($db,$_POST['tName']);
+$tSurname = mysqli_real_escape_string($db,$_POST['tSurname']);
+$tEmail = mysqli_real_escape_string($db,$_POST['tEmail']);
+$tUsername = mysqli_real_escape_string($db,$_POST['tUsername']);
 
-$writtenPassword = mysqli_real_escape_string($_POST['tPassword']);
+$writtenPassword = mysqli_real_escape_string($db,$_POST['tPassword']);
 $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
 
-$tStreetName = mysqli_real_escape_string($_POST['tStreetName']);
-$tStreetNumber = mysqli_real_escape_string($_POST['tStreetNumber']);
-$tZipcode = mysqli_real_escape_string($_POST['tZipcode']);
-$tCity = mysqli_real_escape_string($_POST['tCity']);
+$tStreetName = mysqli_real_escape_string($db,$_POST['tStreetName']);
+$tStreetNumber = mysqli_real_escape_string($db,$_POST['tStreetNumber']);
+$tZipcode = mysqli_real_escape_string($db,$_POST['tZipcode']);
+$tCity = mysqli_real_escape_string($db,$_POST['tCity']);
 
 
 // $signupDate = date('Y-m-d', time() );
@@ -30,8 +30,8 @@ VALUES ('$tName', '$tSurname', '$tEmail', '$tUsername' , '$tPassword', '$tStreet
 ";
 
 
+mysqli_query($db, $query);
 
-$result = mysqli_query($db, $query);
 
 echo sendResponse('1', 'DONE', __LINE__);;
 
