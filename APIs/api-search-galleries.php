@@ -13,10 +13,10 @@ if(!$_SESSION){
 
 }
 
-$searchTerm1 = $_POST['gallery_name'];
-$searchTerm2 = $_POST['photographer_name'];
+$searchTerm1 = mysqli_real_escape_string($db,$_POST['gallery_name']);
+$searchTerm2 = mysqli_real_escape_string($db,$_POST['photographer_name']);
 
-// $query = "SELECT photographerID FROM tphotographers WHERE name LIKE %$searchterm2%;"
+
 
 $query = "SELECT tgalleries.name, tgalleries.galleryID FROM tgalleries LEFT JOIN tphotographers ON tgalleries.photographerID = tphotographers.photographerID
 WHERE tgalleries.name LIKE '%$searchTerm1%'
@@ -27,9 +27,6 @@ AND tphotographers.name LIKE '%$searchTerm2%';";
 
 $result = mysqli_query($db,$query);
 
-
-// $searchResult = [];
-// $searchID = [];
 
 $contruct = '[';
 

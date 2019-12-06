@@ -5,19 +5,19 @@
 
     session_start();
 
-    // if(!$_SESSION){
+    if(!$_SESSION){
 
-    //     header('Location: ../login.php ');
-    //     exit; // Make sure that code doesn't keeep running and deletes people!! 
+        header('Location: ../login.php ');
+        exit; // Make sure that code doesn't keeep running and deletes people!! 
 
-    // }
+    }
 
-    // if($SESSION['ID'] != $_GET['ID']){
+    if($SESSION['ID'] != $_GET['ID']){
 
-    //     header('Location: ../login.php ');
-    //     exit; // Make sure that code doesn't keeep running and deletes people!! 
+        header('Location: ../login.php ');
+        exit; // Make sure that code doesn't keeep running and deletes people!! 
 
-    // }
+    }
 
     $sUserToBeDeleted = $_GET['ID'];
     $type = $_SESSION['type'];

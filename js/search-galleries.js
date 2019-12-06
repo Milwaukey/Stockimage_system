@@ -16,9 +16,6 @@ $("#frmSearch #BtnSearch").click(function(){
 
         ajSearchResults = JSON.parse(searchResults); // Convert the text into a object
 
-        // console.log(ajSearchResults);
-
-
         for( let jResults of ajSearchResults ) { // JSON OBJECT WITH JSON OBJECTS IN IT 
 
 

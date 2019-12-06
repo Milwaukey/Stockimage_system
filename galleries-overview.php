@@ -61,7 +61,7 @@ $photographerID = $_SESSION['ID'];
     </form>
 
 
-    <div id="search_result"></div>
+        <div id="search_result">
 
     <?php 
 
@@ -77,7 +77,7 @@ $photographerID = $_SESSION['ID'];
 
     ?>
     
-
+        </div>
     </div>
 
     <?php $sLinkToScript2 ='<script src="js/search-galleries.js"></script>'; $sLinkToScript = '<script src="js/create-gallery.js"></script>'; require_once(__DIR__ . '/footer.php'); ?>
