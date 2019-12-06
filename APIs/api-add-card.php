@@ -28,14 +28,13 @@ $userID = $_SESSION['ID'];
 
 // $result = mysqli_query($db, $query);
 
-
 $stmt = $db->prepare(
 "INSERT INTO tcards (userID, ibanCode, expirationDate, ccv)
-VALUES (?, ?, ?, ?);" ;
+VALUES (?, ?, ?, ?)"
 );
 
    
-$stmt->bind_param("ssss", $userID,$tIbanCode,$tExpirationDate,$tccv);
+$stmt->bind_param("isss", $userID,$tIbanCode,$tExpirationDate,$tccv);
 
 $ok = $stmt->execute();
 

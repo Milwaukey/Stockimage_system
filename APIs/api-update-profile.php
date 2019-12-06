@@ -53,7 +53,7 @@ if( $_SESSION['type'] == 'user' ){
     $stmt = $db->prepare(
         "UPDATE tusers SET name = ?, surname = ?, email = ?, username = ?, streetName = ?,
          streetNumber = ?, zipcode = ?, cityID = ? 
-         WHERE userID =  ?" ;
+         WHERE userID =  ?"
    );
    
        

@@ -56,5 +56,5 @@ if( $ok == 0){
 // BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
 $results = mysqli_stmt_get_result($stmt);
 
-echo sendResponse('1', 'DONE', __LINE__);;
+echo sendResponse('1', 'DONE', __LINE__);
 
