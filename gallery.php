@@ -1,37 +1,38 @@
 <?php require_once(__DIR__ . '/header.php');
  require_once(__DIR__ . '/includes/connection.php'); ;
 
-session_start();
-if(!$_SESSION){
-
-    header('Location: login.php ');
-
-}
-
-if(empty($_GET['id'])){
-    header('Location: galleries-overview.php');
-}
-
-echo $_SESSION['type'];
-
-$galleryID = $_GET['id'];
-
+if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header('Location: galleries-overview.php'); } $galleryID = $_GET['id'];
 ?>
 
 
-
-<h1>Gallery</h1>
-
+<div id="profile_section">
 
 
-<?php if($_SESSION['type'] == 'photographer'){ ?>
+    <img class="profile_image" src="images/IMG_8538.jpg">
+
+    <?php 
+
+    $query_galleries = 'SELECT tgalleries.name AS galleryName, tphotographers.name, surname FROM tgalleries LEFT JOIN tphotographers ON tphotographers.photographerID = tgalleries.photographerID WHERE galleryID = '. $_GET['id'] .'';
+
+    $results_galleries_info = mysqli_query($db, $query_galleries);
+
+    while($row = mysqli_fetch_array($results_galleries_info)){
+
+        echo '<h1>'. $row['galleryName'] .'</h1>';
+        echo '<p></p>';
+        echo '<p>'. $row['name'] .' ' . $row['surname'] .'</p>';
+
+    }
+    ?>
+
+    <hr>
+
+    <?php if($_SESSION['type'] == 'photographer'){ ?>
     
-    
-    
-    <button id="BtnUpload_images" type="submit">Add images to gallery</button>
-    
-    <a href="APIs/api-delete-gallery.php?id=<?php echo $galleryID ?>" class="BtnDeleteGallery">Delete Gallery</a>
-    
+    <div class="profile_buttons">
+        <a class="button_profile" href="APIs/api-delete-gallery.php?id=<?php echo $galleryID ?>" class="BtnDeleteGallery"><img class="icon" src="assets/icons/trash.svg">Delete</a>
+        <div id="BtnUpload_images" class="button_profile"><img class="icon" src="assets/icons/upload.svg"> Upload</div>
+    </div>
 
     <form id="<?php echo $_GET['id'] ?>" class="frmUploadImages hide">
         <input id="imageUpload" name="photos[]" type="file" multiple="multipart/form-data" required>
@@ -39,38 +40,20 @@ $galleryID = $_GET['id'];
         <button>Upload</button>
     </form>
     
-    
+
     
     <?php }; ?>
 
 
-<?php 
-
-$query = 'SELECT photoID, price, photoFile, format FROM tphotos WHERE galleryID = '. $_GET['id'] .'';
-
-$results = mysqli_query($db, $query);
-
-while($row = mysqli_fetch_array($results)){
-
-    echo '<div id="photo_' . $row['photoID'] . '">';
-
-            echo '<div class="photo_price_'.$row['photoID'].'"> ' .$row['price'] . '</div>';
-            echo '<img class="img_size" src="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'">';
-            if($_SESSION['type'] == 'user'){ echo '<div class="BtnBuyImage" id="'. $row['photoID'] .'">Buy Image</div>'; };
-            if($_SESSION['type'] == 'photographer'){ echo '<div class="BtnDeleteImage" id="'. $row['photoID'] .'">Delete Image</div>'; };
-
-    echo '</div>';
 
 
-}
+    <div id="select_card" class="hide">
 
+    <div class="cart_section">
+        <p class="photo_buy"></p>
+        <p class="price_buy_image"></p>
+    </div>
 
-?>
-
-
-<div id="select_card" class="hide">
-
-<!-- SOLUTION THAT MAKES IT EASIER TO SELECT CARD WHILE TESTING PAYMENTS, WE ARE USING THE INSTEAD OF AN API -->
         <select>
         <option disabled selected >CHOOSE CARD</option>
                 <?php 
@@ -84,7 +67,56 @@ while($row = mysqli_fetch_array($results)){
                 ?>
         </select>
 
-</div>
+    </div>
+
+
+
+
+    </div>
+
+
+
+
+    <div id="dashboard">
+    
+            <div class="gallery_singleview_container">
+            <?php 
+
+            $query = 'SELECT photoID, price, photoFile, format FROM tphotos WHERE galleryID = '. $_GET['id'] .'';
+
+            $results = mysqli_query($db, $query);
+
+            while($row = mysqli_fetch_array($results)){
+
+                echo '<div id="photo_' . $row['photoID'] . '" class="single_image_box">';
+                        echo '<div class="resize"><img src="assets/icons/resize.svg"></div>';
+                        echo '<div class="price photo_price_'.$row['photoID'].'"> ' .$row['price'] . '</div>';
+                        echo '<img src="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'">';
+                        if($_SESSION['type'] == 'user'){ echo '<div class="BtnBuyImage" id="'. $row['photoID'] .'"><img src="assets/icons/cart.svg"></div>'; };
+                        if($_SESSION['type'] == 'photographer'){ echo '<div class="BtnDeleteImage" id="'. $row['photoID'] .'"><img src="assets/icons/trash.svg"></div>'; };
+
+                echo '</div>';
+
+
+            }
+
+
+            ?>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

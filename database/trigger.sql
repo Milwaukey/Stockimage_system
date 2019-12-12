@@ -206,3 +206,34 @@ DELIMITER ;
 
 
 
+
+
+
+
+
+
+
+// PHOTO ON DELETE NEW 
+
+
+
+
+
+DELIMITER //
+
+CREATE TRIGGER photoOnDelete BEFORE DELETE ON tphotos
+
+FOR EACH ROW BEGIN 
+
+SET @paymentID = (SELECT paymentID FROM tpayments WHERE photoID = old.photoID);
+
+
+UPDATE tpayments SET photoID = NULL WHERE paymentID = @paymentID;
+
+
+END // 
+
+
+DELIMITER ; 
+
+

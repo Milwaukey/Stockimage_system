@@ -1,72 +1,63 @@
-<?php require_once(__DIR__ . '/header.php');
-require_once(__DIR__ . '/includes/connection.php'); 
-
-session_start();
-if(!$_SESSION){
-
-    header('Location: login.php ');
-
-}
-
-echo $_SESSION['type'];
-
-
-?>
+<?php require_once(__DIR__ . '/header.php'); require_once(__DIR__ . '/includes/connection.php'); if(!$_SESSION){ header('Location: login.php '); } ?>
 
 
 
-<h1>PROFILE</h1>
 
 
-<?php if($_SESSION['type'] == 'photographer'){ 
+<div id="profile_section">
 
-    echo '<div>';
-                
-                $query = 'SELECT name, surname, email FROM tphotographers WHERE photographerID = ' .$_SESSION['ID'] .'';
-                $results = mysqli_query($db, $query);
-                while($row = mysqli_fetch_array($results)){
+    <img class="profile_image" src="images/IMG_8538.jpg">
+    <h1>Profile</h1>
+    <hr>
 
-                    echo '<div>' . $row['name'] .'</div>';
-                    echo '<div>' . $_SESSION['ID'] .'</div>';
-                    echo '<div>' . $row['surname'] .'</div>';
-                    echo '<div>' . $row['email'] .'</div>';
+        <?php if($_SESSION['type'] == 'photographer'){ 
 
-                    echo "
-                        <div class='Update_personal_info hide'>
-                            <form>
-                                <input name='tName' value='".$row['name']."'>
-                                <input name='tSurname' value='".$row['surname']."'>
-                                <input name='tEmail' value='".$row['email']."'>                                
-                                <button>Update</button>
-                            </form>
-                        </div>
-                        ";
+            echo '<div>';
+                        
+                        $query = 'SELECT name, surname, email FROM tphotographers WHERE photographerID = ' .$_SESSION['ID'] .'';
+                        $results = mysqli_query($db, $query);
+                        while($row = mysqli_fetch_array($results)){
+
+                            echo '<p>' . $row['name'] .'</p>';
+                            echo '<p>' . $row['email'] .'</p>';
+
+                            echo "
+                                <div class='Update_personal_info hide'>
+                                    <form>
+                                    <div class='input_wrapper'>
+                                        <label>Name</label>
+                                        <input class='effect-1' name='tName' value='".$row['name']."'>
+                                        <span class='focus-border'></span>
+                                    </div>
+
+                                    <div class='input_wrapper'>
+                                        <label>Surname</label>
+                                        <input class='effect-1' name='tSurname' value='".$row['surname']."'>
+                                        <span class='focus-border'></span>
+                                    </div>
+
+                                    <div class='input_wrapper'>
+                                        <label>Email</label>
+                                        <input class='effect-1' name='tEmail' value='".$row['email']."'> 
+                                        <span class='focus-border'></span>
+                                    </div>                               
+                                        <button>Update</button>
+                                    </form>
+                                </div>
+                                ";
+                            
+                        }
                     
-                }
-            
-    echo '</div>';
+            echo '</div>';
 
-
- } ?>
+            } ?>
 
 
 
 
+            <?php if($_SESSION['type'] == 'user'){ 
 
 
-
-<?php if($_SESSION['type'] == 'user'){ 
-
-
-// SELECT * FROM tbook INNER JOIN tbooktheme ON tbook.nBookID = tbooktheme.nBookID INNER JOIN ttheme ON tbooktheme.nThemeID = ttheme.nThemeID WHERE nPublishingCompanyID = 32;
-
-// SELECT name, surname, email, username, streetName, streetNumber, tcities.cityID, cityName FROM tusers INNER JOIN tcities WHERE userID = 1;
-
-
-
-
-    echo '<div>';
-            
             $query = 'SELECT name, surname, email, username, streetName, streetNumber, zipcode, tusers.cityID, cityName FROM tusers INNER JOIN tcities WHERE userID = '. $_SESSION['ID'] .' AND tcities.cityID = tusers.cityID; ';
             $results = mysqli_query($db, $query);
 
@@ -78,20 +69,61 @@ echo $_SESSION['type'];
 
             while($row = mysqli_fetch_array($results)){
 
-                echo  '<div>' .$row['name'] . '</div>';
-                echo '<div>' . $_SESSION['ID'] .'</div>';
+                echo '<p>' . $row['username'] .'</p>';
+                echo '<p>' . $row['name'] . ' ' . $row['surname'] .'</p>';
+
 
                 echo "
                 
                 <div class='Update_personal_info hide'>
                     <form method='POST'>
-                        <input name='tName' value='".$row['name']."'>
-                        <input name='tSurname' value='".$row['surname']."'>
-                        <input name='tEmail' value='".$row['email']."'>
-                        <input name='tUsername' value='".$row['username']."'>
-                        <input name='tStreetName' value='".$row['streetName']."'>
-                        <input name='tStreetNumber' value='".$row['streetNumber']."'>
-                        <input name='tZipcode' value='".$row['zipcode']."'>
+
+                    <div class='input_wrapper'>
+                        <label>Name</label>
+                        <input class='effect-1' name='tName' value='".$row['name']."'>
+                        <span class='focus-border'></span>
+                    </div>
+
+                    <div class='input_wrapper'>
+                        <label>Surname</label>
+                        <input class='effect-1' name='tSurname' value='".$row['surname']."'>
+                        <span class='focus-border'></span>
+                    </div>
+
+                    <div class='input_wrapper'>
+                    <label>Email</label>
+                        <input class='effect-1' name='tEmail' value='".$row['email']."'>
+                        <span class='focus-border'></span>
+                    </div>
+
+
+                    <div class='input_wrapper'>
+                    <label>Email</label>
+                        <input class='effect-1' name='tUsername' value='".$row['username']."'>
+                        <span class='focus-border'></span>
+                    </div>
+
+                    <div class='wrapper_form'>
+                    <div class='input_wrapper'>
+                    <label>Streetname</label>
+                        <input class='effect-1' name='tStreetName' value='".$row['streetName']."'>
+                        <span class='focus-border'></span>
+                    </div>
+
+                    <div class='input_wrapper'>
+                    <label>Streetnumber</label>
+                        <input class='effect-1' name='tStreetNumber' value='".$row['streetNumber']."'>
+                        <span class='focus-border'></span>
+                    </div>
+                    </div>
+
+                    <div class='input_wrapper'>
+                    <label>Zipcode</label>
+                        <input class='effect-1' name='tZipcode' value='".$row['zipcode']."'>
+                        <span class='focus-border'></span>
+                        </div>
+
+
                         <select name='tCity'>
                             <option value='". $row['cityID'] ."'>" . $row['cityName'] ."</option> ";
 
@@ -107,50 +139,33 @@ echo $_SESSION['type'];
                     </form>
                 </div>
                 ";
-                
+
             }
-        
-    echo '</div>';
-
-    echo '<div>';
 
 
-
-    // SHOWING AN OVERVIEW OF THE IMAGES BOUGHT AND MAKE IT AVIABLE TO DOWNLOAD
-    $query_orders = 'SELECT paymentID, tphotos.photoID, tphotos.format, tcards.cardID, tcards.userID, tphotos.photoFile FROM tpayments
-    LEFT JOIN tphotos ON tpayments.photoID = tphotos.photoID
-    LEFT JOIN tcards ON tpayments.cardID = tcards.cardID 
-    WHERE tcards.userID = '. $_SESSION['ID'] .'
-
-    ;';
-                $result_orders = mysqli_query($db, $query_orders);
-
-                
-                while($row = mysqli_fetch_array($result_orders)){
-
-                    echo '
-                    
-                    <a href="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'" download>
-                        <img class="img_size" src="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'">
-                    </a>
-                    
-                    ';
-
-                }
-
-
-
-    echo '</div>';
-
-    } ?>
+            }?>
 
 
 
 
+        <div class="profile_buttons">
+            <a href="APIs/api-delete-profile.php?ID=<?=$_SESSION['ID']?>"><div class="button_profile"><img class="icon" src="assets/icons/trash.svg">Delete</div></a>
+            <div class="button_profile BtnUpdateImage"><img class="icon" src="assets/icons/edit.svg">Update</div>
+        </div>
+
+</div>
 
 
-<div class="BtnUpdateImage">Update Profile</div>
-<a href="APIs/api-delete-profile.php?ID=<?=$_SESSION['ID']?>">Delete Profile</a>
-<a href="APIs/api-logout.php?ID=<?=$_SESSION['ID']?>">Logout</a>
+
+<div id="dashboard">
+    hej
+</div>
+
+
+
+
+<!-- <div class="BtnUpdateImage">Update Profile</div> -->
+<!-- <a href="APIs/api-delete-profile.php?ID=<?=$_SESSION['ID']?>">Delete Profile</a> -->
+
 
 <?php $sLinkToScript = '<script src="js/update-profile.js"></script>'; require_once(__DIR__ . '/footer.php'); ?>

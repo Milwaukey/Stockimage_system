@@ -14,13 +14,13 @@
     }
 
     $sPhotoToBeDeleted = $_POST['tPhotoID'];
-
-
+    
         // UPDATE THE GALLERY  with the number of  images added
-        $query2 = "SELECT numberOfPhotos FROM tgalleries INNER JOIN tphotos ON tgalleries.galleryID = tphotos.galleryID WHERE photoID = " . $sPhotoToBeDeleted;
-        $result2 = mysqli_query($db, $query2);
+        $query2 = "SELECT numberOfPhotos FROM tgalleries
+        INNER JOIN tphotos ON tgalleries.galleryID = tphotos.galleryID WHERE photoID = " . $sPhotoToBeDeleted;
 
-        // var_dump($result2);
+
+        $result2 = mysqli_query($db, $query2);
     
         while($row = mysqli_fetch_array($result2)){
     
@@ -28,7 +28,8 @@
         
             $newNumberOfPhotos = $numberOfPhotos-1;
         
-            $query3 = "UPDATE tgalleries INNER JOIN tphotos ON tgalleries.galleryID = tphotos.galleryID SET tgalleries.numberOfPhotos = " . $newNumberOfPhotos ." WHERE photoID = " . $sPhotoToBeDeleted;
+            $query3 = "UPDATE tgalleries
+            INNER JOIN tphotos ON tgalleries.galleryID = tphotos.galleryID SET tgalleries.numberOfPhotos =  $newNumberOfPhotos WHERE photoID = $sPhotoToBeDeleted ";
     
             mysqli_query($db, $query3);
         
@@ -36,11 +37,16 @@
         }
 
 
+        $query2 = "UPDATE tpayments SET photoID = NULL WHERE photoID = $sPhotoToBeDeleted";
+
+        $result2 = mysqli_query($db, $query2);
+    
+
+
     // DELETES THE PHOTO FROM THE DATABASE 
     $query = "DELETE FROM tphotos WHERE photoID = $sPhotoToBeDeleted";
 
     $result = mysqli_query($db, $query);
 
-    // var_dump($result);
 
     echo sendResponse(1,'Photo Deleted!',__LINE__);

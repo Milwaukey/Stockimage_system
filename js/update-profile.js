@@ -1,9 +1,11 @@
 $('.BtnUpdateImage').click(function(){
 
     $('.Update_personal_info').show();
-    
 
+    
 })
+
+
 
 
 

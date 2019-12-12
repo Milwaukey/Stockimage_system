@@ -1,56 +1,75 @@
-<?php require_once(__DIR__ . '/header.php'); 
-require_once(__DIR__ . '/includes/connection.php'); 
+<?php require_once(__DIR__ . '/header.php'); require_once(__DIR__ . '/includes/connection.php');  if(!$_SESSION){ header('Location: login.php '); } $photographerID = $_SESSION['ID']; ?>
 
 
-session_start();
-if(!$_SESSION){
 
-    header('Location: login.php ');
 
+<!-- <div class="button_profile"><img class="icon" src="assets/icons/create.svg"> Create Gallery</div> -->
+
+<h1>Galleries</h1>
+<hr>
+
+
+<div <?php if($_SESSION['type'] == 'user'){echo 'class="hide"';} ?>>
+
+
+<div id="CreateGalleryBox">
+<div class="cancel"><img src="assets/icons/cancel.svg"></div>
+<form id="<?php echo $photographerID ?>"> 
+
+<div class="input_wrapper">
+        <label>Gallery Name</label>
+        <input class="effect-1" name="tGalleryName" type="text" placeholder="Write gallery name here ...">
+        <span class="focus-border"></span>
+</div> 
+        <button id="BtnCreateGallery">Create Gallery</button>
+</form>
+</div>
+
+<div class="gallery_grid_container">
+
+<div class="createNewGallery"><img class="create_new_gallery_icon" src="assets/icons/plus.svg"></div>
+
+<?php 
+
+$query = 'SELECT galleryID, name FROM tgalleries WHERE photographerID =' . $_SESSION['ID'];
+
+$results = mysqli_query($db, $query);
+
+while($row = mysqli_fetch_array($results)){
+    
+    echo '
+    
+    <a href="gallery.php?id='. $row['galleryID'] .'">
+    <div> 
+    <div class="overlay">
+                <p>'. $row['name'] .'</p>
+                
+            <div></div>
+        </div>
+        <img src="images/IMG_8538.jpg"> 
+        </div>
+    </a>
+    ';
 }
 
-echo $_SESSION['type'];
-
-
-$photographerID = $_SESSION['ID'];
 
 ?>
 
-<div <?php if($_SESSION['type'] == 'user'){echo 'class="hide"';} ?>>
-    <h1>Create gallery</h1>
-
-
-    <form id="<?php echo $photographerID ?>">    
-        <input name="tGalleryName" type="text" placeholder="Gallery Name">
-        <button id="BtnCreateGallery">Create Gallery</button>
-    </form>
-
-
-    <h1>Overview of MY galleries</h1>
-
-    <?php 
-
-        $query = 'SELECT galleryID, name FROM tgalleries WHERE photographerID =' . $_SESSION['ID'];
-
-        $results = mysqli_query($db, $query);
-
-        while($row = mysqli_fetch_array($results)){
-
-            echo '<a href="gallery.php?id='. $row['galleryID'] .'"> '. $row['name'] .' </a>';
-
-        }
-
-
-    ?>
-   
-    
 </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
     
     <div <?php if($_SESSION['type'] == 'photographer'){echo 'class="hide"';} ?> >
-    
-
-    <h1>Overview ALL galleries (user)</h1>
-
 
 <!-- SEARCH -->
 
@@ -61,24 +80,41 @@ $photographerID = $_SESSION['ID'];
     </form>
 
 
-        <div id="search_result">
+        <!-- <div id="search_result"> -->
 
-    <?php 
 
-        $query = 'SELECT galleryID, name FROM tgalleries';
+                        <div id="search_result" class="gallery_grid_container">
 
-        $results = mysqli_query($db, $query);
+                        <?php 
 
-        while($row = mysqli_fetch_array($results)){
+                        $query = 'SELECT galleryID, name FROM tgalleries';
 
-            echo '<a href="gallery.php?id='. $row['galleryID'] .'"> '. $row['name'] .' </a>';
-            
-        }
+                        $results = mysqli_query($db, $query);
 
-    ?>
+                        while($row = mysqli_fetch_array($results)){
+                            
+                            echo '
+                            
+                            <a href="gallery.php?id='. $row['galleryID'] .'">
+                            <div> 
+                            <div class="overlay">
+                                        <p>'. $row['name'] .'</p>
+                                        
+                                    <div></div>
+                                </div>
+                                <img src="images/IMG_8538.jpg"> 
+                                </div>
+                            </a>
+                            ';
+                        }
+
+
+                        ?>
+
+                        </div>
     
         </div>
-    </div>
+    <!-- </div> -->
 
     <?php $sLinkToScript2 ='<script src="js/search-galleries.js"></script>'; $sLinkToScript = '<script src="js/create-gallery.js"></script>'; require_once(__DIR__ . '/footer.php'); ?>
 

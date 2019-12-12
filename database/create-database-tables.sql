@@ -84,6 +84,7 @@ CREATE TABLE taudit (
   photographerID int,
   userID int,
   paymentID int,
+  photoFile longblob NOT NULL,
   FOREIGN KEY (photographerID) REFERENCES tphotographers(photographerID),
   FOREIGN KEY (userID) REFERENCES tusers(userID),
   FOREIGN KEY (paymentID) REFERENCES tpayments(paymentID)

@@ -12,7 +12,6 @@ $(".BtnDeleteImage").click(function(){
         })
         .done(function( jData ){   
 
-            console.log('test');
             
             if( jData.status == 1 ){
                 $('#photo_' + tDeleteImage).hide();

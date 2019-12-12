@@ -1,6 +1,23 @@
-$("#BtnAddCard").click(function(){
+$('.btnOpenAddCard').click(function(){
 
-    // let userID = $(this).parent().attr('id');
+$('.add_new_card').show();
+
+
+$('.cancel').click(function(){
+
+
+    $('.add_new_card').hide();
+
+
+})
+
+
+})
+
+
+
+
+$("#BtnAddCard").click(function(){
 
     $.ajax({
 

@@ -14,19 +14,10 @@ $tccv = mysqli_real_escape_string($db,$_POST['tccv']);
 $userID = $_SESSION['ID'];
 
 
-
+ 
 // VARIFY IF THE IBAN ALREADY EXCIST IN THE DATABASE !
 
 
-// $query = "
-
-// INSERT INTO tcards (userID, ibanCode, expirationDate, ccv)
-// VALUES ('$userID', '$tIbanCode', '$tExpirationDate', '$tccv');
-
-// ";
-
-
-// $result = mysqli_query($db, $query);
 
 $stmt = $db->prepare(
 "INSERT INTO tcards (userID, ibanCode, expirationDate, ccv)
@@ -48,10 +39,6 @@ if( $ok == 0){
 
 // BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
 $results = mysqli_stmt_get_result($stmt);
-
-
-
-
 
 
 

@@ -21,7 +21,16 @@ $("#frmSearch #BtnSearch").click(function(){
 
             console.log(jResults)
 
-            let searchResults = `<a href="gallery.php?id=${jResults.id}">${jResults.name}</a>`;
+            let searchResults = 
+            `<a href="gallery.php?id=${jResults.id}">
+                <div> 
+                    <div class="overlay">
+                        <p>${jResults.name}</p>        
+                        <div></div>
+                    </div>
+                    <img src="images/IMG_8538.jpg"> 
+                </div>
+            </a>`;
 
             $('#search_result').append(searchResults);
 

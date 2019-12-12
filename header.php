@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,12 +21,34 @@
 <body>
 
 
+<a href="index.php" class="logo">
+    <img src="assets/logo.svg">
+</a>
+
 <nav>
-    <a href="index.php">Frontpage</a>
-    <a href="login.php">Login</a>
-    <a href="profile.php">Profile</a>
-    <a href="galleries-overview.php">Gallery Overview</a>
-    <a href="add-card.php">Add Card</a>
-    <a href="signup-user.php">Signup User</a>
-    <a href="signup-photographer.php">Signup Photographer</a>
+    <a href="index.php"><img src="assets/logo.svg"></a>
+    <hr>
+
+
+    <?php if( !$_SESSION ){ echo '<a href="index.php" class="underline">Frontpage</a>'; }?>
+    <?php if( !$_SESSION ){ echo '<a href="login.php" class="underline">Login</a>'; }?>
+    <?php if( $_SESSION ){ echo '<a href="profile.php" class="underline">Profile</a>'; }?>
+    <?php if( $_SESSION ){ echo '<a href="galleries-overview.php" class="underline">Galleries</a>'; }?>
+    <?php if( $_SESSION && $_SESSION['type'] == 'user' ){ echo '<a href="add-card.php" class="underline">Cards</a>'; }?>
+
+    <?php if( $_SESSION ){ echo '<a href="orders.php" class="underline">Orders</a>';}?>
+
+    <?php if( !$_SESSION ){ echo '<a href="signup-user.php" class="underline">Signup User</a>';}?>
+    <?php if( !$_SESSION ){ echo '<a href="signup-photographer.php" class="underline">Signup Photographer</a>';}?>
+    <?php if( $_SESSION ){ echo '<a href="APIs/api-logout.php?ID=<?=' . $_SESSION['ID'] . '?>" class="underline">Logout</a>';}?>
 </nav>
+
+<div class="burger-menu burger-menu--closed" >
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+</div>
+
+
+
+<section>

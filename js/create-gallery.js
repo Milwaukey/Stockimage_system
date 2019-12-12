@@ -1,3 +1,20 @@
+$('.createNewGallery').click(function(){
+
+
+    console.log('create')
+    $('#CreateGalleryBox').css('visibility', 'visible');
+
+
+    $('.cancel').click(function(){
+
+
+        $('#CreateGalleryBox').css('visibility', 'hidden');
+        $('#CreateGalleryBox form input').val('');
+
+    })
+
+
+
 $("#BtnCreateGallery").click(function(){
 
     let photographerID = $(this).parent().attr('id');
@@ -24,6 +41,9 @@ $("#BtnCreateGallery").click(function(){
 
     
     return false;
+
+})
+
 
 })
 
