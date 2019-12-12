@@ -35,9 +35,6 @@ if( $ok == 0){
     
 }
 
-// BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
-
-
 
 
 $contruct = '[';

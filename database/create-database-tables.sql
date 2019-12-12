@@ -77,21 +77,6 @@ CREATE TABLE tpayments (
 );
 
 
-CREATE TABLE taudit (
-  auditID int AUTO_INCREMENT PRIMARY KEY,
-  photoAuditID int,
-  dateOfDeletePhoto date NOT NULL,
-  photographerID int,
-  userID int,
-  paymentID int,
-  photoFile longblob NOT NULL,
-  FOREIGN KEY (photographerID) REFERENCES tphotographers(photographerID),
-  FOREIGN KEY (userID) REFERENCES tusers(userID),
-  FOREIGN KEY (paymentID) REFERENCES tpayments(paymentID)
-);
-
-
-
 CREATE TABLE tauditusers (
   userID int NOT NULL,
   name varchar(50) DEFAULT NULL,

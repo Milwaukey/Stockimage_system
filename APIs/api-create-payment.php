@@ -18,6 +18,7 @@ $tPhotoID = $_POST['tPhotoID'];
 $dPayDate = date('Y-m-d', time() );
 $dPayTime = date('H:i:s');
 $iAmountPaid = floatVal($_POST['tPrice']);
+
 $userID= $_SESSION['ID'];
 
 

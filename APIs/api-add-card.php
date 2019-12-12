@@ -5,17 +5,29 @@ require_once(__DIR__ . '/functions.php');
 
 session_start();
 
+if(!$_SESSION){
 
+    header('Location: ../login.php ');
+    exit; // Make sure that code doesn't keeep running and deletes people!! 
+
+}
 
 // INFORMATION FROM THE SIGNUP 
 $tIbanCode = $_POST['tIbanCode']; // FOR FUNCTIONALITY - One day it will be credit card/bank number
+if( empty($tIbanCode) ){ sendResponse(0, 'You must write a iban code', __LINE__); }
+if( strlen($tIbanCode) == 18 ){ sendResponse(0,'It must be 18 characters', __LINE__); }
+
 $tExpirationDate = $_POST['tExpirationDate'];
+if( empty($tExpirationDate) ){ sendResponse(0, 'You must write a iban code', __LINE__); }
+if( strlen($tExpirationDate) == 4 ){ sendResponse(0,'It must be 4 characters', __LINE__); }
+
 $tccv = $_POST['tccv'];
+if( empty($tccv) ){ sendResponse(0, 'You must write a iban code', __LINE__); }
+if( strlen($tccv) == 3 ){ sendResponse(0,'It must be 3 characters', __LINE__); }
+
+
 $userID = $_SESSION['ID'];
 
-
-
-// VARIFY IF THE IBAN ALREADY EXCIST IN THE DATABASE !
 
     // write the sequence for the database
     $query = "INSERT INTO tcards (userID, ibanCode, expirationDate, ccv)

@@ -23,5 +23,5 @@ if(!$_SESSION){
     // execute the prepared statement
     $ok = $stmt->execute([$sGalleryId]);
     
-    echo sendResponse(1,'photos deleted',__LINE__);
     $db = null;
+    echo sendResponse(1,'photos deleted',__LINE__);

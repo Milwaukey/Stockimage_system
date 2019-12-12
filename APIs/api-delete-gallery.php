@@ -59,5 +59,5 @@ if($ok == true){
     $ok = $stmt->execute([$sGalleryToBeDeleted]);
 
 
-    header('Location: ../galleries-overview.php');
     $db = null;
+    header('Location: ../galleries-overview.php');

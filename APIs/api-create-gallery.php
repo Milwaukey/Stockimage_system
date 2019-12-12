@@ -7,6 +7,11 @@ require_once(__DIR__ . '/functions.php');
 
 
 $tGalleryName = $_POST['tGalleryName'];
+if( empty($tGalleryName) ){ sendResponse(0, 'You must write a gallery name', __LINE__); }
+if( strlen($tGalleryName) < 1 ){ sendResponse(0,'Must be more than 1 character', __LINE__); }
+if( strlen($tGalleryName) > 50 ){ sendResponse(0, 'Must be max 50 characters', __LINE__); }
+
+
 $photographerID = $_SESSION['ID'];
 
 $query = "
@@ -15,9 +20,8 @@ INSERT INTO tgalleries (photographerID, name)
 VALUES (?, ?);
 
 ";
-    //prepare it
+
     $stmt = $db->prepare($query);
-    // execute the prepared statement
     $ok = $stmt->execute([$photographerID,$tGalleryName]);
 
 echo sendResponse('1', 'DONE', __LINE__);

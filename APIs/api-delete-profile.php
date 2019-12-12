@@ -20,7 +20,10 @@
     }
 
     $sUserToBeDeleted = $_GET['ID'];
+    if( empty($sUserToBeDeleted) ){ sendResponse(0, 'You must write your login', __LINE__); }
+
     $type = $_SESSION['type'];
+    
 
     if( $type == 'photographer' ){
 

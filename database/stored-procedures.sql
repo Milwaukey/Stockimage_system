@@ -17,7 +17,7 @@ VALUES ( iCardID, iPhotoID, CURRENT_DATE, CURRENT_TIME, iAmountPaid );
 UPDATE tcards SET totalAmountPaid = @CardTotalSpending WHERE userID = iUserID AND cardID = iCardID;
 UPDATE tusers SET totalMonetaryPaid = @UserTotalSpending WHERE userID = iUserID;
 
-if(EORROR )
+if ( EORROR )
 rollback;
 end if
 

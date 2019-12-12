@@ -3,22 +3,22 @@
 require_once(__DIR__ . '/../includes/connection.php'); 
 require_once(__DIR__ . '/functions.php'); 
 
-///////////////////
-//Define inputs
+
+
 $tLogin = $_POST['tLogin'];
+if( empty($tLogin) ){ sendResponse(0, 'You must write your login', __LINE__); }
+
 $tPassword = $_POST['tPassword'];
+if( empty($tPassword) ){ sendResponse(0, 'You must write your password', __LINE__); }
 
 
 // CHECK IF tLogin is an email or an username
 if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
 
-        //THIS IS EXECUTION OF PDO
-    //crate the sequence to be prepared
+    //THIS IS EXECUTION OF PDO - create the sequence to be prepared
     $query ='SELECT email, password, photographerID
     FROM tphotographers WHERE email = ?';
-    //prepare it
     $stmt = $db->prepare($query);
-    // excute the prepared statement
     $ok = $stmt->execute([$tLogin]);
 
 
@@ -28,10 +28,6 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
         echo sendResponse(0, 'Wrong Credentials!', __LINE__);
         
     }
-    
-    // BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
-    // $results = mysqli_stmt_get_result($stmt);
-   
 
 
     // IF TRUE  - loop trough the objecdt
@@ -63,11 +59,8 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
 
 }else {
 
-    // write the sequence for the database
     $query = "SELECT userID, email, username, active, password FROM tusers WHERE username = ? ";
-    //prepare it
     $stmt = $db->prepare($query);
-    // execute the prepared statement
     $ok = $stmt->execute([$tLogin]);
 
     // If it doesn't exists the send response to the browser about wrong credentials 

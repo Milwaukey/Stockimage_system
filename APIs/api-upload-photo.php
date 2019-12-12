@@ -6,14 +6,17 @@ require_once(__DIR__ . '/functions.php');
 // CHANGE THIS BY GET
 $galleryID = $_GET['galleryID'];
 
+
+
 //Pickup files that have been uploaded // PHOTO ID // GALLERY ID // FORMAT // H + V // RESOLUTION // SIZE // PRICE // FILE  
-$tPrice = mysqli_real_escape_string($db,$_POST['tPrice']); 
+$tPrice = $_POST['tPrice']; 
 if( empty($tPrice) ){ sendResponse(0, 'txtPrice is empty', __LINE__); }
 if( !ctype_digit( $tPrice ) ){ sendResponse(0, 'Not a number', __LINE__); }
-if( $tPrice < 1 ){ sendResponse(0,'...', __LINE__); }
-if( $tPrice > 9999 ){ sendResponse(0, '...', __LINE__); }
+if( $tPrice < 1 ){ sendResponse(0,'Must cost at least 1', __LINE__); }
+if( $tPrice > 9999 ){ sendResponse(0, 'Cant cost more than 9999', __LINE__); }
 
 // COUNTS the number op oploadeds images in the array
+if( empty($_FILES['photos']['name']) ){ sendResponse(0, 'Must contain at least 1 image', __LINE__); };
 $iNumberOfImages = count($_FILES['photos']['name']);
 
 
@@ -60,7 +63,6 @@ for($i = 0; $i < $iNumberOfImages ; $i++){
 
 
     $stmt = $db->prepare($query);
-    // execute the prepared statement
     $ok = $stmt->execute([$galleryID, $sExtension, $imageHeight, $imageWidth, $imageResolution, $iImageSize, $tPrice, $sImageName]);
     
     
@@ -69,8 +71,7 @@ for($i = 0; $i < $iNumberOfImages ; $i++){
 // UPDATE THE GALLERY  with the number of  images added
 $query2 = " SELECT numberOfPhotos FROM tgalleries WHERE galleryID = ?";
 $stmt = $db->prepare($query2);
-    // execute the prepared statement
-    $ok = $stmt->execute([$galleryID]); 
+$ok = $stmt->execute([$galleryID]); 
 
 while($row = $stmt->fetch()){
 
@@ -80,12 +81,10 @@ while($row = $stmt->fetch()){
 
     $query3 = " UPDATE tgalleries SET numberOfPhotos = ? WHERE galleryID = ?" ;
     $stmt = $db->prepare($query2);
-    // execute the prepared statement
     $ok = $stmt->execute([$newNumberOfPhotos,$galleryID]); 
 
 
 }
 
-echo sendResponse(1, 'Uploaded', __LINE__);
-
 $db = null;
+echo sendResponse(1, 'Uploaded', __LINE__);

@@ -52,3 +52,4 @@ $userID = $_SESSION['ID'];
 
 
 
+    $db = null;

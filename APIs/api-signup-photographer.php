@@ -3,27 +3,26 @@
 require_once(__DIR__ . '/../includes/connection.php'); 
 require_once(__DIR__ . '/functions.php'); 
 
-// INFORMATION FROM THE SIGNUP 
 
-$tName = mysqli_real_escape_string($db,$_POST['tName']);
-$tSurname = mysqli_real_escape_string($db,$_POST['tSurname']);
-$tEmail = mysqli_real_escape_string($db,$_POST['tEmail']);
+$tName = $_POST['tName'];
+if( empty($tName) ){ sendResponse(0, 'You must write a name', __LINE__); }
+if( strlen($tName) < 1 ){ sendResponse(0,'Must be more than 1 character', __LINE__); }
+if( strlen($tName) > 50 ){ sendResponse(0, 'Must be max 50 characters', __LINE__); }
+
+$tSurname = $_POST['tSurname'];
+if( empty($tSurname) ){ sendResponse(0, 'You must write a surname', __LINE__); }
+if( strlen($tSurname) < 1 ){ sendResponse(0,'Must be more than 1 character', __LINE__); }
+if( strlen($tSurname) > 60 ){ sendResponse(0, 'Must be max 60 characters', __LINE__); }
+
+$tEmail = $_POST['tEmail'];
+if( empty($tEmail) ){ sendResponse(0, 'You must write an email', __LINE__); }
+if (!filter_var($tEmail, FILTER_VALIDATE_EMAIL)) { sendResponse(0, 'Not a valid email', __LINE__); }
 
 $writtenPassword = $_POST['tPassword'];
+if( empty($writtenPassword) ){ sendResponse(0, 'You must write a password', __LINE__); }
+if( strlen($writtenPassword) < 1 ){ sendResponse(0,'Must be more than 1 character', __LINE__); }
+if( strlen($writtenPassword) > 50 ){ sendResponse(0, 'Must be max 50 characters', __LINE__); }
 $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
-
-// $query = "
-
-// INSERT INTO tphotographers (name, surname, email, password)
-// VALUES ('$tName', '$tSurname', '$tEmail', '$tPassword');
-
-// ";
-
-
-// $result = mysqli_query($db, $query);
-
-
-
 
 $query =
     "INSERT INTO tphotographers (name, surname, email, password)
@@ -31,17 +30,7 @@ $query =
 ;
 
 $stmt = $db->prepare($query);
-// execute the prepared statement
 $ok = $stmt->execute([$tName,$tSurname, $tEmail,  $tPassword]);
-
-
-// If it doesn't exists the send response to the browser about wrong credentials 
-if( $ok == 0){
-    
-    echo sendResponse(0, 'Wrong Credentials!', __LINE__);
-    
-}
-
 
 
 echo sendResponse('1', 'DONE', __LINE__);;

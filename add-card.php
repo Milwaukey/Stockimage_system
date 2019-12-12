@@ -74,8 +74,6 @@ if(!$_SESSION){ header('Location: login.php '); } if($_SESSION['type'] == 'photo
                 </div>
                 
                 
-                
-                
                 ';
 
 
