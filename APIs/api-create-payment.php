@@ -21,9 +21,12 @@ $iAmountPaid = floatVal($_POST['tPrice']);
 $userID= $_SESSION['ID'];
 
 
-$query = "CALL newPayment( $iAmountPaid, $userID, $tCardID, $tPhotoID );";
+    $query = "CALL newPayment( ?, ?, ?, ? );";
 
-$reulst = mysqli_multi_query($db, $query);
+    //prepare it
+    $stmt = $db->prepare($query);
+    $ok = $stmt->execute([$iAmountPaid, $userID, $tCardID, $tPhotoID]);
 
 
 echo sendResponse(1, 'SUCCES!', __LINE__);
+$db = null;

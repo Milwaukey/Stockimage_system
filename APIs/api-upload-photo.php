@@ -50,35 +50,42 @@ for($i = 0; $i < $iNumberOfImages ; $i++){
     $tmpFile = move_uploaded_file($_FILES['photos']['tmp_name'][$i], "/Applications/XAMPP/xamppfiles/htdocs/WebDevelopmentDatabase/images/" . $sImageName);
     
 
-    // Put it into the database // ONLY WORKS AS LOCAL HOST
+    // Put it into the database // ONLY WORKS AS LOCAL HOST//ALSO MIGHT BE WEIRD WITH PREPARED STATEMENT
     $query = "
 
 
     INSERT INTO tphotos (galleryID, format, hDimension, vDimension, resolution, filesize, price, photoFile)
-    VALUES ($galleryID, '$sExtension', $imageHeight, $imageWidth, $imageResolution, $iImageSize, $tPrice, LOAD_FILE('/Applications/XAMPP/xamppfiles/htdocs/WebDevelopmentDatabase/images/$sImageName'));
+    VALUES (?, ?, ?, ?, ?, ?, ?, LOAD_FILE('/Applications/XAMPP/xamppfiles/htdocs/WebDevelopmentDatabase/images/ ? '));
     ";
 
 
-    mysqli_query($db, $query);
+    $stmt = $db->prepare($query);
+    // execute the prepared statement
+    $ok = $stmt->execute([$galleryID, $sExtension, $imageHeight, $imageWidth, $imageResolution, $iImageSize, $tPrice, $sImageName]);
     
     
 }
 
 // UPDATE THE GALLERY  with the number of  images added
-$query2 = " SELECT numberOfPhotos FROM tgalleries WHERE galleryID = " . $galleryID ;
-$results = mysqli_query($db, $query2);
+$query2 = " SELECT numberOfPhotos FROM tgalleries WHERE galleryID = ?";
+$stmt = $db->prepare($query2);
+    // execute the prepared statement
+    $ok = $stmt->execute([$galleryID]); 
 
-
-while($row = mysqli_fetch_array($results)){
+while($row = $stmt->fetch()){
 
     $numberOfPhotos = $row['numberOfPhotos'];
 
     $newNumberOfPhotos = $numberOfPhotos+$iNumberOfImages;
 
-    $query3 = " UPDATE tgalleries SET numberOfPhotos = $newNumberOfPhotos WHERE galleryID = " . $galleryID ;
-    mysqli_query($db, $query3);
+    $query3 = " UPDATE tgalleries SET numberOfPhotos = ? WHERE galleryID = ?" ;
+    $stmt = $db->prepare($query2);
+    // execute the prepared statement
+    $ok = $stmt->execute([$newNumberOfPhotos,$galleryID]); 
 
 
 }
 
 echo sendResponse(1, 'Uploaded', __LINE__);
+
+$db = null;

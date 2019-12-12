@@ -1,10 +1,6 @@
 $('.view_order').click(function(){
 
-
     let orderId = $(this).parent().children(':first-child').text().slice(7);
-
-    console.log(orderId);
-
 
     $.ajax({
 
@@ -18,8 +14,6 @@ $('.view_order').click(function(){
 
 
         if(jData.status == 0){
-            console.log('NULL')
-
 
             $('.download_container').empty();
             
@@ -78,10 +72,6 @@ $('.view_order').click(function(){
 
 
         }
-
-
-
-
 
     }) 
 

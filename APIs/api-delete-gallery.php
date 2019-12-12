@@ -3,8 +3,6 @@
     require_once(__DIR__ . '/../includes/connection.php'); 
     require_once(__DIR__ . '/functions.php'); 
 
-
-
     session_start();
 
     if(!$_SESSION){
@@ -14,30 +12,36 @@
 
     }
 
-    
     $galleryid = $_GET['id'];
 
     
 
 // SETS PAYMENT PHOTO ID TO NULL
-    $query = "SELECT photoID FROM tphotos WHERE galleryID = $galleryid";
-    $results = mysqli_query($db,$query);
+    $query = "SELECT photoID FROM tphotos WHERE galleryID = ?";
+    $stmt = $db->prepare($query);
+    // execute the prepared statement
+    $ok = $stmt->execute([$galleryid]);
 
 
-if($results == true){
+if($ok == true){
 
-    foreach($results as $photoid){
+    $photos = $stmt->fetchAll();
+    foreach($photos as $photoid){
 
         $i = $photoid['photoID'];
 
-        $query = "UPDATE tpayments SET photoID = NULL WHERE photoID = $i";
-        mysqli_query($db,$query);
+        $query = "UPDATE tpayments SET photoID = NULL WHERE photoID = ?";
+        $stmt = $db->prepare($query);
+        // execute the prepared statement
+        $ok = $stmt->execute([$i]);
     
     
         // DELETE PHOTOS 
-        $query = "DELETE FROM tphotos WHERE photoID = $i";
+        $query = "DELETE FROM tphotos WHERE photoID = ?";
 
-        mysqli_query($db, $query);
+        $stmt = $db->prepare($query);
+        // execute the prepared statement
+        $ok = $stmt->execute([$i]);
 
 
     }
@@ -48,9 +52,12 @@ if($results == true){
 // DELETE GALLERY
     $sGalleryToBeDeleted = $galleryid;
     
-    $query = "DELETE FROM tgalleries WHERE galleryID = $sGalleryToBeDeleted";
+    $query = "DELETE FROM tgalleries WHERE galleryID = ?";
 
-    $result = mysqli_query($db, $query);
+    $stmt = $db->prepare($query);
+    // execute the prepared statement
+    $ok = $stmt->execute([$sGalleryToBeDeleted]);
 
 
     header('Location: ../galleries-overview.php');
+    $db = null;

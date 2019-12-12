@@ -6,18 +6,34 @@ $host='localhost'; //Refers to the localhost, it matches depends on the server y
 $user='root'; //Refers to the localhost, it matches depends on the server you use (like a domain server) 
 $password=''; //Refers to the localhost, it matches depends on the server you use (like a domain server)
 $databaseName = 'proofing_system_db';
+$charset = 'utf8mb4';
 
-// $db = mysqli_connect($host, $user, $password, $databaseName); // Establish the connection to the server by using the information from the variables 
-$db = new mysqli($host, $user, $password, $databaseName); // Establish the connection to the server by using the information from the variables 
+// Prepared connection to the database 
+$dsn = "mysql:host=$host;dbname=$databaseName;charset=$charset";
 
-mysqli_set_charset($db, 'utf8'); // Uses the UTF8 charset that's also used in the database
+// 
+$options = [
+    PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES =>false,
+];
 
-// Build in mysql about errors, so it can give us the right error
-if( $db->connect_error){
-    die('Connection Failed: ' . $db->connect_error);
+
+// CREATE the connection to the database
+try{
+    // Create a PHP database object - Called PDO
+    $db = new PDO($dsn,$user,$password,$options);
+
+
+
+    // ERROR messages about what went wrong 
+} catch (\PDOException $e){
+    throw new \PDOException($e ->getMessage(),(int) $e->getCode());
 }
 
-// echo 'connected';
+
+
+
 
 // Closed because it's an included in other files, so if you don't close php it can cause errors!!
 ?>

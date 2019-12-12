@@ -3,27 +3,23 @@
 require_once(__DIR__ . '/../includes/connection.php'); 
 require_once(__DIR__ . '/functions.php'); 
 
-
-// GETS THE INFORMATION
-// $tLogin = $_POST['tLogin'];
-// $tPassword = $_POST['tPassword'];
-
-$tLogin = mysqli_real_escape_string($db,$_POST['tLogin']);
-$tPassword = mysqli_real_escape_string($db,$_POST['tPassword']);
+///////////////////
+//Define inputs
+$tLogin = $_POST['tLogin'];
+$tPassword = $_POST['tPassword'];
 
 
 // CHECK IF tLogin is an email or an username
 if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
 
-
-    // Checks if the email exists in the database WITH A PREPARED STATEMENT 
-
-    $stmt = $db->prepare('SELECT email, password, photographerID
-    FROM tphotographers WHERE email = ?');
-
-    $stmt->bind_param("s", $tLogin);
-
-    $ok = $stmt->execute();
+        //THIS IS EXECUTION OF PDO
+    //crate the sequence to be prepared
+    $query ='SELECT email, password, photographerID
+    FROM tphotographers WHERE email = ?';
+    //prepare it
+    $stmt = $db->prepare($query);
+    // excute the prepared statement
+    $ok = $stmt->execute([$tLogin]);
 
 
     // If it doesn't exists the send response to the browser about wrong credentials 
@@ -34,11 +30,12 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
     }
     
     // BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
-    $results = mysqli_stmt_get_result($stmt);
+    // $results = mysqli_stmt_get_result($stmt);
+   
 
 
     // IF TRUE  - loop trough the objecdt
-    while($row = mysqli_fetch_array($results)){
+    while($row = $stmt->fetch()){
 
         // CHECK THE PASSWORD 
         if( !password_verify( $tPassword, $row['password'] ) ){
@@ -66,23 +63,22 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
 
 }else {
 
-    // Checks if the email exists in the database 
-    $query = "SELECT userID, email, username, active, password FROM tusers WHERE username = '$tLogin' ";
-
-    // Get the result from the database
-    $results = mysqli_query($db, $query);
-
-    // var_dump($results);
+    // write the sequence for the database
+    $query = "SELECT userID, email, username, active, password FROM tusers WHERE username = ? ";
+    //prepare it
+    $stmt = $db->prepare($query);
+    // execute the prepared statement
+    $ok = $stmt->execute([$tLogin]);
 
     // If it doesn't exists the send response to the browser about wrong credentials 
-    if( mysqli_num_rows($results) == 0){
+    if( $stmt->rowCount() == 0){
 
         echo sendResponse(0, 'Wrong Credentials!', __LINE__);
 
     }
 
-    // IF TRUE  - loop trough the objecdt
-    while($row = mysqli_fetch_array($results)){
+     // IF TRUE  - loop trough the objecdt
+     while($row = $stmt->fetch()){
 
         if( $row['active'] == 0){
 
@@ -113,3 +109,5 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
     }
 
 }
+
+$db = null;

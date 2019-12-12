@@ -10,13 +10,18 @@ if(!$_SESSION){
 
     header('Location: ../login.php ');
     exit; // Make sure that code doesn't keeep running and deletes people!! 
-
 }
 
-
     $sGalleryId =  $_POST['galleryID'];
-    $query = "DELETE FROM tphotos WHERE galleryID = $sGalleryId";
-    mysqli_query($db, $query);
 
+    $query = "DELETE FROM tphotos WHERE galleryID = ?";
+    
+    //prepare it
+    $stmt = $db->prepare($query);
+
+
+    // execute the prepared statement
+    $ok = $stmt->execute([$sGalleryId]);
     
     echo sendResponse(1,'photos deleted',__LINE__);
+    $db = null;

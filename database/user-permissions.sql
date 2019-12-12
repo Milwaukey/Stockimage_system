@@ -4,10 +4,6 @@ GRANT ALL PRIVILEGES ON proofing_system_db.* TO 'admin'@'localhost';
 FLUSH PRIVILEGES;
 
 
-
-
-
-
 CREATE USER 'user_read'@'localhost' IDENTIFIED BY 'password';
 GRANT SELECT ON proofing_system_db.* TO 'user_read'@'localhost';
 FLUSH PRIVILEGES;

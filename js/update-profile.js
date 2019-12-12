@@ -11,6 +11,8 @@ $('.BtnUpdateImage').click(function(){
 
 $('.Update_personal_info form button').click(function(){
 
+    console.log('update')
+
     $.ajax({
 
         url : "APIs/api-update-profile.php",
@@ -20,6 +22,7 @@ $('.Update_personal_info form button').click(function(){
 
     })
     .done(function( jData ){
+    
         
         if(jData.status == 1){
 
@@ -29,8 +32,7 @@ $('.Update_personal_info form button').click(function(){
 
             }, 100)
 
-
-
+            
                 $('.Update_personal_info').hide();
                             
         }

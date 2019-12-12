@@ -1,7 +1,3 @@
-var stopBuy = 0;
-
-
-let tBuyImage;
 
 
 $(".BtnBuyImage").click(function(){
@@ -9,9 +5,6 @@ $(".BtnBuyImage").click(function(){
     $('.price_buy_image').empty();
     $('.photo_buy').empty();
     
-    console.log(stopBuy);
-
-
     let tBuyImage = $(this).attr('id');
 
     let price_onScreen = $('.photo_price_' + tBuyImage).text();
@@ -40,8 +33,6 @@ $('#select_card').change(function(){
     let cardID = $("#select_card option:selected").val();
     let photoId = $('.photo_buy').text().slice(6);
 
-    console.log(photoId)
-
     $.ajax({
 
         url : "APIs/api-create-payment.php",
@@ -51,8 +42,6 @@ $('#select_card').change(function(){
 
     })
     .done(function( jData ){
-
-        console.log(jData.test);
 
         if(jData.status == 1){
 
@@ -80,7 +69,5 @@ $('#select_card').change(function(){
 
 })
 })
-
-stopBuy++;
 
 

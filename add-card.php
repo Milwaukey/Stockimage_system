@@ -48,11 +48,12 @@ if(!$_SESSION){ header('Location: login.php '); } if($_SESSION['type'] == 'photo
 <div class="card_wrapper">
 
 <?php 
-$query = 'SELECT ibanCode, expirationDate, ccv, totalAmountPaid FROM tcards WHERE userID = ' . $_SESSION['ID'];
+            $query = 'SELECT ibanCode, expirationDate, ccv, totalAmountPaid FROM tcards WHERE userID = ?';
 
-            $results = mysqli_query($db, $query);
+            $stmt = $db->prepare($query);
+            $ok = $stmt->execute([$_SESSION['ID']]);
 
-            while($row = mysqli_fetch_array($results)){
+            while($row = $stmt->fetch()){
 
                
                 echo '

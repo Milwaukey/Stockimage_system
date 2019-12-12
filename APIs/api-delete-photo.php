@@ -14,39 +14,41 @@
     }
 
     $sPhotoToBeDeleted = $_POST['tPhotoID'];
-    
+
+
         // UPDATE THE GALLERY  with the number of  images added
-        $query2 = "SELECT numberOfPhotos FROM tgalleries
-        INNER JOIN tphotos ON tgalleries.galleryID = tphotos.galleryID WHERE photoID = " . $sPhotoToBeDeleted;
+        $query2 = "SELECT numberOfPhotos FROM tgalleries INNER JOIN tphotos ON tgalleries.galleryID = tphotos.galleryID WHERE photoID = ? " ;
+        $stmt = $db->prepare($query2);
+        // execute the prepared statement
+        $ok = $stmt->execute([$sPhotoToBeDeleted]);
+        
 
-
-        $result2 = mysqli_query($db, $query2);
+        // var_dump($result2);
     
-        while($row = mysqli_fetch_array($result2)){
+        while($row = $stmt->fetch()){
     
             $numberOfPhotos = $row['numberOfPhotos'];
         
             $newNumberOfPhotos = $numberOfPhotos-1;
         
-            $query3 = "UPDATE tgalleries
-            INNER JOIN tphotos ON tgalleries.galleryID = tphotos.galleryID SET tgalleries.numberOfPhotos =  $newNumberOfPhotos WHERE photoID = $sPhotoToBeDeleted ";
+            $query3 = "UPDATE tgalleries INNER JOIN tphotos ON tgalleries.galleryID = tphotos.galleryID SET tgalleries.numberOfPhotos = ? WHERE photoID = ?";
     
-            mysqli_query($db, $query3);
+            $stmt = $db->prepare($query3);
+            // execute the prepared statement
+            $ok = $stmt->execute([$newNumberOfPhotos, $sPhotoToBeDeleted]);
         
         
         }
 
 
-        $query2 = "UPDATE tpayments SET photoID = NULL WHERE photoID = $sPhotoToBeDeleted";
-
-        $result2 = mysqli_query($db, $query2);
-    
-
-
     // DELETES THE PHOTO FROM THE DATABASE 
     $query = "DELETE FROM tphotos WHERE photoID = $sPhotoToBeDeleted";
 
-    $result = mysqli_query($db, $query);
+    $stmt = $db->prepare($query);
+    // execute the prepared statement
+    $ok = $stmt->execute([$sPhotoToBeDeleted]);
 
+    // var_dump($result);
 
     echo sendResponse(1,'Photo Deleted!',__LINE__);
+    $db = null;

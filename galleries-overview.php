@@ -2,14 +2,11 @@
 
 
 
-
-<!-- <div class="button_profile"><img class="icon" src="assets/icons/create.svg"> Create Gallery</div> -->
-
 <h1>Galleries</h1>
 <hr>
 
 
-<div <?php if($_SESSION['type'] == 'user'){echo 'class="hide"';} ?>>
+<?php if($_SESSION['type'] == 'photographer'){ ?>
 
 
 <div id="CreateGalleryBox">
@@ -31,26 +28,27 @@
 
 <?php 
 
-$query = 'SELECT galleryID, name FROM tgalleries WHERE photographerID =' . $_SESSION['ID'];
+    $query = 'SELECT galleryID, name FROM tgalleries WHERE photographerID = ?';
 
-$results = mysqli_query($db, $query);
+    $stmt = $db->prepare($query);
+    $ok = $stmt->execute([$_SESSION['ID']]);
 
-while($row = mysqli_fetch_array($results)){
-    
-    echo '
-    
-    <a href="gallery.php?id='. $row['galleryID'] .'">
-    <div> 
-    <div class="overlay">
-                <p>'. $row['name'] .'</p>
-                
-            <div></div>
-        </div>
-        <img src="images/IMG_8538.jpg"> 
-        </div>
-    </a>
-    ';
-}
+    while($row = $stmt->fetch()){
+        
+        echo '
+        
+        <a href="gallery.php?id='. $row['galleryID'] .'">
+        <div> 
+        <div class="overlay">
+                    <p>'. $row['name'] .'</p>
+                    
+                <div></div>
+            </div>
+            <img src="images/IMG_8538.jpg"> 
+            </div>
+        </a>
+        ';
+    }
 
 
 ?>
@@ -59,7 +57,7 @@ while($row = mysqli_fetch_array($results)){
 </div>
 
 
-
+<?php }?>
 
 
 
@@ -69,7 +67,7 @@ while($row = mysqli_fetch_array($results)){
 
 
     
-    <div <?php if($_SESSION['type'] == 'photographer'){echo 'class="hide"';} ?> >
+<?php if($_SESSION['type'] == 'user'){ ?> 
 
 <!-- SEARCH -->
 
@@ -89,9 +87,10 @@ while($row = mysqli_fetch_array($results)){
 
                         $query = 'SELECT galleryID, name FROM tgalleries';
 
-                        $results = mysqli_query($db, $query);
+                        $stmt = $db->prepare($query);
+                        $ok = $stmt->execute();
 
-                        while($row = mysqli_fetch_array($results)){
+                        while($row = $stmt->fetch()){
                             
                             echo '
                             
@@ -113,8 +112,7 @@ while($row = mysqli_fetch_array($results)){
 
                         </div>
     
-        </div>
-    <!-- </div> -->
+<?php } ?>
 
     <?php $sLinkToScript2 ='<script src="js/search-galleries.js"></script>'; $sLinkToScript = '<script src="js/create-gallery.js"></script>'; require_once(__DIR__ . '/footer.php'); ?>
 

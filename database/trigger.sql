@@ -1,36 +1,5 @@
 DELIMITER // 
 
-CREATE TRIGGER auditPhotoOnDelete BEFORE DELETE ON tphotos
-
-FOR EACH ROW BEGIN
-
-
-SET @photographerID = (SELECT photographerID FROM tgalleries LEFT JOIN tphotos ON tphotos.galleryID = tgalleries.galleryID WHERE tphotos.photoID = old.photoID LIMIT 1);
-
-SET @userID = (SELECT userID FROM tcards LEFT JOIN tpayments ON tcards.cardID = tpayments.cardID WHERE photoID = old.photoID LIMIT 1);
-
-SET @paymentID = (SELECT paymentID FROM tpayments WHERE photoID = old.photoID) LIMIT 1;
-
-INSERT INTO taudit (dateOfDeletePhoto, photoAuditID, photographerID, userID, paymentID)
-
-VALUES (CURRENT_TIMESTAMP, old.photoID, @photographerID, @userID, @paymentID);
-
-UPDATE tpayments SET photoID = NULL WHERE paymentID = @paymentID;
-
-
-END // 
-
-
-DELIMITER ; 
-
-
-
-
-
-
-
-DELIMITER // 
-
 CREATE TRIGGER auditUsersInsert AFTER INSERT ON tusers
 
 FOR EACH ROW BEGIN
@@ -205,35 +174,5 @@ DELIMITER ;
 
 
 
-
-
-
-
-
-
-
-
-// PHOTO ON DELETE NEW 
-
-
-
-
-
-DELIMITER //
-
-CREATE TRIGGER photoOnDelete BEFORE DELETE ON tphotos
-
-FOR EACH ROW BEGIN 
-
-SET @paymentID = (SELECT paymentID FROM tpayments WHERE photoID = old.photoID);
-
-
-UPDATE tpayments SET photoID = NULL WHERE paymentID = @paymentID;
-
-
-END // 
-
-
-DELIMITER ; 
 
 

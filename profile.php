@@ -13,10 +13,16 @@
         <?php if($_SESSION['type'] == 'photographer'){ 
 
             echo '<div>';
-                        
-                        $query = 'SELECT name, surname, email FROM tphotographers WHERE photographerID = ' .$_SESSION['ID'] .'';
-                        $results = mysqli_query($db, $query);
-                        while($row = mysqli_fetch_array($results)){
+
+                $query = 'SELECT name, surname, email FROM tphotographers WHERE photographerID = ?';
+
+                //prepare it
+                $stmt = $db->prepare($query);
+
+                // execute the prepared statement
+                $ok = $stmt->execute([$_SESSION['ID']]);
+
+                        while($row = $stmt->fetch()){
 
                             echo '<p>' . $row['name'] .'</p>';
                             echo '<p>' . $row['email'] .'</p>';
@@ -58,16 +64,19 @@
             <?php if($_SESSION['type'] == 'user'){ 
 
 
-            $query = 'SELECT name, surname, email, username, streetName, streetNumber, zipcode, tusers.cityID, cityName FROM tusers INNER JOIN tcities WHERE userID = '. $_SESSION['ID'] .' AND tcities.cityID = tusers.cityID; ';
-            $results = mysqli_query($db, $query);
+            $query = 'SELECT name, surname, email, username, streetName, streetNumber, zipcode, tusers.cityID, cityName FROM tusers INNER JOIN tcities WHERE userID = ? AND tcities.cityID = tusers.cityID';
+            
+            //prepare it
+            $stmt = $db->prepare($query);
+
+            // execute the prepared statement
+            $ok = $stmt->execute([ $_SESSION['ID'] ]);
 
 
             $query2 = 'SELECT * FROM tcities';
-            $results2 = mysqli_query($db, $query2);
-
             
 
-            while($row = mysqli_fetch_array($results)){
+            while($row = $stmt->fetch()){
 
                 echo '<p>' . $row['username'] .'</p>';
                 echo '<p>' . $row['name'] . ' ' . $row['surname'] .'</p>';
@@ -128,7 +137,13 @@
                             <option value='". $row['cityID'] ."'>" . $row['cityName'] ."</option> ";
 
                             
-                            while($row2 = mysqli_fetch_array($results2)) {
+                            //prepare it
+                            $stmt = $db->prepare($query2);
+
+                            // execute the prepared statement
+                            $ok = $stmt->execute();
+
+                            while($row2 = $stmt->fetch()) {
 
                                 echo '<option value="'. $row2['cityID'] . '">' . $row2['cityName'] . '</option>';//sloppy use jquery 
             
@@ -161,11 +176,6 @@
     hej
 </div>
 
-
-
-
-<!-- <div class="BtnUpdateImage">Update Profile</div> -->
-<!-- <a href="APIs/api-delete-profile.php?ID=<?=$_SESSION['ID']?>">Delete Profile</a> -->
 
 
 <?php $sLinkToScript = '<script src="js/update-profile.js"></script>'; require_once(__DIR__ . '/footer.php'); ?>

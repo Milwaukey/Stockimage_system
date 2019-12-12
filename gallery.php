@@ -12,11 +12,13 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
 
     <?php 
 
-    $query_galleries = 'SELECT tgalleries.name AS galleryName, tphotographers.name, surname FROM tgalleries LEFT JOIN tphotographers ON tphotographers.photographerID = tgalleries.photographerID WHERE galleryID = '. $_GET['id'] .'';
+    $query_galleries = 'SELECT tgalleries.name AS galleryName, tphotographers.name, surname FROM tgalleries LEFT JOIN tphotographers ON tphotographers.photographerID = tgalleries.photographerID WHERE galleryID = ?';
 
-    $results_galleries_info = mysqli_query($db, $query_galleries);
+    $stmt = $db->prepare($query_galleries);
+    $ok = $stmt->execute([$_GET['id']]);
+    
 
-    while($row = mysqli_fetch_array($results_galleries_info)){
+    while($row = $stmt->fetch()){
 
         echo '<h1>'. $row['galleryName'] .'</h1>';
         echo '<p></p>';
@@ -47,6 +49,7 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
 
 
 
+    <?php if($_SESSION['type'] == 'user'){ ?>
     <div id="select_card" class="hide">
 
     <div class="cart_section">
@@ -57,9 +60,12 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
         <select>
         <option disabled selected >CHOOSE CARD</option>
                 <?php 
-                $query = 'SELECT cardID, ibanCode FROM tcards WHERE userID = ' .$_SESSION['ID'] .'';
-                $results = mysqli_query($db, $query);
-                while($row = mysqli_fetch_array($results)){
+                $query = 'SELECT cardID, ibanCode FROM tcards WHERE userID = ?';
+                
+                $stmt = $db->prepare($query);
+                $ok = $stmt->execute([$_SESSION['ID']]);
+
+                while($row = $stmt->fetch()){
 
                     echo '<option value=" '. $row['cardID'] .' "> '. $row['ibanCode'] .' </option>';
                     
@@ -68,11 +74,9 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
         </select>
 
     </div>
+    <?php }?>
 
-
-
-
-    </div>
+</div>
 
 
 
@@ -82,11 +86,12 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
             <div class="gallery_singleview_container">
             <?php 
 
-            $query = 'SELECT photoID, price, photoFile, format FROM tphotos WHERE galleryID = '. $_GET['id'] .'';
+            $query = 'SELECT photoID, price, photoFile, format FROM tphotos WHERE galleryID = ?';
 
-            $results = mysqli_query($db, $query);
+            $stmt = $db->prepare($query);
+            $ok = $stmt->execute([$_GET['id']]);
 
-            while($row = mysqli_fetch_array($results)){
+            while($row = $stmt->fetch()){
 
                 echo '<div id="photo_' . $row['photoID'] . '" class="single_image_box">';
                         echo '<div class="resize"><img src="assets/icons/resize.svg"></div>';
@@ -103,17 +108,6 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
 
             ?>
             </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

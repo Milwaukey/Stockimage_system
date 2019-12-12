@@ -25,15 +25,14 @@ $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
 
 
 
-$stmt = $db->prepare(
+$query =
     "INSERT INTO tphotographers (name, surname, email, password)
     VALUES (?, ?, ?, ?);"
-);
+;
 
-   
-$stmt->bind_param("ssss",$tName, $tSurname, $tEmail,  $tPassword);
-
-$ok = $stmt->execute();
+$stmt = $db->prepare($query);
+// execute the prepared statement
+$ok = $stmt->execute([$tName,$tSurname, $tEmail,  $tPassword]);
 
 
 // If it doesn't exists the send response to the browser about wrong credentials 
@@ -43,9 +42,8 @@ if( $ok == 0){
     
 }
 
-// BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
-$results = mysqli_stmt_get_result($stmt);
 
 
 echo sendResponse('1', 'DONE', __LINE__);;
 
+$db = null;

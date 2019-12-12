@@ -5,18 +5,18 @@ require_once(__DIR__ . '/functions.php');
 
 // INFORMATION FROM THE SIGNUP 
 
-$tName = mysqli_real_escape_string($db,$_POST['tName']);
-$tSurname = mysqli_real_escape_string($db,$_POST['tSurname']);
-$tEmail = mysqli_real_escape_string($db,$_POST['tEmail']);
-$tUsername = mysqli_real_escape_string($db,$_POST['tUsername']);
+$tName = $_POST['tName'];
+$tSurname = $_POST['tSurname'];
+$tEmail = $_POST['tEmail'];
+$tUsername = $_POST['tUsername'];
 
-$writtenPassword = mysqli_real_escape_string($db,$_POST['tPassword']);
+$writtenPassword = $_POST['tPassword'];
 $tPassword = password_hash($writtenPassword, PASSWORD_DEFAULT);
 
-$tStreetName = mysqli_real_escape_string($db,$_POST['tStreetName']);
-$tStreetNumber = mysqli_real_escape_string($db,$_POST['tStreetNumber']);
-$tZipcode = mysqli_real_escape_string($db,$_POST['tZipcode']);
-$tCity = mysqli_real_escape_string($db,$_POST['tCity']);
+$tStreetName = $_POST['tStreetName'];
+$tStreetNumber = $_POST['tStreetNumber'];
+$tZipcode = $_POST['tZipcode'];
+$tCity = $_POST['tCity'];
 
 
 // $signupDate = date('Y-m-d', time() );
@@ -35,15 +35,14 @@ $signupDate = date('Y-m-d', time() );
 
 
 
-$stmt = $db->prepare(
+$query =
     "INSERT INTO tusers (name, surname, email, username, password, streetName, streetNumber, zipcode, cityID, signupDate )
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ? DATE ? )"
-);
+;
 
-   
-$stmt->bind_param("ssssssssss",$tName, $tSurname, $tEmail, $tUsername , $tPassword, $tStreetName, $tStreetNumber,$tZipcode, $tCity, $signupDate);
-
-$ok = $stmt->execute();
+$stmt = $db->prepare($query);
+// execute the prepared statement
+$ok = $stmt->execute([$tName, $tSurname, $tEmail, $tUsername , $tPassword, $tStreetName, $tStreetNumber,$tZipcode, $tCity, $signupDate]);
 
 
 // If it doesn't exists the send response to the browser about wrong credentials 
@@ -53,8 +52,6 @@ if( $ok == 0){
     
 }
 
-// BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
-$results = mysqli_stmt_get_result($stmt);
-
 echo sendResponse('1', 'DONE', __LINE__);
 
+$db = null;

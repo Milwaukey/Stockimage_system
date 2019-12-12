@@ -13,31 +13,19 @@ if(!$_SESSION){
 
 }
  
-$searchTerm1 = mysqli_real_escape_string($db,'%'.$_POST['gallery_name'].'%');
-$searchTerm2 = mysqli_real_escape_string($db,'%'.$_POST['photographer_name'].'%');
+$searchTerm1 = '%'.$_POST['gallery_name'].'%';
+$searchTerm2 = '%'.$_POST['photographer_name'].'%';
 
 
-
-// $query = "SELECT tgalleries.name, tgalleries.galleryID FROM tgalleries LEFT JOIN tphotographers ON tgalleries.photographerID = tphotographers.photographerID
-// WHERE tgalleries.name LIKE '%$searchTerm1%'
-// AND tphotographers.name LIKE '%$searchTerm2%';";
-
-
-
-// $result = mysqli_query($db,$query);
-
-
-
-$stmt = $db->prepare(
+$query =
    "SELECT tgalleries.name, tgalleries.galleryID FROM tgalleries LEFT JOIN tphotographers ON tgalleries.photographerID = tphotographers.photographerID
-WHERE tgalleries.name LIKE ?
-AND tphotographers.name LIKE ?;"
-);
-
-   
-$stmt->bind_param("ss",$searchTerm1,$searchTerm2 );
-
-$ok = $stmt->execute();
+    WHERE tgalleries.name LIKE ?
+    AND tphotographers.name LIKE ?;"
+;
+    //prepare it
+    $stmt = $db->prepare($query);
+    // execute the prepared statement
+    $ok = $stmt->execute([$searchTerm1,$searchTerm2]);
 
 
 // If it doesn't exists the send response to the browser about wrong credentials 
@@ -48,13 +36,13 @@ if( $ok == 0){
 }
 
 // BELONGS TO THE STMT - DB - PREPARE - OK - BIND->PARAM PART 
-$result = mysqli_stmt_get_result($stmt);
+
 
 
 
 $contruct = '[';
 
-while($row = mysqli_fetch_array($result)){
+while($row = $stmt->fetch()){
 
     
     $search_new_result = $row['name'];
@@ -71,3 +59,4 @@ $contruct .= ']';
 
 
 echo json_encode($contruct);
+$db = null;

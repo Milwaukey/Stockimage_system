@@ -17,19 +17,6 @@ VALUE ('Charles', 'Darwin', 'cd@gmail.com', 'Evolution', '$2y$10$B2RySJ2G2MEOHvF
 ('Sokrates', 'Athen', 'sa@gmail.com', 'Athen', '$2y$10$B2RySJ2G2MEOHvFGb5wQi.GAAXGDiDGKAyp1976VxCFFwdn9G2rrK', 'Grækersens Allé', '5', '5700', 9);
 
 
-INSERT INTO tgalleries (photographerID, name, numberOfPhotos)
-VALUES (1, 'Pictures of me, myself and I', 7),
-(1, 'This is not a pipe', 7),
-(1, 'All about you', 6),
-(2, 'Red Socks', 7), 
-(2, 'Portraits of you', 7),
-(2, 'All about the Belly', 6),
-(3, 'The first love', 7),
-(3, 'Wedding is not all - midlife crisis', 7),
-(3, 'Yoga', 6);
-
-
-
 INSERT INTO tcards (userID, ibanCode, expirationDate, ccv)
 VALUE (1, 'DK9284710274923838', '0123', '032'),
 (1, 'DK9284710274923839', '1234', '033'),

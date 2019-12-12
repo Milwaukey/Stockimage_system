@@ -12,13 +12,14 @@ $userID = $_SESSION['ID'];
     $query2 = "SELECT tpayments.paymentID, tcards.ibanCode, tpayments.payDate, tpayments.amountPaid, format, hDimension, vDimension, photoFile, tpayments.photoID
     FROM tpayments LEFT JOIN tcards ON tpayments.cardID = tcards.cardID
     LEFT JOIN tphotos ON tpayments.photoID = tphotos.photoID
-    WHERE userID = $userID AND paymentID = $orderID LIMIT 1";
+    WHERE userID = ? AND paymentID = ? LIMIT 1";
+
+    $stmt = $db->prepare($query2);
+    $ok = $stmt->execute([$userID, $orderID ]);
     
 
-    $results2 = mysqli_query($db, $query2);
-
                         
-    while($row = mysqli_fetch_array($results2)){
+    while($row = $stmt->fetch()){
 
         if( $row['photoID'] == NULL ){
 

@@ -6,19 +6,20 @@ require_once(__DIR__ . '/functions.php');
 // INFORMATION FROM THE SIGNUP 
 
 
-$tGalleryName = mysqli_real_escape_string($db,$_POST['tGalleryName']);
-
+$tGalleryName = $_POST['tGalleryName'];
 $photographerID = $_SESSION['ID'];
 
 $query = "
 
 INSERT INTO tgalleries (photographerID, name)
-VALUES ('$photographerID', '$tGalleryName');
+VALUES (?, ?);
 
 ";
+    //prepare it
+    $stmt = $db->prepare($query);
+    // execute the prepared statement
+    $ok = $stmt->execute([$photographerID,$tGalleryName]);
 
-
-$result = mysqli_query($db, $query);
-
-echo sendResponse('1', 'DONE', __LINE__);;
+echo sendResponse('1', 'DONE', __LINE__);
+$db = null;
 

@@ -13,12 +13,13 @@ if(!$_SESSION){ header('Location: login.php '); }?>
 <div class="download_container">
 
 <?php 
-    // $query2 = 'SELECT * FROM tpayments LEFT JOIN tcards ON tpayments.cardID = tcards.cardID  WHERE userID = '. $_SESSION['ID'] .' ORDER BY paymentID DESC LIMIT 1';
     $query2 = 'SELECT tpayments.paymentID, tcards.ibanCode, tpayments.payDate, tpayments.amountPaid, format, hDimension, vDimension, photoFile FROM tpayments
-    LEFT JOIN tcards ON tpayments.cardID = tcards.cardID LEFT JOIN tphotos ON tpayments.photoID = tphotos.photoID  WHERE userID = '. $_SESSION['ID'] .' ORDER BY paymentID DESC LIMIT 1;';
-    $results2 = mysqli_query($db, $query2);
+    LEFT JOIN tcards ON tpayments.cardID = tcards.cardID LEFT JOIN tphotos ON tpayments.photoID = tphotos.photoID  WHERE userID = ? ORDER BY paymentID DESC LIMIT 1;';
+    
+    $stmt = $db->prepare($query2);
+    $ok = $stmt->execute([$_SESSION['ID']]);
                         
-    while($row = mysqli_fetch_array($results2)){
+    while($row = $stmt->fetch()){
 
         if( $row['photoFile'] == NULL ){
 
@@ -81,10 +82,12 @@ if(!$_SESSION){ header('Location: login.php '); }?>
     <div class="card_wrapper">
 
     <?php 
-    $query = 'SELECT * FROM tpayments LEFT JOIN tcards ON tpayments.cardID = tcards.cardID  WHERE userID = '. $_SESSION['ID'] .' ORDER BY paymentID DESC' ;
-    $results = mysqli_query($db, $query);
+    $query = 'SELECT * FROM tpayments LEFT JOIN tcards ON tpayments.cardID = tcards.cardID  WHERE userID = ? ORDER BY paymentID DESC' ;
+    
+    $stmt = $db->prepare($query);
+    $ok = $stmt->execute([$_SESSION['ID']]);
                         
-    while($row = mysqli_fetch_array($results)){
+    while($row = $stmt->fetch()){
 
         echo ' 
         <div class="order_card">
