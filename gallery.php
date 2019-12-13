@@ -20,7 +20,7 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
 
     while($row = $stmt->fetch()){
 
-        echo '<h1>'. $row['galleryName'] .'</h1>';
+        echo '<h1 class="gallery_name">'. $row['galleryName'] .'</h1>';
         echo '<p></p>';
         echo '<p>'. $row['name'] .' ' . $row['surname'] .'</p>';
 
@@ -30,6 +30,19 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
     <hr>
 
     <?php if($_SESSION['type'] == 'photographer'){ ?>
+
+
+        <form class="update_gallery_name_form hide">
+            <div class="input_wrapper">
+                <input class="effect-1 input_new_gallery_name" name="gallery_name_update" type="text" placeholder="New gallery name">
+                <span class="focus-border"></span>
+            </div>
+            <button class="<?= $_GET['id'] ?>">Update name</button>
+        </form>
+
+
+    <div id="update_gallery_name" class="button_profile">Update gallery</div>
+
     
     <div class="profile_buttons">
         <a class="button_profile" href="APIs/api-delete-gallery.php?id=<?php echo $galleryID ?>" class="BtnDeleteGallery"><img class="icon" src="assets/icons/trash.svg">Delete</a>
@@ -118,6 +131,7 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
 
 $sLinkToScript4 = '<script src="js/upload-images.js"></script>';
 $sLinkToScript3 = '<script src="js/delete-image.js"></script>';
+$sLinkToScript2 = '<script src="js/update-gallery-name.js"></script>';
 $sLinkToScript = '<script src="js/create-payment.js"></script>';
 
 
