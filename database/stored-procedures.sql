@@ -4,6 +4,9 @@ CREATE PROCEDURE newPayment(IN iAmountPaid int, IN iUserID int, IN iCardID int, 
 
 BEGIN
 
+    DECLARE `_rollback` BOOL DEFAULT 0;
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION SET `_rollback` = 1;
+    
 START TRANSACTION;
 
 
@@ -17,9 +20,11 @@ VALUES ( iCardID, iPhotoID, CURRENT_DATE, CURRENT_TIME, iAmountPaid );
 UPDATE tcards SET totalAmountPaid = @CardTotalSpending WHERE userID = iUserID AND cardID = iCardID;
 UPDATE tusers SET totalMonetaryPaid = @UserTotalSpending WHERE userID = iUserID;
 
-IF 
-rollback;
-END IF
+    IF `_rollback` THEN
+        ROLLBACK;
+    ELSE
+        COMMIT;
+    END IF;
 
 COMMIT;
 
