@@ -24,8 +24,6 @@ UPDATE tusers SET totalMonetaryPaid = @UserTotalSpending WHERE userID = iUserID;
         COMMIT;
     END IF;
 
-COMMIT;
-
 END // 
 
 DELIMITER ;
