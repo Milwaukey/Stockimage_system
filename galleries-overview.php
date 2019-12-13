@@ -39,13 +39,13 @@
         
         <a href="gallery.php?id='. $row['galleryID'] .'">
         <div> 
-        <div class="overlay">
-                    <p>'. $row['name'] .'</p>
-                    
-                <div></div>
+            <div class="overlay">
+                        <p>'. $row['name'] .'</p>
+                        
+                    <div></div>
             </div>
             <img src="images/IMG_8538.jpg"> 
-            </div>
+        </div>
         </a>
         ';
     }

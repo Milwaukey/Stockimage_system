@@ -507,6 +507,7 @@ form button:hover {
   padding: 10px;
   cursor: pointer;
   padding-left: 30px;
+  text-transform: uppercase;
 }
 
 
@@ -580,13 +581,11 @@ grid-gap: 15px;
 margin-top: 50px!important;
 }
 
-
 .gallery_grid_container div {
   height: 300px;
   background-color:white;
   position: relative;
 }
-
 
 .gallery_grid_container div:first-of-type {
   display: flex;
@@ -655,6 +654,13 @@ margin-top: 50px!important;
     height: 100%;
 }
 
+.update_gallery_name_form {
+  margin: 25px 0 25px 0;
+}
+
+.update_gallery_name_form input {
+  background: white;
+}
 
 
 .gallery_singleview_container {
