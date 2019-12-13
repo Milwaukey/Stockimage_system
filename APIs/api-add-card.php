@@ -17,6 +17,24 @@ $tIbanCode = $_POST['tIbanCode']; // FOR FUNCTIONALITY - One day it will be cred
 if( empty($tIbanCode) ){ sendResponse(0, 'You must write a iban code', __LINE__); }
 if( strlen($tIbanCode) == 18 ){ sendResponse(0,'It must be 18 characters', __LINE__); }
 
+
+// write the sequence for the database
+$checkIbanCodeExist = "SELECT ibanCode FROM tcards WHERE ibanCode = ?";
+
+//prepare it
+$stmt = $db->prepare($checkIbanCodeExist);
+
+// execute the prepared statement
+$ok = $stmt->execute([$tIbanCode]);
+
+if($ok == true ){
+
+    sendResponse(0 ,'ibanCode already exist in the system', __LINE__);
+
+}
+
+
+
 $tExpirationDate = $_POST['tExpirationDate'];
 if( empty($tExpirationDate) ){ sendResponse(0, 'You must write a iban code', __LINE__); }
 if( strlen($tExpirationDate) == 4 ){ sendResponse(0,'It must be 4 characters', __LINE__); }

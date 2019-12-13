@@ -31,5 +31,3 @@ COMMIT;
 END // 
 
 DELIMITER ;
-
-
