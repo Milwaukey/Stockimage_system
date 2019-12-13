@@ -50,21 +50,20 @@ for($i = 0; $i < $iNumberOfImages ; $i++){
 
     
     // Removing images from the uploaded folder, to the one i want to store them in
-    $tmpFile = move_uploaded_file($_FILES['photos']['tmp_name'][$i], "/Applications/XAMPP/xamppfiles/htdocs/WebDevelopmentDatabase/images/" . $sImageName);
-    
+    $tmpFile = move_uploaded_file($_FILES['photos']['tmp_name'][$i], "/Applications/XAMPP/xamppfiles/htdocs/WebDevelopmentFrontend/images/" . $sImageName);    
+    $path = '/Applications/XAMPP/xamppfiles/htdocs/WebDevelopmentFrontend/images/' . $sImageName;
 
+    
     // Put it into the database // ONLY WORKS AS LOCAL HOST//ALSO MIGHT BE WEIRD WITH PREPARED STATEMENT
     $query = "
 
 
     INSERT INTO tphotos (galleryID, format, hDimension, vDimension, resolution, filesize, price, photoFile)
-    VALUES (?, ?, ?, ?, ?, ?, ?, LOAD_FILE('/Applications/XAMPP/xamppfiles/htdocs/WebDevelopmentDatabase/images/ ? '));
+    VALUES (?, ?, ?, ?, ?, ?, ?, LOAD_FILE(?));
     ";
 
-
     $stmt = $db->prepare($query);
-    $ok = $stmt->execute([$galleryID, $sExtension, $imageHeight, $imageWidth, $imageResolution, $iImageSize, $tPrice, $sImageName]);
-    
+    $ok = $stmt->execute([$galleryID, $sExtension, $imageHeight, $imageWidth, $imageResolution, $iImageSize, $tPrice, $path ]) ;
     
 }
 

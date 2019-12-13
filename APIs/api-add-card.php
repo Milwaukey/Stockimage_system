@@ -67,8 +67,9 @@ if( $ok == 0){
 }
 
 
-echo sendResponse(1, 'DONE', __LINE__);
-
 // CLOSING THE CONNECTION TO THE DATABASE 
 $db = null;
+
+echo sendResponse(1, 'DONE', __LINE__);
+
 

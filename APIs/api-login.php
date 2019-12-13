@@ -51,6 +51,7 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
         $_SESSION['type'] = $loginType;
 
 
+        $db = null;
         echo sendResponse(1, 'Correct Login!', __LINE__);
 
     }
@@ -97,10 +98,9 @@ if( FILTER_VAR($tLogin, FILTER_VALIDATE_EMAIL) ){
         $_SESSION['type'] = $loginType;
 
 
+        $db = null;
         echo sendResponse(1, 'Correct Login!', __LINE__);
 
     }
 
 }
-
-$db = null;

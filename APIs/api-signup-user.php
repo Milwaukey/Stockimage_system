@@ -24,6 +24,21 @@ if( empty($tUsername) ){ sendResponse(0, 'You must write a username', __LINE__);
 if( strlen($tUsername) < 1 ){ sendResponse(0,'Must be more than 1 character', __LINE__); }
 if( strlen($tUsername) > 50 ){ sendResponse(0, 'Must be max 50 characters', __LINE__); }
 
+
+// write the sequence for the database
+$checkUsernameExist = "SELECT username FROM tusers WHERE username = ?";
+
+//prepare it
+$stmt = $db->prepare($checkUsernameExist);
+
+// execute the prepared statement
+$ok = $stmt->execute([$tUsername]);
+if($ok == true ){
+    sendResponse(0 ,'Username already exist in the system', __LINE__);
+}
+
+
+
 $writtenPassword = $_POST['tPassword'];
 if( empty($writtenPassword) ){ sendResponse(0, 'You must write a password', __LINE__); }
 if( strlen($writtenPassword) < 1 ){ sendResponse(0,'Must be more than 1 character', __LINE__); }
@@ -61,6 +76,5 @@ $ok = $stmt->execute([$tName, $tSurname, $tEmail, $tUsername , $tPassword, $tStr
 
 
 
-echo sendResponse('1', 'DONE', __LINE__);
-
 $db = null;
+echo sendResponse('1', 'DONE', __LINE__);

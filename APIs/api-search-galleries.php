@@ -55,5 +55,5 @@ $contruct = substr($contruct, 0, -1);
 $contruct .= ']';
 
 
-echo json_encode($contruct);
 $db = null;
+echo json_encode($contruct);

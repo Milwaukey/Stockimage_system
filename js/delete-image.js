@@ -1,6 +1,8 @@
 $(".BtnDeleteImage").click(function(){
 
     let tDeleteImage = $(this).attr('id');
+
+    console.log(tDeleteImage)
             
         $.ajax({
             

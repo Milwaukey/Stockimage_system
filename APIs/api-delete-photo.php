@@ -13,7 +13,7 @@
 
     }
 
-    $sPhotoToBeDeleted = $_POST['tPhotoID'];
+    $sPhotoToBeDeleted = intVal($_POST['tPhotoID']);
 
 
         // UPDATE THE GALLERY  with the number of  images added
@@ -41,14 +41,24 @@
         }
 
 
+
+        // DELETES THE PHOTO FROM THE DATABASE 
+        $setPaymentToNULL = "UPDATE tpayments SET photoID = NULL WHERE photoID = ?";
+
+        $stmt = $db->prepare($setPaymentToNULL);
+        // execute the prepared statement
+        $ok = $stmt->execute([$sPhotoToBeDeleted]);
+
+    
+
+
     // DELETES THE PHOTO FROM THE DATABASE 
-    $query = "DELETE FROM tphotos WHERE photoID = $sPhotoToBeDeleted";
+    $query = "DELETE FROM tphotos WHERE photoID = ?";
 
     $stmt = $db->prepare($query);
     // execute the prepared statement
     $ok = $stmt->execute([$sPhotoToBeDeleted]);
 
-    // var_dump($result);
 
-    echo sendResponse(1,'Photo Deleted!',__LINE__);
     $db = null;
+    echo sendResponse(1,'Photo Deleted!',__LINE__);

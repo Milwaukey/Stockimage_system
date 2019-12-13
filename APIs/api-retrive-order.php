@@ -29,6 +29,8 @@ $userID = $_SESSION['ID'];
                 "price": '.$row['amountPaid'].',
                 "payDate": "'.$row['payDate'].'"
             }';
+
+            $db = null;
             exit;
 
         }
@@ -48,8 +50,8 @@ $userID = $_SESSION['ID'];
             
         }';
 
+        $db = null;
+        exit;
+
     }
 
-
-
-    $db = null;

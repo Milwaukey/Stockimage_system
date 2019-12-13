@@ -29,5 +29,5 @@ $userID= $_SESSION['ID'];
     $ok = $stmt->execute([$iAmountPaid, $userID, $tCardID, $tPhotoID]);
 
 
+    $db = null;
 echo sendResponse(1, 'SUCCES!', __LINE__);
-$db = null;
