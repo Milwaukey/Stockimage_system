@@ -9,8 +9,6 @@ BEGIN
     
 START TRANSACTION;
 
-
-
 SET @CardTotalSpending = (SELECT totalAmountPaid FROM tcards WHERE userID = iUserID AND cardID = iCardID) + iAmountPaid;
 SET @UserTotalSpending = (SELECT totalMonetaryPaid FROM tusers WHERE userID = iUserID) + iAmountPaid; 
 
