@@ -9,7 +9,7 @@
 <?php if($_SESSION['type'] == 'photographer'){ ?>
 
 
-<div id="CreateGalleryBox">
+<!-- <div id="CreateGalleryBox">
 <div class="cancel"><img src="assets/icons/cancel.svg"></div>
 <form id="<?php echo $photographerID ?>"> 
 
@@ -20,9 +20,9 @@
 </div> 
         <button id="BtnCreateGallery">Create Gallery</button>
 </form>
-</div>
+</div> -->
 
-<div class="gallery_grid_container">
+<div id="<?php echo $_SESSION['ID'] ?>" class="gallery_grid_container">
 
 <div class="createNewGallery"><img class="create_new_gallery_icon" src="assets/icons/plus.svg"></div>
 

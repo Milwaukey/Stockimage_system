@@ -35,7 +35,7 @@ if($_SESSION){
             <span class="focus-border"></span>
         </div>
 
-        <button id="BtnSignup">Signup</button>
+        <button id="BtnSignup" class="button">Signup</button>
     </form>
 
 

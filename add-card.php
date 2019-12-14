@@ -34,7 +34,7 @@ if(!$_SESSION){ header('Location: login.php '); } if($_SESSION['type'] == 'photo
 </div>
 
 
-        <button id="BtnAddCard">Add card</button>
+        <button id="BtnAddCard" class="button">Add card</button>
     </form>
 
 

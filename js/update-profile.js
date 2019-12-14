@@ -2,6 +2,9 @@ $('.BtnUpdateImage').click(function(){
 
     $('.Update_personal_info').show();
 
+    $('.BtnUpdateImage').hide();
+    $('.delete_profile').hide();
+
     
 })
 

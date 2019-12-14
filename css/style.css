@@ -64,6 +64,13 @@ a {
   text-decoration: none;
 }
 
+
+i.update_icon {
+  background-image: url('assets/icons/edit.svg');
+  width: 35px;
+  height: 35px;
+}
+
 /* ***************************** 
               MENU 
 ******************************** */
@@ -434,18 +441,18 @@ form label {
   transition: 0.4s;
 }
 
-form button {
+form .button {
     background: #568890;
     color: white;
     border-radius: 5px;
     margin: 30px 0 0 0;
     height: 35px;
-    border: none;
     width: 100%;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-family: Avenir_Black;
+    border: none;
     cursor: pointer;
+
+    border-radius: .25em;
+    font-size: 1.0625em;
 }
 
 form button:hover {
@@ -492,22 +499,37 @@ form button:hover {
 }
 
 #profile_section .profile_buttons {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 5px;
   margin-top: 25px;
   text-transform: uppercase;
+  letter-spacing: 2px; */
+  margin-top: 25px;
+  text-transform: uppercase;
   letter-spacing: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
 .button_profile {
-  border: 1px solid rgb(221, 221, 221);
-  color: rgb(221, 221, 221);
+  /* border: 1px solid rgb(221, 221, 221); */
+  border: 1px solid #49777e;
+  /* color: rgb(221, 221, 221); */
+  color: #49777e;
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
-  padding-left: 30px;
   text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.button_profile:hover {
+  background: #49777e;
+  color: white;
+  transition: 0.4s;
 }
 
 
@@ -600,7 +622,11 @@ margin-top: 50px!important;
   height:  40px;
 }
 
-#CreateGalleryBox {
+.gallery_grid_container .createNewGallery {
+  min-width: 300px;
+}
+
+/* #CreateGalleryBox {
     position: fixed;
     z-index: 8;
     width: 100vw;
@@ -628,7 +654,7 @@ margin-top: 50px!important;
     right: 25px;
     cursor: pointer;
     z-index: 100;
-}
+} */
 
 .gallery_grid_container div .overlay {
   position: absolute;
@@ -654,13 +680,22 @@ margin-top: 50px!important;
     height: 100%;
 }
 
-.update_gallery_name_form {
+/* .update_gallery_name_form {
   margin: 25px 0 25px 0;
 }
 
 .update_gallery_name_form input {
   background: white;
-}
+} */
+
+
+
+
+
+
+
+
+
 
 
 .gallery_singleview_container {
@@ -668,12 +703,14 @@ margin-top: 50px!important;
   grid-gap: 15px;
   max-width: 350px;
   margin: 0 auto;
+  padding: 15px;
 }
 
 .gallery_singleview_container .single_image_box {
   height: 300px;
   background-color:white;
   position: relative;
+  z-index: 0;
 }
 
 
@@ -954,15 +991,7 @@ transition: all 0.3s;
 
 .add_new_card {
   display: block;
-  /* position: fixed; */
   width: 600px;
-  /* height: 100vh;
-  top: 0;
-  background: white;
-
-  display: grid;
-  justify-content: center;
-  align-items: center; */
   z-index: 0;
   
 }
@@ -997,10 +1026,6 @@ transition: all 0.3s;
   }
 
 }
-
-
-
-
 
 
 .download_container {
@@ -1105,4 +1130,118 @@ transition: all 0.3s;
     display: none;
   }
 
+}
+
+
+@media only screen and (min-width: 900px) {
+
+.dashboard {
+
+  width: calc(100vw - 350px);
+  padding: 15px;
+  margin-left: 350px;
+}
+
+}
+
+
+/******* UPLOAD IMAGES POP UP **********/ 
+
+#frmUploadImages .swal2-styled .swal2-confirm {
+  height: 100%;
+}
+
+
+#uploadImagesContainer {
+visibility: hidden;
+background: rgba(0,0,0,.4);
+width: 100vw;
+height: 100vh;
+position: fixed;
+z-index: 100!important;
+top: 0;
+left: 0;
+
+display: flex;
+justify-content: center;
+
+}
+
+.upload_image_popup {
+position: relative;
+    box-sizing: border-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 32em;
+    max-width: 100%;
+    padding: 1.25em;
+    border: none;
+    border-radius: .3125em;
+    background: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    max-width: 450px;
+    align-self: center;
+    /* animation-duration: 1.5s; */
+
+}
+
+.upload_animationBox {
+  animation: showBox 0.3s;
+}
+
+.upload_image_popup p {
+  font-family: Avenir_black;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.upload_image_popup .input_wrapper {
+  margin-top: 30px;
+}
+
+.upload_image_popup input {
+  background: white;
+}
+
+@keyframes showBox {
+  0% {
+    transform: scale(.7);
+  }
+
+  45% {
+    transform: scale(1.05);
+  }
+
+  80% {
+    transform: scale(.95);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+/**************** SWAAAL CHANGES ******************/ 
+
+
+.swal2-input:focus {
+  border: 1px solid #dce1e2;
+  outline: 0;
+  box-shadow: 0 0 3px #49777e!important;
+}
+
+
+.swal2-confirm {
+  background-color: #49777e!important;
+  font-family: Avenir_Light;
+}
+
+.swal2-cancel {
+  
+  font-family: Avenir_Light;
 }

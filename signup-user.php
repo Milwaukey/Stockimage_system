@@ -77,7 +77,7 @@ if($_SESSION){
             ?>
         </select>
 
-        <button id="BtnSignup">Signup</button>
+        <button id="BtnSignup" class="button">Signup</button>
     </form>
 
             </div>

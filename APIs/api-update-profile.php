@@ -24,18 +24,6 @@ if( $_SESSION['type'] == 'photographer' ){
     if( empty($tEmail) ){ sendResponse(0, 'You must write an email', __LINE__); }
     if (!filter_var($tEmail, FILTER_VALIDATE_EMAIL)) { sendResponse(0, 'Not a valid email', __LINE__); }
 
-    // write the sequence for the database
-    $checkEmailExist = "SELECT email FROM tphotographers WHERE email = ?";
-
-    //prepare it
-    $stmt = $db->prepare($checkEmailExist);
-
-    // execute the prepared statement
-    $ok = $stmt->execute([$tEmail]);
-    if($ok == true ){
-        sendResponse(0 ,'Email already exist in the system', __LINE__);
-    }
-
 
     $query = 'UPDATE tphotographers SET name = ?, surname = ?, email = ? WHERE photographerID = ?';
 
@@ -71,18 +59,6 @@ if( $_SESSION['type'] == 'user' ){
     if( empty($tUsername) ){ sendResponse(0, 'You must write a username', __LINE__); }
     if( strlen($tUsername) < 1 ){ sendResponse(0,'Must be more than 1 character', __LINE__); }
     if( strlen($tUsername) > 50 ){ sendResponse(0, 'Must be max 50 characters', __LINE__); }
-
-    // write the sequence for the database
-    $checkUsernameExist = "SELECT username FROM tusers WHERE username = ?";
-
-    //prepare it
-    $stmt = $db->prepare($checkUsernameExist);
-
-    // execute the prepared statement
-    $ok = $stmt->execute([$tUsername]);
-    if($ok == true ){
-        sendResponse(0 ,'Username already exist in the system', __LINE__);
-    }
 
     $tStreetName = $_POST['tStreetName'];
     if( empty($tStreetName) ){ sendResponse(0, 'You must write a streetname', __LINE__); }

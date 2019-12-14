@@ -31,11 +31,25 @@ $("#BtnAddCard").click(function(){
 
         if( jData.status == 0 ){
 
-            $(location).attr('href', 'index.php');
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'bottom-end',
+                showConfirmButton: false,
+                timer: 3000,
+                onOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer)
+                  toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+              })
+              
+              Toast.fire({
+                icon: 'info',
+                title: jData.message
+              })
 
         }else if( jData.status = 1 ){
 
-            $(location).attr('href', 'profile.php');
+            $(location).attr('href', 'add-card.php');
 
         }
 

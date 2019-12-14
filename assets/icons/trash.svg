@@ -1,1 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.03 46"><defs><style>.cls-1{fill:#ddd;}</style></defs><title>trash_1</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M14,0a3,3,0,0,0-3,3V5H1A1,1,0,0,0,1,7H2V43a3,3,0,0,0,3,3H31a3,3,0,0,0,3-3V7h1a1,1,0,1,0,0-2H33.18a.86.86,0,0,0-.32,0H25V3a3,3,0,0,0-3-3Zm0,2h8a1,1,0,0,1,1,1V5H13V3A1,1,0,0,1,14,2ZM4,7h7.84a.86.86,0,0,0,.32,0H23.85a.86.86,0,0,0,.32,0H32V43a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1Zm8,5a1,1,0,0,0-1,1V38a1,1,0,0,0,1,1,1,1,0,0,0,1-1V13a1,1,0,0,0-1-1Zm6,0a1,1,0,0,0-1,1V38a1,1,0,0,0,1,1,1,1,0,0,0,1-1V13a1,1,0,0,0-1-1Zm6,0a1,1,0,0,0-1,1V38a1,1,0,0,0,1,1,1,1,0,0,0,1-1V13a1,1,0,0,0-1-1Z"/></g></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 36 46" style="enable-background:new 0 0 36 46;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#F9F9F9;}
+</style>
+<title>trash_1</title>
+<g id="Layer_2_1_">
+	<g id="Layer_1-2">
+		<path class="st0" d="M14,0c-1.7,0-3,1.3-3,3v2H1C0.4,5,0,5.4,0,6s0.4,1,1,1h1v36c0,1.7,1.3,3,3,3h26c1.7,0,3-1.3,3-3V7h1
+			c0.6,0,1-0.4,1-1s-0.4-1-1-1h-1.8c-0.1,0-0.2,0-0.3,0H25V3c0-1.7-1.3-3-3-3H14z M14,2h8c0.6,0,1,0.4,1,1v2H13V3
+			C13,2.4,13.4,2,14,2z M4,7h7.8c0.1,0,0.2,0,0.3,0h11.7c0.1,0,0.2,0,0.3,0H32v36c0,0.6-0.4,1-1,1H5c-0.6,0-1-0.4-1-1V7z M12,12
+			c-0.6,0-1,0.4-1,1v25c0,0.6,0.4,1,1,1s1-0.4,1-1V13C13,12.4,12.6,12,12,12z M18,12c-0.6,0-1,0.4-1,1v25c0,0.6,0.4,1,1,1s1-0.4,1-1
+			V13C19,12.4,18.6,12,18,12z M24,12c-0.6,0-1,0.4-1,1v25c0,0.6,0.4,1,1,1s1-0.4,1-1V13C25,12.4,24.6,12,24,12z"/>
+	</g>
+</g>
+</svg>

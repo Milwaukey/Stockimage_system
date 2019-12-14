@@ -5,6 +5,30 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
 ?>
 
 
+<?php if($_SESSION['type'] == 'photographer'){ ?>
+<div id="uploadImagesContainer">
+    <div class="upload_image_popup">
+        
+        <p>Upload your images here</p>
+        <form id="<?php echo $_GET['id'] ?>" class="frmUploadImages hide">
+
+            <input id="imageUpload" name="photos[]" type="file" multiple="multipart/form-data" required>
+
+            <div class="input_wrapper">
+                <label>What's the price(s)?</label>
+                <input class="effect-1" name="tPrice" type="number" min="0" step="any" placeholder="Image price" required>
+                <span class="focus-border"></span>
+            </div>
+
+            <div class="swal2-actions">
+                <button class="frmUploadImages swal2-confirm swal2-styled">OK</button><div class="btnCancel swal2-cancel swal2-styled">Cancel</div>
+            </div>
+        </form>
+    </div>
+</div> 
+<?php } ?>
+
+
 <div id="profile_section">
 
 
@@ -31,30 +55,17 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
 
     <?php if($_SESSION['type'] == 'photographer'){ ?>
 
-
-        <form class="update_gallery_name_form hide">
-            <div class="input_wrapper">
-                <input class="effect-1 input_new_gallery_name" name="gallery_name_update" type="text" placeholder="New gallery name">
-                <span class="focus-border"></span>
-            </div>
-            <button class="<?= $_GET['id'] ?>">Update name</button>
-        </form>
-
-
     <div id="update_gallery_name" class="button_profile">Update gallery</div>
 
     
     <div class="profile_buttons">
-        <a class="button_profile" href="APIs/api-delete-gallery.php?id=<?php echo $galleryID ?>" class="BtnDeleteGallery"><img class="icon" src="assets/icons/trash.svg">Delete</a>
         <div id="BtnUpload_images" class="button_profile"><img class="icon" src="assets/icons/upload.svg"> Upload</div>
+
+        <a id="delete_gallery" class="button_profile" href="APIs/api-delete-gallery.php?id=<?php echo $galleryID ?>" class="BtnDeleteGallery">Delete</a>
     </div>
 
-    <form id="<?php echo $_GET['id'] ?>" class="frmUploadImages hide">
-        <input id="imageUpload" name="photos[]" type="file" multiple="multipart/form-data" required>
-        <input name="tPrice" type="number" min="0" step="any" placeholder="Image price" required>
-        <button>Upload</button>
-    </form>
-    
+
+
 
     
     <?php }; ?>
@@ -92,35 +103,33 @@ if(!$_SESSION){ header('Location: login.php '); } if(empty($_GET['id'])){ header
 </div>
 
 
+<div class="dashboard">
+    <div class="gallery_singleview_container">
+        <?php 
+
+        $query = 'SELECT photoID, price, photoFile, format FROM tphotos WHERE galleryID = ?';
+
+        $stmt = $db->prepare($query);
+        $ok = $stmt->execute([$_GET['id']]);
+
+        while($row = $stmt->fetch()){
+            
+
+            echo '<div id="photo_' . $row['photoID'] . '" class="single_image_box">';
+
+            if($_SESSION['type'] == 'photographer'){ echo '<div class="BtnDeleteImage" id="'. $row['photoID'] .'"><img src="assets/icons/trash.svg"></div>'; };
+            if($_SESSION['type'] == 'user'){ echo '<div class="BtnBuyImage" id="'. $row['photoID'] .'"><img src="assets/icons/cart.svg"></div>'; };
+            echo '<div class="price photo_price_'.$row['photoID'].'"> ' .$row['price'] . '</div>';
+            echo '<img src="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'">';
+            
+            echo '</div>';
 
 
-    <div id="dashboard">
-    
-            <div class="gallery_singleview_container">
-            <?php 
+        }
 
-            $query = 'SELECT photoID, price, photoFile, format FROM tphotos WHERE galleryID = ?';
-
-            $stmt = $db->prepare($query);
-            $ok = $stmt->execute([$_GET['id']]);
-
-            while($row = $stmt->fetch()){
-
-                echo '<div id="photo_' . $row['photoID'] . '" class="single_image_box">';
-                        echo '<div class="resize"><img src="assets/icons/resize.svg"></div>';
-                        echo '<div class="price photo_price_'.$row['photoID'].'"> ' .$row['price'] . '</div>';
-                        echo '<img src="data:image/'. $row['format'] .';base64,'. base64_encode($row['photoFile']) .'">';
-                        if($_SESSION['type'] == 'user'){ echo '<div class="BtnBuyImage" id="'. $row['photoID'] .'"><img src="assets/icons/cart.svg"></div>'; };
-                        if($_SESSION['type'] == 'photographer'){ echo '<div class="BtnDeleteImage" id="'. $row['photoID'] .'"><img src="assets/icons/trash.svg"></div>'; };
-
-                echo '</div>';
-
-
-            }
-
-
-            ?>
-            </div>
+        ?>
+    </div>
+</div>
 
 
 

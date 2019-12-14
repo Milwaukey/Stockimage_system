@@ -47,7 +47,7 @@
                                         <input class='effect-1' name='tEmail' value='".$row['email']."'> 
                                         <span class='focus-border'></span>
                                     </div>                               
-                                        <button>Update</button>
+                                        <button class='button'>Update</button>
                                     </form>
                                 </div>
                                 ";
@@ -107,7 +107,7 @@
 
 
                     <div class='input_wrapper'>
-                    <label>Email</label>
+                    <label>Username</label>
                         <input class='effect-1' name='tUsername' value='".$row['username']."'>
                         <span class='focus-border'></span>
                     </div>
@@ -150,7 +150,7 @@
                             }
 
                         echo "</select>
-                        <button type='submit'>Update</button>
+                        <button type='submit' class='button'>Update</button>
                     </form>
                 </div>
                 ";
@@ -164,8 +164,8 @@
 
 
         <div class="profile_buttons">
-            <a href="APIs/api-delete-profile.php?ID=<?=$_SESSION['ID']?>"><div class="button_profile"><img class="icon" src="assets/icons/trash.svg">Delete</div></a>
-            <div class="button_profile BtnUpdateImage"><img class="icon" src="assets/icons/edit.svg">Update</div>
+            <div class="button_profile BtnUpdateImage">Update Profile</div>
+            <a class="delete_profile" href="APIs/api-delete-profile.php?ID=<?=$_SESSION['ID']?>"><div class="button_profile">Delete</div></a>
         </div>
 
 </div>
