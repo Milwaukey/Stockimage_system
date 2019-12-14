@@ -1,3 +1,21 @@
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'bottom-end',
+    showConfirmButton: false,
+    timer: 10000,
+    onOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+  
+  Toast.fire({
+    icon: 'info',
+    title: 'Updating data for dashboard!'
+  })
+
+
+
 setInterval(function(){    
     
     // MONEY EARNED
