@@ -13,8 +13,6 @@ $('.createNewGallery').click(function(){
 
     })
 
-    // let photographerID = $('.gallery_grid_container').attr('id');
-
     Swal.fire({
         html : '<p>What is your new gallery called?</p>',
         input: 'text',

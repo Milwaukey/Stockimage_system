@@ -56,7 +56,6 @@ $("#BtnAddCard").click(function(){
     })
 
 
-    
     return false;
 
 })
