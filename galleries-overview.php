@@ -72,9 +72,13 @@
 <!-- SEARCH -->
 
     <form id="frmSearch">
-        <input name="gallery_name" placeholder="Gallery Name">
-        <input name="photographer_name" placeholder="Photographer Name">
-        <button id="BtnSearch">SEARCH</button>
+        <div class="searchWrapper">
+            <input name="gallery_name" class="searcher" placeholder="Gallery">
+            <input name="photographer_name" class="searcher" placeholder="Photographer">
+        </div>
+        
+            <button id="BtnSearch">SEARCH</button>
+        
     </form>
 
 

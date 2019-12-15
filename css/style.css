@@ -794,21 +794,7 @@ margin-top: 50px!important;
 
 
 
-/****************************
-        SEARCH
-*****************************/
 
-#frmSearch {
-  width: 400px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 15px;
-}
-
-#frmSearch #BtnSearch {
-  grid-column: 1/3;
-}
 
 
 
@@ -1246,6 +1232,91 @@ position: relative;
   font-family: Avenir_Light;
 }
 
+
+
+
+/************************** **********************
+
+                  SEARCH BAR GALLRY 
+
+***************************************************/ 
+/****************************
+        SEARCH
+*****************************/
+
+#frmSearch {
+  width: 400px;
+  margin: 0 auto;
+  display: grid;
+  /* grid-template-columns: 1fr 1fr; */
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 15px;
+
+}
+
+#frmSearch #BtnSearch {
+  /* grid-column: 1/3; */
+  align-self: center;
+  justify-self: center;
+
+  
+}
+.searchWrapper{
+  background-color: #F9f9f9;
+  border: 2px solid #ccc;
+  /* display:flex; */
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
+  background-image: url('../images/search.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding-left: 40px;
+}
+#BtnSearch{
+  /* width:374px; */
+  border: solid 2px #49777e;
+  width:166px;
+  height:36px;
+  border-radius: 3px;
+  background-color: white;
+  align-self: center;
+  justify-self: center;
+  cursor: pointer;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+#BtnSearch:hover {
+  background-color: #49777e;
+  color: white;
+}
+.searcher{
+
+/* width: 25%; */
+/* padding:10px; */
+border: 0px solid #ccc;
+border-left: 2px solid #ccc;
+width: 160px;
+box-sizing: border-box;
+/* border: 2px solid #ccc; */
+
+font-size: 16px;
+/* background-color: white; */
+
+padding: 10px 20px 10px 40px;
+/* -webkit-transition: width 5.4s ease-in-out;
+transition: width 5.4s ease-in-out; */
+-webkit-transition: all .2s ease-out;
+-moz-transition: all .2s ease-out;
+-ms-transition: all .2s ease-out;
+-o-transition: all .2s ease-out;
+transition: all .2s ease-out
+
+}
+.searcher:focus {
+
+  outline: none;
+  border-left: 6px solid #548890;
+}
 
 
 
