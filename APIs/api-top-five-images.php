@@ -19,7 +19,7 @@ $photographerID = $_SESSION['ID'];
 $topFiveImages = "SELECT count(tpayments.photoID) as countBuys, tphotos.format, tpayments.photoID, tphotos.photoFile as image
 FROM tpayments INNER JOIN tphotos ON tpayments.photoID = tphotos.photoID
 INNER JOIN tgalleries ON tgalleries.galleryID = tphotos.galleryID
-WHERE photographerID = ? GROUP BY photoID LIMIT 5;
+WHERE photographerID = ? GROUP BY photoID LIMIT 3;
 ";
 
 $stmt = $db->prepare($topFiveImages);
@@ -38,7 +38,6 @@ while($row = $stmt->fetch()){
 
 
 }
-
 
 $contruct = substr($contruct, 0, -1);
 $contruct .= ']';

@@ -17,6 +17,8 @@ session_start();
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/be2ad1df7f.js" crossorigin="anonymous"></script>
 
+
+    
 </head>
 <body>
 
@@ -36,7 +38,7 @@ session_start();
     <?php if( $_SESSION ){ echo '<a href="galleries-overview.php" class="underline">Galleries</a>'; }?>
     <?php if( $_SESSION && $_SESSION['type'] == 'user' ){ echo '<a href="add-card.php" class="underline">Cards</a>'; }?>
 
-    <?php if( $_SESSION ){ echo '<a href="orders.php" class="underline">Orders</a>';}?>
+    <?php if( $_SESSION && $_SESSION['type'] == 'user' ){ echo '<a href="orders.php" class="underline">Orders</a>';}?>
 
     <?php if( !$_SESSION ){ echo '<a href="signup-user.php" class="underline">Signup User</a>';}?>
     <?php if( !$_SESSION ){ echo '<a href="signup-photographer.php" class="underline">Signup Photographer</a>';}?>

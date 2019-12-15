@@ -178,14 +178,59 @@
 <?php if($_SESSION['type'] == 'photographer') { ?>
 
 
+<div class="dashboard_container">
 
-    <div class="totalMoneyErned">Earned Money</div>
+    <div class="dashboard_box_large_start">
+        <h3>Top 5 cities</h3>
+        <hr>
+        <div>
 
-    <div class="topFiveMostPopularImages">Top 5 most popular images</div>
+        <canvas id="myChart"></canvas>
 
-    <div class="topFiveCitysBoughtFrom">Top 5 cities bought from</div>
 
-    <div class="allOrdersWithNotDeletedImages">Orders from not deleted images</div>
+        </div>
+    </div>
+    <div class="dashboard_box total_earned_wrapper">
+        <h3>Total Money Earned</h3>
+        <hr>
+        <p class="totalMoneyErned"></p>
+    </div>
+
+
+    <div class="dashboard_box">
+        <h3>Top 3 images</h3>
+        <hr>
+        <ol class="topFiveMostPopularImages">
+        </ol>
+    </div>
+
+    <div class="dashboard_box_large_end">
+       <h3>Orders</h3>
+       <hr>
+       <div class="orders_details_defination">
+           <p>Pay.ID</p>
+           <p>Photo ID</p>
+           <p>Date</p>
+           <p>Price</p>
+       </div>
+       <div class="allOrdersWithNotDeletedImages"></div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+    <!-- <div class="totalMoneyErned">Earned Money</div> -->
+
+    <!-- <div class="topFiveMostPopularImages">Top 5 most popular images</div> -->
+
+    <!-- <div class="topFiveCitysBoughtFrom">Top 5 cities bought from</div> -->
+
+    <!-- <div class="allOrdersWithNotDeletedImages">Orders from not deleted images</div> -->
 
 <?php } ?>
 

@@ -1245,3 +1245,160 @@ position: relative;
   
   font-family: Avenir_Light;
 }
+
+
+
+
+
+
+/************************** **********************
+
+                  DASHBOARD
+
+***************************************************/ 
+
+
+.dashboard_container {
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 15px;
+
+  max-width: 500px;
+  margin: 0 auto;
+
+}
+
+.dashboard_container .dashboard_box, .dashboard_container .dashboard_box_large_end, .dashboard_container .dashboard_box_large_start {
+  height: 350px;
+  background: white;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dashboard_container h3 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: Avenir_black;
+  margin-top: 20px;
+}
+
+.allOrdersWithNotDeletedImages {
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.orders_details_defination {
+  display: grid;
+  grid-template-columns: 50px 70px 70px 100px;
+  /* margin-top: 15px; */
+  /* margin-bottom: 15px; */
+  grid-gap: 15px;
+
+  background: #49777e;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 5px;
+}
+
+.orders_info_dash {
+  display: grid;
+  grid-template-columns: 50px 70px 70px 100px;
+  /* margin-top: 15px; */
+  grid-gap: 15px;
+  padding: 5px 0 5px 0;
+}
+
+.orders_info_dash:nth-child(odd){
+  background: #E7F1EC;
+}
+
+.totalMoneyErned{
+  font-size: 40px;
+    margin-top: 50px;
+    letter-spacing: 4px;
+    color: #49777e;
+    font-family: Avenir_black;
+}
+
+.topFiveMostPopularImages {
+  display: grid;
+  grid-gap: 15px;
+}
+
+.topFiveMostPopularImages li {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.topFiveMostPopularImages li p {
+  align-items: center;
+  display: flex;
+}
+
+.top_images_img {
+  width: 60px;
+  height: 60px;
+}
+
+.top_images_img img {
+  border-radius: 100px;
+  object-fit: cover;
+  height: 100%;
+}
+
+#myChart {
+  height: 175px;
+}
+
+@media only screen and (min-width: 700px) {
+
+  .dashboard_container {
+
+    grid-template-columns: 1fr 1fr;
+    max-width: 1200px;
+  
+  }
+
+  .dashboard_container .dashboard_box_large_end, .dashboard_container .dashboard_box_large_start {
+    grid-column: 1/3;
+  }
+
+  .orders_details_defination {
+    grid-template-columns: 70px 90px 90px 120px;
+  }
+  .orders_info_dash {
+    grid-template-columns: 70px 90px 90px 120px;
+  }
+
+}
+
+
+@media only screen and (min-width: 1200px) {
+
+  .dashboard_container {
+
+    grid-template-columns: 1fr 1fr 1fr;
+  
+  }
+
+  .dashboard_container .dashboard_box_large_end {
+    grid-column: 2/4;
+  }
+
+  .dashboard_container .dashboard_box_large_start {
+    grid-column: 1/3;
+  }
+
+  .orders_details_defination {
+    grid-template-columns: 130px 150px 150px 180px;
+  }
+  .orders_info_dash {
+    grid-template-columns: 130px 150px 150px 180px;
+  }
+
+}

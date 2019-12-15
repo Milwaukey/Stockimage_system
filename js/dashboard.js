@@ -57,7 +57,18 @@ setInterval(function(){
 
         for( let jResults of data ) { // JSON OBJECT WITH JSON OBJECTS IN IT 
             
-            let order = `<div><p>Gallery name: ${jResults.galleryName}</p> <p>Photo ID: ${jResults.photoID}</p> <p>Price: ${jResults.price}</p> </div>`;
+            let order = `
+            <div class="orders_info_dash">
+                <p>${jResults.orderID}</p>
+                <p>${jResults.photoID}</p>
+                <p>${jResults.payDate}</p>
+                <p>${jResults.price} DKK</p>
+            </div>
+            `;
+            
+            
+            
+            // `<div><p>Gallery name: ${jResults.galleryName}</p> <p>Photo ID: ${jResults.photoID}</p> <p>Price: ${jResults.price}</p><p>Pay Date: ${jResults.payDate}</p> </div>`;
 
             $('.allOrdersWithNotDeletedImages').append(order);
 
@@ -76,10 +87,19 @@ setInterval(function(){
         dataType : 'JSON'
         
     }).done(function(data){
+
+
         $('.topFiveMostPopularImages').empty();
 
         for( let jResults of data ) { // JSON OBJECT WITH JSON OBJECTS IN IT 
-            let topFiveImages = `<div><p>Count Buys: ${jResults.countBuys}</p> <p>Photo ID: ${jResults.photoID}</p> <img class="order_download_image" src="${jResults.photoFile}">  </div>`;
+            let topFiveImages = `
+            
+            <li><div class="top_images_img"><img src="${jResults.photoFile}"></div><p>Photo ID: ${jResults.photoID}</p></li>
+            
+            `;           
+            
+            
+            // `<div><p>Count Buys: ${jResults.countBuys}</p> <p>Photo ID: ${jResults.photoID}</p> <img class="order_download_image" src="${jResults.photoFile}">  </div>`;
 
             $('.topFiveMostPopularImages').append(topFiveImages);
 
@@ -97,18 +117,62 @@ setInterval(function(){
         method : 'POST',
         dataType : 'JSON'
         
-    }).done(function(data){
+    }).done(function(jData){
         $('.topFiveCitysBoughtFrom').empty();
 
-        for( let jResults of data ) { // JSON OBJECT WITH JSON OBJECTS IN IT 
-            let topFiveCities = `<div>Count Buys: ${jResults.countOfBuys} City Name: ${jResults.cityName}  </div>`;
 
-            $('.topFiveCitysBoughtFrom').append(topFiveCities);
+        // console.log(data);
+        let dataValueForChart = [];
+        let dataNameForChart = [];
 
 
-        } 
+        for(jCities of jData){
+
+            dataValueForChart.push(jCities.countOfBuys);
+            dataNameForChart.push(jCities.cityName);
+
+        }
+          
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myDoughnutChart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'doughnut',
+        
+            // The data for our dataset
+            data : {
+                datasets: [{
+                    data: dataValueForChart,
+                    backgroundColor: [
+                        '#E7F1EC',
+                        '#49777e',
+                        '#282828',
+                        '#D3C979',
+                        '#f9f9f9'                    ],
+                }],
+            
+                // These labels appear in the legend and in the tooltips when hovering different arcs
+                labels: dataNameForChart,
+                
+            },
+               
+        
+            // Configuration options go here
+            options: {}
+        });
+
+
+
     })
 
 
 
+
+
+
+
+
+
+
 }, 10000)
+
+

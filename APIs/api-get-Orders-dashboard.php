@@ -23,7 +23,7 @@ $photographerID = $_SESSION['ID'];
 
 
 // MONEY EARNED
-$getAllOrders = " SELECT tgalleries.name, tpayments.photoID, amountPaid
+$getAllOrders = " SELECT paymentID, tpayments.photoID, payDate, amountPaid
 FROM tpayments INNER JOIN tphotos ON tpayments.photoID = tphotos.photoID
 INNER JOIN tgalleries ON tgalleries.galleryID = tphotos.galleryID
 WHERE photographerID = ?;
@@ -37,11 +37,12 @@ $contruct = '[';
 while($row = $stmt->fetch()){
 
     
-    $galleryName = $row['name'];
+    $galleryName = $row['paymentID'];
     $photoID = $row['photoID'];
     $amountPaid = $row['amountPaid'];
+    $payDate = $row['payDate'];
 
-    $contruct .= '{"galleryName": "'.$galleryName.'", "photoID": '. $photoID .', "price": '. $amountPaid .' },';
+    $contruct .= '{"orderID": "'.$galleryName.'", "photoID": '. $photoID .', "price": '. $amountPaid .', "payDate": "'.$payDate.'" },';
 
 }
 

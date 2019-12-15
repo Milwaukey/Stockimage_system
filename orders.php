@@ -1,12 +1,13 @@
 <?php require_once(__DIR__ . '/header.php');
  require_once(__DIR__ . '/includes/connection.php'); ;
 
-if(!$_SESSION){ header('Location: login.php '); }?>
+if(!$_SESSION){ header('Location: login.php '); }
+
+if( $_SESSION['type'] != 'user' ){ header('Location: profile.php '); }?>
 
 
 
-
-<?php if( $_SESSION['type'] == 'user' ){ ?>
+<!-- <?php if( $_SESSION['type'] == 'user' ){ ?> -->
 <div class="add_new_card">
     <div class="cancel cancel_order_info"><img src="assets/icons/cancel.svg"></div>
     
@@ -108,7 +109,7 @@ if(!$_SESSION){ header('Location: login.php '); }?>
 
 </div>
 
-<?php } ?>
+<!-- <?php } ?> -->
 
 
 
