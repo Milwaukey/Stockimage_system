@@ -14,10 +14,6 @@ session_start();
     <link rel="stylesheet" href="css/style.css">
     <title></title>
 
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/be2ad1df7f.js" crossorigin="anonymous"></script>
-
-
     
 </head>
 <body>

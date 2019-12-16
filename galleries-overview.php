@@ -9,19 +9,6 @@
 <?php if($_SESSION['type'] == 'photographer'){ ?>
 
 
-<!-- <div id="CreateGalleryBox">
-<div class="cancel"><img src="assets/icons/cancel.svg"></div>
-<form id="<?php echo $photographerID ?>"> 
-
-<div class="input_wrapper">
-        <label>Gallery Name</label>
-        <input class="effect-1" name="tGalleryName" type="text" placeholder="Write gallery name here ...">
-        <span class="focus-border"></span>
-</div> 
-        <button id="BtnCreateGallery">Create Gallery</button>
-</form>
-</div> -->
-
 <div id="<?php echo $_SESSION['ID'] ?>" class="gallery_grid_container">
 
 <div class="createNewGallery"><img class="create_new_gallery_icon" src="assets/icons/plus.svg"></div>
@@ -73,11 +60,11 @@
 
     <form id="frmSearch">
         <div class="searchWrapper">
+        <div id="BtnSearch"></div>
             <input name="gallery_name" class="searcher" placeholder="Gallery">
             <input name="photographer_name" class="searcher" placeholder="Photographer">
         </div>
-        
-            <button id="BtnSearch">SEARCH</button>
+            <!-- <button id="BtnSearch">SEARCH</button> -->
         
     </form>
 

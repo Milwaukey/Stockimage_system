@@ -1,4 +1,5 @@
-$("#frmSearch #BtnSearch").click(function(){
+$("#BtnSearch").click(function(){
+    console.log('icon')
 
     $.ajax({
 

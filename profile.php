@@ -209,7 +209,7 @@
        <hr>
        <div class="orders_details_defination">
            <p>Pay.ID</p>
-           <p>Photo ID</p>
+           <p>ID</p>
            <p>Date</p>
            <p>Price</p>
        </div>
@@ -221,20 +221,28 @@
 
 
 
-
-
-
-    <!-- <div class="totalMoneyErned">Earned Money</div> -->
-
-    <!-- <div class="topFiveMostPopularImages">Top 5 most popular images</div> -->
-
-    <!-- <div class="topFiveCitysBoughtFrom">Top 5 cities bought from</div> -->
-
-    <!-- <div class="allOrdersWithNotDeletedImages">Orders from not deleted images</div> -->
-
 <?php } ?>
 
 
+<!-- <div class="dashboard_container">
+
+<div class="dashboard_box">
+    <h3>Most used card</h3>
+    <hr>
+    <div>
+    Under construction
+    </div>
+</div>
+
+<div class="dashboard_box_large_end">
+    <h3>Newest orders</h3>
+    <hr>
+    <div>
+    Under construction
+    </div>
+</div>
+
+</div> -->
 
 
 
@@ -243,4 +251,4 @@
 
 
 
-<?php $sLinkToScript = '<script src="js/update-profile.js"></script>'; $sLinkToScript2 = '<script src="js/dashboard.js"></script>'; require_once(__DIR__ . '/footer.php'); ?>
+<?php $sLinkToScript = '<script src="js/update-profile.js"></script>'; if($_SESSION['type'] == 'photographer'){ $sLinkToScript2 = '<script src="js/dashboard.js"></script>';}; require_once(__DIR__ . '/footer.php'); ?>

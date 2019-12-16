@@ -121,7 +121,6 @@ setInterval(function(){
         $('.topFiveCitysBoughtFrom').empty();
 
 
-        // console.log(data);
         let dataValueForChart = [];
         let dataNameForChart = [];
 
@@ -147,17 +146,14 @@ setInterval(function(){
                         '#49777e',
                         '#282828',
                         '#D3C979',
-                        '#f9f9f9'                    ],
+                        '#f9f9f9'                    
+                    ],
                 }],
             
                 // These labels appear in the legend and in the tooltips when hovering different arcs
                 labels: dataNameForChart,
                 
-            },
-               
-        
-            // Configuration options go here
-            options: {}
+            }
         });
 
 

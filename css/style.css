@@ -81,7 +81,7 @@ i.update_icon {
   position: fixed;
   width: 130px;
   height: 30px;
-  z-index: 1;
+  z-index: 7;
 }
 
 
@@ -1267,14 +1267,27 @@ position: relative;
   background-color: #F9f9f9;
   border: 2px solid #ccc;
   /* display:flex; */
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
-  background-image: url('../images/search.png');
-  background-position: 10px 10px; 
-  background-repeat: no-repeat;
-  padding-left: 40px;
+  /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19); */
+  /* padding-left: 40px; */
+
+  display: grid;
+  grid-template-columns: 40px 1fr 1fr;
 }
-#BtnSearch{
-  /* width:374px; */
+
+#BtnSearch {
+  background-image: url('../images/search.png');
+  background-position: 5px 5px; 
+  background-repeat: no-repeat;
+  width: 30px;
+    height: 30px;
+}
+
+#BtnSearch:hover {
+  filter: invert(100%);
+  cursor: pointer;
+}
+
+/* #BtnSearch {
   border: solid 2px #49777e;
   width:166px;
   height:36px;
@@ -1283,15 +1296,20 @@ position: relative;
   align-self: center;
   justify-self: center;
   cursor: pointer;
-  -webkit-transition-duration: 0.4s; /* Safari */
+  -webkit-transition-duration: 0.4s; 
   transition-duration: 0.4s;
   color:#282828;
-}
+} */
 
+
+/* 
 #BtnSearch:hover {
   background-color: #49777e;
   color: white;
-}
+} */
+
+
+
 .searcher{
 
 /* width: 25%; */
@@ -1366,7 +1384,7 @@ transition: all .2s ease-out
 
 .orders_details_defination {
   display: grid;
-  grid-template-columns: 87px 147px 117px 117px;
+  grid-template-columns: 55px 30px 87px 77px;
   /* margin-top: 15px; */
   /* margin-bottom: 15px; */
   grid-gap: 15px;
@@ -1380,7 +1398,7 @@ transition: all .2s ease-out
 
 .orders_info_dash {
   display: grid;
-  grid-template-columns: 87px 147px 117px 100px;
+  grid-template-columns: 55px 30px 87px 77px;
   /* margin-top: 15px; */
   grid-gap: 15px;
   padding: 5px 0 5px 10px;
@@ -1426,7 +1444,8 @@ transition: all .2s ease-out
 }
 
 #myChart {
-  height: 175px;
+  height: 163px;
+  /* width: 310px!important; */
 }
 
 @media only screen and (min-width: 700px) {
