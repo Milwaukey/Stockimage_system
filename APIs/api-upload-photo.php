@@ -57,9 +57,9 @@ for($i = 0; $i < $iNumberOfImages ; $i++){
     // Put it into the database // ONLY WORKS AS LOCAL HOST//ALSO MIGHT BE WEIRD WITH PREPARED STATEMENT
     $query = "
 
-
     INSERT INTO tphotos (galleryID, format, hDimension, vDimension, resolution, filesize, price, photoFile)
     VALUES (?, ?, ?, ?, ?, ?, ?, LOAD_FILE(?));
+
     ";
 
     $stmt = $db->prepare($query);

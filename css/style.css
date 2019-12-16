@@ -541,6 +541,7 @@ form button:hover {
 #dashboard {
   padding: 15px;
   padding-bottom: 50px;
+  
 }
 
 
@@ -1077,6 +1078,7 @@ transition: all 0.3s;
   border-radius: 5px 0 0 5px;
 }
 
+
 .order_card .order_info {
   position: absolute;
   top: 30%;
@@ -1277,12 +1279,13 @@ position: relative;
   width:166px;
   height:36px;
   border-radius: 3px;
-  background-color: white;
+  background-color: #F9f9f9;
   align-self: center;
   justify-self: center;
   cursor: pointer;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
+  color:#282828;
 }
 
 #BtnSearch:hover {
@@ -1363,7 +1366,7 @@ transition: all .2s ease-out
 
 .orders_details_defination {
   display: grid;
-  grid-template-columns: 50px 70px 70px 100px;
+  grid-template-columns: 87px 147px 117px 117px;
   /* margin-top: 15px; */
   /* margin-bottom: 15px; */
   grid-gap: 15px;
@@ -1377,10 +1380,10 @@ transition: all .2s ease-out
 
 .orders_info_dash {
   display: grid;
-  grid-template-columns: 50px 70px 70px 100px;
+  grid-template-columns: 87px 147px 117px 100px;
   /* margin-top: 15px; */
   grid-gap: 15px;
-  padding: 5px 0 5px 0;
+  padding: 5px 0 5px 10px;
 }
 
 .orders_info_dash:nth-child(odd){
@@ -1440,10 +1443,12 @@ transition: all .2s ease-out
   }
 
   .orders_details_defination {
-    grid-template-columns: 70px 90px 90px 120px;
+    grid-template-columns: 120px 140px 140px 170px;
+    padding:12px;  
   }
   .orders_info_dash {
-    grid-template-columns: 70px 90px 90px 120px;
+    grid-template-columns: 112px 140px 140px 162px;
+    padding:12px;
   }
 
 }
@@ -1466,10 +1471,23 @@ transition: all .2s ease-out
   }
 
   .orders_details_defination {
-    grid-template-columns: 130px 150px 150px 180px;
+    grid-template-columns: 110px 130px 130px 160px;
+    padding:12px;
   }
   .orders_info_dash {
-    grid-template-columns: 130px 150px 150px 180px;
+    grid-template-columns: 112px 129px 130px 145px;
+    padding:12px;
   }
+
+}
+@media only screen and (min-width: 900px) {
+.orders_details_defination {
+  grid-template-columns: 75px 105px 105px 125px;
+  padding:12px;
+}
+.orders_info_dash {
+  grid-template-columns: 75px 105px 105px 110px;
+  padding:12px;
+}
 
 }
