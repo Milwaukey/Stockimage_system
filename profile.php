@@ -223,7 +223,11 @@
 
 <?php } ?>
 
-
+<img 
+    src="contructionworker.svg" 
+    alt="worker"
+    height="500"
+    width="700" />
 <!-- <div class="dashboard_container">
 
 <div class="dashboard_box">
